@@ -74,7 +74,7 @@ public class Conexion {
 		// TODO Auto-generated method stub
 		PreparedStatement ps = null;
 		try {
-			ps = this.conexion.prepareStatement(sql);
+			ps = this.conexion.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
