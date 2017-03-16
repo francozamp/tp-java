@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Entidades.Usuario;
@@ -61,21 +62,46 @@ public class Ppal {
 		frame.getContentPane().add(lblContrasea);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(88, 8, 86, 20);
+		txtUsuario.setBounds(88, 8, 182, 20);
 		frame.getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtPass = new JPasswordField();
-		txtPass.setBounds(88, 33, 86, 20);
+		txtPass.setBounds(88, 33, 182, 20);
 		frame.getContentPane().add(txtPass);
 		
 		JLabel lblnombre = new JLabel("[nombre]");
-		lblnombre.setBounds(184, 11, 46, 14);
+		lblnombre.setBounds(280, 11, 103, 14);
 		frame.getContentPane().add(lblnombre);
 		
 		JLabel lblapellido = new JLabel("[apellido]");
-		lblapellido.setBounds(184, 36, 46, 14);
+		lblapellido.setBounds(280, 36, 103, 14);
 		frame.getContentPane().add(lblapellido);
+		
+		JButton btnNuevaCategoria = new JButton("Nueva categoria");
+		btnNuevaCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				frmABMCategorias frmABMCategorias = new frmABMCategorias();
+				frame.setEnabled(false);
+				frmABMCategorias.setVisible(true);
+			}
+		});
+		btnNuevaCategoria.setEnabled(false);
+		btnNuevaCategoria.setBounds(393, 7, 131, 23);
+		frame.getContentPane().add(btnNuevaCategoria);
+		
+		JButton btnNuevoLibro = new JButton("Nuevo libro");
+		btnNuevoLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLibros frmLibros = new frmLibros();
+				frame.setEnabled(false);
+				frmLibros.setVisible(true);
+			}
+		});
+		btnNuevoLibro.setEnabled(false);
+		btnNuevoLibro.setBounds(393, 32, 131, 23);
+		frame.getContentPane().add(btnNuevoLibro);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -86,8 +112,21 @@ public class Ppal {
 				NegocioUsuario nUsuario=new NegocioUsuario();
 				usuario=nUsuario.hacerLogin(txtUsuario.getText(), txtPass.getText());
 				
-				lblnombre.setText(usuario.nombre);
-				lblapellido.setText(usuario.apellido);
+				if (usuario!=null){
+					
+					lblnombre.setText(usuario.nombre);
+					lblapellido.setText(usuario.apellido);
+					
+					if(usuario.tipoUsuario.Nombre.equals("Administrador")){
+						
+						btnNuevaCategoria.setEnabled(true);
+						btnNuevoLibro.setEnabled(true);
+					}	
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+				}
+				
 			}
 		});
 		btnLogin.setBounds(88, 64, 86, 23);
