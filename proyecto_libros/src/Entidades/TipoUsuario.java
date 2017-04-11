@@ -11,5 +11,9 @@ public class TipoUsuario {
 		this.Nombre=nombre;
 		
 	}
+        public int getID() {
+		// TODO Auto-generated method stub
+		return Id;
+	}
 
 }
