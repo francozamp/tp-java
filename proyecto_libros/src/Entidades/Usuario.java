@@ -5,14 +5,14 @@ import Datos.DatosTipoUsuario;
 
 public class Usuario {
 	
-	public String email;
-	public String nombre;
-	public String apellido;
-	public String telefono;
-	public String direccion;
-	public String password;
-	public Estado estado;
-	public TipoUsuario tipoUsuario;
+	private String email;
+	private String nombre;
+	private String apellido;
+	private String telefono;
+	private String direccion;
+	private String password;
+	private Estado estado;
+	private TipoUsuario tipoUsuario;
 	
 	public Usuario(String email,String nombre, String apellido, String telefono,String direccion, String pass, int idEstado, int idTipoUsu){
 		
@@ -29,6 +29,38 @@ public class Usuario {
 		DatosTipoUsuario dtu=new DatosTipoUsuario();
 		this.tipoUsuario=dtu.getTipoUsuario(idTipoUsu);
 		
+	}
+	
+	public String getEmail(){
+		return this.email;
+	}
+	
+	public String getNombre(){
+		return this.nombre;
+	}
+	
+	public String getApellido(){
+		return this.apellido;
+	}
+	
+	public String getTelefono(){
+		return this.telefono;
+	}
+	
+	public String getDireccion(){
+		return this.direccion;
+	}
+	
+	public String getPassword(){
+		return this.password;
+	}
+	
+	public Estado getEstado(){
+		return this.estado;
+	}
+	
+	public TipoUsuario getTipoUsuario(){
+		return this.tipoUsuario;
 	}
 
 }

@@ -114,17 +114,17 @@ public class Ppal {
 				
 				if (usuario!=null){
 					
-					lblnombre.setText(usuario.nombre);
-					lblapellido.setText(usuario.apellido);
+					lblnombre.setText(usuario.getNombre());
+					lblapellido.setText(usuario.getApellido());
 					
-					if(usuario.tipoUsuario.Nombre.equals("Administrador")){
+					if(usuario.getTipoUsuario().Nombre.equals("Administrador")){
 						
 						btnNuevaCategoria.setEnabled(true);
 						btnNuevoLibro.setEnabled(true);
 					}	
 				}
 				else{
-					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+					JOptionPane.showMessageDialog(null, "Usuario o contraseï¿½a incorrectos");
 				}
 				
 			}
