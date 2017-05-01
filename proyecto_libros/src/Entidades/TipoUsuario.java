@@ -11,6 +11,7 @@ public class TipoUsuario {
 		this.nombre=nombre;
 		
 	}
+<<<<<<< HEAD
 	
 	public int getId(){
 		return this.id;
@@ -18,6 +19,11 @@ public class TipoUsuario {
 	
 	public String getNombre(){
 		return this.nombre;
+=======
+        public int getID() {
+		// TODO Auto-generated method stub
+		return Id;
+>>>>>>> refs/remotes/origin/master
 	}
 
 }

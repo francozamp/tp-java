@@ -28,8 +28,10 @@ public class Ppal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ppal window = new Ppal();
-					window.frame.setVisible(true);
+					//Ppal window = new Ppal();
+					//window.frame.setVisible(true);
+                                    frmUsuarios window = new frmUsuarios();
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
