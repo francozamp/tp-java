@@ -1,5 +1,8 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class Libro {
@@ -10,7 +13,9 @@ public class Libro {
 	private String editorial;
 	private String edicion;
 	private String descripcion;
+	private String urlImagen;
 	private Estado estado;
+	private Date fechaAlta;
 	private List<Categoria> categorias;
 	
 	@SuppressWarnings("unchecked")
@@ -27,6 +32,31 @@ public class Libro {
 		} catch (Exception e) {
 			System.out.println("Se rompio algo al hacer lo de la categoria");
 		}
+	}
+
+	public Libro(ResultSet rs) throws SQLException {
+		this.isbn=rs.getString("ISBN").replaceAll("\\s+", "");
+		this.titulo=rs.getString("titulo");
+		this.autor=rs.getString("autor");
+		this.editorial=rs.getString("editorial");
+		this.edicion=rs.getString("edicion");
+		this.descripcion=rs.getString("descripcion");
+		this.urlImagen=rs.getString("imagen");
+		
+		boolean disponible = false;
+		if (rs.getInt("estados_idestados")==Constantes.ID_ESTADO_ACTIVO) {
+			disponible = true;
+		}
+		
+		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
+		
+		fechaAlta=rs.getDate("fechaAlta");
+		
+//		try {
+//			this.categorias=(List<Categoria>) list;
+//		} catch (Exception e) {
+//			System.out.println("Se rompio algo al hacer lo de la categoria");
+//		}
 	}
 
 	public String getISBN() {
@@ -71,6 +101,14 @@ public class Libro {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+	
+	public Date getFechaAlta(){
+		return fechaAlta;
 	}
 	
 

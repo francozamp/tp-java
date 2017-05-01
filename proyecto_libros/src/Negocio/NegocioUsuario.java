@@ -12,9 +12,15 @@ public class NegocioUsuario {
 		DatosUsuario dUsuario=new DatosUsuario();
 		usu=dUsuario.hacerLogin(email, pass);
 		
-		return usu;
+		return usu;	
+	}
+
+	public Usuario getUsuarioPorId(int idUsuario) {
 		
+		DatosUsuario datosUsuario = new DatosUsuario();
+		Usuario usuario =datosUsuario.getUsuarioPorId(idUsuario);
 		
+		return usuario;
 	}
 
 }

@@ -1,13 +1,12 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Entidades.Usuario;
 import Negocio.NegocioUsuario;
@@ -46,23 +45,15 @@ public class login extends HttpServlet {
 		
 		Usuario usuario = negocioUsuario.hacerLogin(email, pass);
 		
-		this.responder(response,usuario);
-	}
-
-	private void responder(HttpServletResponse response, Usuario usuario) throws IOException {
+		HttpSession session = request.getSession(true);
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<body>");
 		if (usuario!=null) {
-			out.println("<h1>" + usuario.getNombre() + "</h1>");
-			out.println("<h1>" + usuario.getApellido() + "</h1>");
+			session.setAttribute("idUsuario", usuario.getId());
 		}
-		else{
-			out.println("<h1>Usuario o contraseña incorrectos</h1>");
-		}
-		out.println("</body>");
-		out.println("</html>");
+		
+		request.getRequestDispatcher("").include(request, response);
+		
+		//response.sendRedirect(request.getHeader("referer"));
 	}
 
 }

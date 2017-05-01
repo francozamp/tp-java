@@ -26,7 +26,7 @@ public class DatosUsuario {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				usu=new Usuario(rs.getString("email"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("telefono"), rs.getString("direccion"), rs.getString("contrasena"), rs.getInt("estados_idestados"), rs.getInt("tipousu_idtipousu"));
+				usu=new Usuario(rs);
 			}
 		}
 		catch(Exception ex){
@@ -37,6 +37,36 @@ public class DatosUsuario {
 		
 		return usu;
 		
+	}
+
+	public Usuario getUsuarioPorId(int idUsuario) {
+		
+		Usuario usu = null;
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM usuarios WHERE id=?";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			//Seteo los valores del preapred statement
+			ps.setInt(1, idUsuario);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				usu = new Usuario(rs);
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		con.cerrarConexion();
+		
+		return usu;
 	}
 
 }

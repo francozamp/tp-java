@@ -7,5 +7,7 @@ public class Constantes {
 	
 	public static final int ID_ESTADO_BAJA=2;
 	public static final String NOMBRE_ESTADO_BAJA="Baja";
+	
+	public static final int ID_TIPO_ADMINISTRADOR=1;
 
 }

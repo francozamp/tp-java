@@ -1,5 +1,7 @@
 package Negocio;
 
+import java.util.List;
+
 import Datos.DatosLibro;
 import Entidades.Libro;
 
@@ -11,6 +13,15 @@ public class NegocioLibro {
 		libro = datosLibro.guardarLibro(libro);
 		
 		return libro;
+	}
+
+	public List<Libro> getRecientes() {
+		
+		List<Libro> librosRecientes = null;
+		DatosLibro datosLibro = new DatosLibro();
+		librosRecientes = datosLibro.getRecientes();
+		
+		return librosRecientes;
 	}
 
 }

@@ -226,4 +226,48 @@ public class DatosLibro {
 		return libros;
 	}
 
+	public List<Libro> getRecientes() {
+		List<Libro> libros = new ArrayList<Libro>();
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		
+		con.crearConexion();
+
+		try{
+			Libro libro = null;
+			Categoria categoria = null;
+			List<Categoria> categorias = new ArrayList<Categoria>();
+			boolean disponible = false;
+			int proximo = 0;
+			
+			ResultSet rs = con.consultarTabla(sql);
+			
+			while(rs.next()){
+				
+				proximo = 0;
+				if(rs.next()){
+					proximo = rs.getInt("id");
+				}
+				rs.previous();
+				
+				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+				categoria.setId(rs.getInt("idcategorias"));
+				categorias.add(categoria);
+				
+				if(proximo != rs.getInt("id")){			
+					disponible = rs.getInt("estados_idestados") == Constantes.ID_ESTADO_ACTIVO ? true : false;
+					libro = new Libro(rs);
+					libros.add(libro);
+					categorias = new ArrayList<Categoria>();
+				}
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return libros;
+	}
+
 }
