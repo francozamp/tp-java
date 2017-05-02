@@ -31,7 +31,7 @@ public class logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		request.getRequestDispatcher("").include(request, response);
+		response.sendRedirect(request.getHeader("referer"));
 	}
 
 	/**

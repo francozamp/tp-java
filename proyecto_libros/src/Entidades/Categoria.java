@@ -1,5 +1,8 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Categoria {
 	
 	
@@ -12,6 +15,12 @@ public class Categoria {
 		this.nombre=nombre;
 		this.detalle=detalle;
 		
+	}
+
+	public Categoria(ResultSet rs) throws SQLException {
+		this.id = rs.getInt("idcategorias");
+		this.nombre = rs.getString("nombre");
+		this.detalle = rs.getString("descripcion");
 	}
 
 	public void setId(int id) {

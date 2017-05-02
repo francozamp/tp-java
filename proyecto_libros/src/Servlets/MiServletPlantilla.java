@@ -208,8 +208,9 @@ public abstract class MiServletPlantilla extends HttpServlet {
 					html = html + "<ul>";
 					
 						for (Categoria categoria : categorias) {
-							html = html + "<li><a class=\"active\" href=\"products.html\"><i class=\"icon-chevron-right\"></i>" + categoria.getNombre() + "</a></li>";
+							html = html + "<li><a class=\"active\" href=\"libros?categoria=" + categoria.getId() + "\"><i class=\"icon-chevron-right\"></i>" + categoria.getNombre() + "</a></li>";
 						}
+						
 					html = html + "</ul>";
 				html = html + "</li>";
 			html = html + "</ul>";

@@ -2,11 +2,13 @@ package Entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Libro {
 	
+	private int id;
 	private String isbn;
 	private String titulo;
 	private String autor;
@@ -35,6 +37,8 @@ public class Libro {
 	}
 
 	public Libro(ResultSet rs) throws SQLException {
+		
+		this.id=rs.getInt("id");
 		this.isbn=rs.getString("ISBN").replaceAll("\\s+", "");
 		this.titulo=rs.getString("titulo");
 		this.autor=rs.getString("autor");
@@ -51,6 +55,8 @@ public class Libro {
 		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
 		
 		fechaAlta=rs.getDate("fechaAlta");
+		
+		categorias =  new ArrayList<>();
 		
 //		try {
 //			this.categorias=(List<Categoria>) list;
@@ -109,6 +115,14 @@ public class Libro {
 	
 	public Date getFechaAlta(){
 		return fechaAlta;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void addCategoria(Categoria categoria) {
+		categorias.add(categoria);
 	}
 	
 

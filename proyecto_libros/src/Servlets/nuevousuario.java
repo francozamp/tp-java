@@ -49,6 +49,8 @@ public class nuevousuario extends MiServletPlantilla {
 		NegocioUsuario negocioUsuario = new NegocioUsuario();
 		negocioUsuario.guardarUsuario(usuario);
 		
+		
+		
 	}
 
 	@Override

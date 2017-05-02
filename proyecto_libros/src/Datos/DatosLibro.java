@@ -270,4 +270,40 @@ public class DatosLibro {
 		return libros;
 	}
 
+	public List<Libro> getLibrosPorCategoria(int idCategoria) {
+		
+		List<Libro> libros = new ArrayList<Libro>();
+		Libro libro = null;
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros_categorias lc inner join libros l on lc.libros_id=l.id inner join categorias c on lc.categorias_idcategorias=c.idcategorias where c.idcategorias = ? order by titulo";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			//Seteo los valores del preapred statement
+			ps.setInt(1, idCategoria);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				if (libro == null || (libro != null && libro.getId() != rs.getInt("id"))) {
+					libro = new Libro(rs);
+					libros.add(libro);
+				}
+				
+				libro.addCategoria(new Categoria(rs));
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+			
+		con.cerrarConexion();
+		
+		return libros;
+	}
+
 }

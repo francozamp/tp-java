@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +30,7 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -51,7 +51,12 @@ public class login extends HttpServlet {
 			session.setAttribute("idUsuario", usuario.getId());
 		}
 		
-		request.getRequestDispatcher("").include(request, response);
+		response.sendRedirect(request.getHeader("referer"));
+		
+		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index");
+		//dispatcher.include(request, response);
+		
+		//request.getRequestDispatcher("index").forward(request, response);
 		
 		//response.sendRedirect(request.getHeader("referer"));
 	}

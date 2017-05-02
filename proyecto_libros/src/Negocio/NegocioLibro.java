@@ -24,4 +24,14 @@ public class NegocioLibro {
 		return librosRecientes;
 	}
 
+	public List<Libro> getLibrosPorCategoria(int idCategoria) {
+		
+		List<Libro> librosPorCategoria = null;
+		DatosLibro datosLibro = new DatosLibro();
+		librosPorCategoria = datosLibro.getLibrosPorCategoria(idCategoria);
+		
+		return librosPorCategoria;
+		
+	}
+
 }
