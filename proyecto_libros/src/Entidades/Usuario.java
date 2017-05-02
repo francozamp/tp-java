@@ -2,13 +2,11 @@ package Entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-
+import java.time.LocalDate;
 import Datos.DatosEstado;
 import Datos.DatosTipoUsuario;
 
 public class Usuario {
-<<<<<<< HEAD
 	
 	private int id;
 	private String email;
@@ -19,7 +17,7 @@ public class Usuario {
 	private String password;
 	private Estado estado;
 	private TipoUsuario tipoUsuario;
-	private Date fechaAlta;
+	private LocalDate fechaAlta;
 	
 	public Usuario(String email,String nombre, String apellido, String telefono,String direccion, String pass, int idEstado, int idTipoUsu){
 		
@@ -52,8 +50,17 @@ public class Usuario {
 		DatosTipoUsuario dtu=new DatosTipoUsuario();
 		this.tipoUsuario=dtu.getTipoUsuario(rs.getInt("tipousu_idtipousu"));
 		
-		this.fechaAlta=rs.getDate("fechaAlta");
+		this.fechaAlta= rs.getDate("fechaAlta").toLocalDate();
 		
+	}
+
+	public Usuario(String nombre, String apellido, String email, String password, String direccion, String telefono) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
+		this.direccion = direccion;
+		this.telefono = telefono;
 	}
 
 	public String getEmail(){
@@ -91,65 +98,30 @@ public class Usuario {
 	public Object getId() {
 		return this.id;
 	}
-=======
-
-    private String email;
-    private String nombre;
-    private String apellido;
-    private String telefono;
-    private String direccion;
-    private String password;
-    private Estado estado;
-    private TipoUsuario tipoUsuario;
-
-    public Usuario(String email, String nombre, String apellido, String telefono, String direccion, String pass, int idEstado, int idTipoUsu) {
-
-        this.email = email;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.password = pass;
-
-        DatosEstado de = new DatosEstado();
-        this.estado = de.getEstado(idEstado);
-
-        DatosTipoUsuario dtu = new DatosTipoUsuario();
-        this.tipoUsuario = dtu.getTipoUsuario(idTipoUsu);
-
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public String getApellido() {
-        return this.apellido;
-    }
-
-    public String getTelefono() {
-        return this.telefono;
-    }
-
-    public String getDireccion() {
-        return this.direccion;
-    }
 
     public String getContrasena() {
         return this.password;
     }
 
-    public int getEstado() {
-        return this.estado.getID();
+    public int getTipousu() {
+        return this.tipoUsuario.getId();
+    }
+    
+    public LocalDate getFechaAlta(){
+    	return this.fechaAlta;
     }
 
-    public int getTipousu() {
-        return this.tipoUsuario.getID();
-    }
->>>>>>> refs/remotes/origin/master
+	public void setEstado(int idEstadoActivo) {
+		this.estado = new Estado(idEstadoActivo);	
+	}
+
+	public void setTipoUsuario(int idTipoComun) {
+		this.tipoUsuario = new TipoUsuario(idTipoComun);
+		
+	}
+
+	public void setFechaAlta(LocalDate now) {
+		this.fechaAlta = now;
+	}
 
 }

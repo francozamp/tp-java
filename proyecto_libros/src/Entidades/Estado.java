@@ -12,6 +12,10 @@ public class Estado {
 		
 	}
 
+	public Estado(int idEstadoActivo) {
+		this.id = idEstadoActivo;
+	}
+
 	public int getID() {
 		// TODO Auto-generated method stub
 		return id;

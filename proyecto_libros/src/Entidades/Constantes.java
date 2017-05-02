@@ -9,5 +9,6 @@ public class Constantes {
 	public static final String NOMBRE_ESTADO_BAJA="Baja";
 	
 	public static final int ID_TIPO_ADMINISTRADOR=1;
+	public static final int ID_TIPO_COMUN=2;
 
 }
