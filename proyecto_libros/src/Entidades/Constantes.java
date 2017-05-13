@@ -10,5 +10,7 @@ public class Constantes {
 	
 	public static final int ID_TIPO_ADMINISTRADOR=1;
 	public static final int ID_TIPO_COMUN=2;
+	
+	public static final int CANT_LIBROS_POR_PAGINA=9;
 
 }

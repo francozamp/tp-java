@@ -33,5 +33,14 @@ public class NegocioLibro {
 		return librosPorCategoria;
 		
 	}
+	
+	public List<Libro> getLibros(){
+		
+		DatosLibro datosLibro = new DatosLibro();
+		List<Libro> libros = datosLibro.getLibros();
+		
+		return libros;
+		
+	}
 
 }

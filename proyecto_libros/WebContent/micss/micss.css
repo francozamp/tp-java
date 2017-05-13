@@ -86,14 +86,21 @@ input[type="text"].srchTxt {
 }
 
 #footerSection a {
-	 color: #ccc;
+	color: #ccc;
     font-size: 11px;
     padding: 0;
     line-height: 24px;
     display: block;
 }
 
-
 .navbar .brand {
 	padding: 10px 20px;
+}
+
+.table td.tapachica {
+	padding: 2px 8px;
+}
+
+.table td.tapachica img {
+	height: 32px;
 }

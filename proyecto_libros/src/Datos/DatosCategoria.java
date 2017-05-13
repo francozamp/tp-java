@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entidades.Categoria;
+import Entidades.Libro;
 
 public class DatosCategoria {
 	
@@ -60,12 +61,16 @@ public class DatosCategoria {
 		
 	}
 
-	private Categoria getCategoria(int clave) {
+	public Categoria getCategoria(int idCategoria) {
 
 		Categoria categoria=null;
+		List<Libro> libros = new ArrayList<>();
 		
 		Conexion con = new Conexion();
-		String sql = "SELECT * FROM categorias WHERE idcategorias=?";
+		String sql = "SELECT * FROM categorias c "
+				+ "INNER JOIN libros_categorias lc on c.idcategorias=lc.categorias_idcategorias "
+				+ "INNER JOIN libros l on lc.libros_id=l.id "
+				+ "WHERE idcategorias=?";
 		
 		con.crearConexion();
 		
@@ -73,14 +78,18 @@ public class DatosCategoria {
 		//cuando haya ganas mover esto adentro de Conexion	
 		try{
 			//Seteo los valores del preapred statement
-			ps.setInt(1, clave);
+			ps.setInt(1, idCategoria);
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
-				categoria.setId(rs.getInt("idcategorias"));
+				if (categoria == null){
+					categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+					categoria.setId(rs.getInt("idcategorias"));
+				}
+				libros.add(new Libro(rs));
 			}
+			categoria.setLibros(libros);
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());

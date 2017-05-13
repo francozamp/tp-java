@@ -26,4 +26,8 @@
     <servlet-name>logout</servlet-name>
     <servlet-class>Servlets.logout</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>administracionLibros</servlet-name>
+    <servlet-class>Servlets.administracionLibros</servlet-class>
+  </servlet>
 </web-app>

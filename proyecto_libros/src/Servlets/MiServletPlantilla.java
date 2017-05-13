@@ -76,7 +76,7 @@ public abstract class MiServletPlantilla extends HttpServlet {
     		html = html + "<!-- <link href=\"themes/css/base.css\" rel=\"stylesheet\" media=\"screen\"/>  BASE -->";
     		html = html + "<!-- Bootstrap style responsive -->";
     		html = html + "<link href=\"themes/css/bootstrap-responsive.min.css\" rel=\"stylesheet\"/>";
-    	  	html = html + "<link href=\"themes/css/font-awesome.css\" rel=\"stylesheet\" type=\"text/css\">";
+    	  	html = html + "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">";
     		html = html + "<!-- Google-code-prettify -->";
     		html = html + "<link href=\"themes/js/google-code-prettify/prettify.css\" rel=\"stylesheet\"/>";
     		html = html + "<!-- fav and touch icons -->";
@@ -132,7 +132,7 @@ public abstract class MiServletPlantilla extends HttpServlet {
 	            				html = html + "<li><a href=\"#\">Historial de pedidos</a></li>";
 	            				
 	            				if (usuario.getTipoUsuario().getId() == Constantes.ID_TIPO_ADMINISTRADOR) {
-	            					html = html + "<li><a href=\"#\">Administración</a></li>";
+	            					html = html + "<li><a href=\"admlibros\">Administración</a></li>";
 								}
 	            				
 	            				html = html + "<li role=\"separator\" class=\"divider\"></li>";
@@ -196,7 +196,7 @@ public abstract class MiServletPlantilla extends HttpServlet {
 		return html;
 	}
 
-	private String getSideBar() {
+	public String getSideBar() {
     	
     	String html = "";
     	
@@ -268,5 +268,9 @@ public abstract class MiServletPlantilla extends HttpServlet {
 		return html;
     	
     }
+	
+	public Usuario getUsuario(){
+		return this.usuario;
+	}
 
 }

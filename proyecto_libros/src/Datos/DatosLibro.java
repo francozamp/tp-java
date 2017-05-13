@@ -186,7 +186,7 @@ public class DatosLibro {
 		List<Libro> libros = new ArrayList<Libro>();
 		
 		Conexion con = new Conexion();
-		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.ISBN=lc.libros_isbn INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
 		
 		con.crearConexion();
 
@@ -208,12 +208,12 @@ public class DatosLibro {
 				rs.previous();
 				
 				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
-				categoria.setId(rs.getInt("idcategoria"));
+				categoria.setId(rs.getInt("idcategorias"));
 				categorias.add(categoria);
 				
 				if(proximo != rs.getString("ISBN")){			
-					disponible = rs.getInt("estados_idestado") == Constantes.ID_ESTADO_ACTIVO ? true : false;
-					libro = new Libro(rs.getString("ISBN"), rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("edicion"), rs.getString("descripcion"), disponible, categorias);
+					disponible = rs.getInt("estados_idestados") == Constantes.ID_ESTADO_ACTIVO ? true : false;
+					libro = new Libro(rs);
 					libros.add(libro);
 					categorias = new ArrayList<Categoria>();
 				}
