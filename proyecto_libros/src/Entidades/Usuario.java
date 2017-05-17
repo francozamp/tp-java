@@ -95,7 +95,7 @@ public class Usuario {
 		return this.tipoUsuario;
 	}
 
-	public Object getId() {
+	public int getId() {
 		return this.id;
 	}
 

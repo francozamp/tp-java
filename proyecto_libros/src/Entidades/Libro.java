@@ -19,6 +19,7 @@ public class Libro {
 	private Estado estado;
 	private Date fechaAlta;
 	private List<Categoria> categorias;
+	private Precio precioActual;
 	
 	@SuppressWarnings("unchecked")
 	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<?> list){
@@ -123,6 +124,14 @@ public class Libro {
 
 	public void addCategoria(Categoria categoria) {
 		categorias.add(categoria);
+	}
+
+	public Precio getPrecioActual() {
+		return precioActual;
+	}
+
+	public void setPrecioActual(Precio precioActual) {
+		this.precioActual = precioActual;
 	}
 	
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +34,18 @@ public class index extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		responder(response);
+		List<Libro> librosRecientes = null;
+		NegocioLibro negocioLibro = new NegocioLibro();
+		librosRecientes = negocioLibro.getRecientes();
+		
+		request.setAttribute("librosRecientes", librosRecientes);
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+		requestDispatcher.forward(request, response);
+//		response.sendRedirect("index.jsp");
+		
+		
+//		responder(response);
 		
 	}
 

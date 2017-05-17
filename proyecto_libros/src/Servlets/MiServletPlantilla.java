@@ -29,16 +29,15 @@ public abstract class MiServletPlantilla extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public MiServletPlantilla() {
-        super();
-        
-        NegocioCategoria negocioCategoria = new NegocioCategoria();
-		categorias = negocioCategoria.getCategorias();
-        
+        super();  
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		usuario = Sesion.getUsuario(request.getSession(true));
+		NegocioCategoria negocioCategoria = new NegocioCategoria();
+		categorias = negocioCategoria.getCategorias();
+		request.setAttribute("categorias", categorias);
 		
 	}
     

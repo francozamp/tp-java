@@ -11,8 +11,8 @@ public class Sesion {
 		
 		Usuario usuario = null;
 		
-		if(session.getAttribute("idUsuario") != null){
-			int idUsuario = (int) session.getAttribute("idUsuario");
+		if(session.getAttribute("usuario") != null){
+			int idUsuario = ((Usuario)session.getAttribute("usuario")).getId();
 			NegocioUsuario negocioUsuario = new NegocioUsuario();
 			usuario = negocioUsuario.getUsuarioPorId((int)idUsuario);
 		}

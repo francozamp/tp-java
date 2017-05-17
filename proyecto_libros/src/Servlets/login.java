@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,10 +49,15 @@ public class login extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		
 		if (usuario!=null) {
-			session.setAttribute("idUsuario", usuario.getId());
+			session.setAttribute("usuario", usuario);
 		}
+			
+		String destino = (String)request.getParameter("paginaLlamado");
 		
-		response.sendRedirect(request.getHeader("referer"));
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destino);
+		requestDispatcher.forward(request, response);
+		
+//		response.sendRedirect(request.getHeader("referer"));
 		
 		//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index");
 		//dispatcher.include(request, response);

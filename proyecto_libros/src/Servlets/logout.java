@@ -1,6 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,10 @@ public class logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect(request.getHeader("referer"));
+		String destino = (String)request.getParameter("paginaLlamado");
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destino);
+		requestDispatcher.forward(request, response);
 	}
 
 	/**

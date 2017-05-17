@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,10 @@ public class administracionLibros extends MiServletPlantilla {
 			NegocioLibro negocioLibro = new NegocioLibro();
 			libros = negocioLibro.getLibros();
 			
-			this.responder(response);
+			request.setAttribute("libros", libros);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			requestDispatcher.forward(request, response);
 		}
 		else {
 			response.sendRedirect("/libros/index");
