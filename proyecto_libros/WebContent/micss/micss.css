@@ -1,0 +1,119 @@
+#logo {
+	height: 50px;
+}
+
+.nav-element {
+	margin: 0;
+	padding: 20px 0;
+}
+
+input[type="text"].srchTxt {
+	height: 20px;
+}
+
+#topMenu>li>a {
+	padding: 25px 10px;
+}
+
+#topMenu>li>a:hover {
+	background: #45aeea;
+}
+
+#submitButton {
+	margin: 0;
+}
+
+#topMenu>li>a#btnLogin {
+    padding: 13px 0;
+}
+
+#topMenu>li>a>span {
+	margin: 0;
+}
+
+#topMenu>li>a>span.caret {
+	margin-top: 8px;
+}
+
+#myCarousel {
+	max-height: 400px;
+	overflow: hidden;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+#sidebar li a {
+    font-weight: bold;
+    background: url(../images/tabRepeatInactive.png) repeat-x 0 0;
+    color: #262626;
+}
+
+#sidebar ul li li a {
+    background: #eee;
+    padding-left: 14px;
+    font-weight: normal;
+    display: block;
+    font-size: 13px;
+    line-height: 26px;
+}
+
+.thumbnails {
+	text-align: center;
+}
+
+.thumbnails img {
+	height: 350px;
+    margin: auto;
+    display: block;
+}
+
+.thumbnail .caption p {
+	height: 40px;
+}
+
+.icon-shopping-cart:before {
+    content: "";
+}
+
+#footerSection {
+	padding: 10px 0;
+	background: #202020;
+}
+
+#footerSection a {
+	color: #ccc;
+    font-size: 11px;
+    padding: 0;
+    line-height: 24px;
+    display: block;
+}
+
+.navbar .brand {
+	padding: 10px 20px;
+}
+
+.table td.tapachica {
+	padding: 2px 8px;
+}
+
+.table td.tapachica img {
+	height: 32px;
+}
+
+input[type="checkbox"][disabled] {
+	cursor: default;
+}
+
+.btn-default:focus {
+	background-color: #ffffff;
+    background-position: 0;
+}
+
+.frm input, textarea, .uneditable-input {
+	width: 450px;
+}

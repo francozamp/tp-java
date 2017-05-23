@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
 import Entidades.Categoria;
 import Entidades.Constantes;
 import Entidades.Libro;
@@ -188,7 +186,7 @@ public class DatosLibro {
 		List<Libro> libros = new ArrayList<Libro>();
 		
 		Conexion con = new Conexion();
-		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.ISBN=lc.libros_isbn INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
 		
 		con.crearConexion();
 
@@ -210,12 +208,12 @@ public class DatosLibro {
 				rs.previous();
 				
 				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
-				categoria.setId(rs.getInt("idcategoria"));
+				categoria.setId(rs.getInt("idcategorias"));
 				categorias.add(categoria);
 				
 				if(proximo != rs.getString("ISBN")){			
-					disponible = rs.getInt("estados_idestado") == Constantes.ID_ESTADO_ACTIVO ? true : false;
-					libro = new Libro(rs.getString("ISBN"), rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("edicion"), rs.getString("descripcion"), disponible, categorias);
+					disponible = rs.getInt("estados_idestados") == Constantes.ID_ESTADO_ACTIVO ? true : false;
+					libro = new Libro(rs);
 					libros.add(libro);
 					categorias = new ArrayList<Categoria>();
 				}
@@ -226,6 +224,116 @@ public class DatosLibro {
 		}
 		
 		return libros;
+	}
+
+	public List<Libro> getRecientes() {
+		List<Libro> libros = new ArrayList<Libro>();
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		
+		con.crearConexion();
+
+		try{
+			Libro libro = null;
+			Categoria categoria = null;
+			List<Categoria> categorias = new ArrayList<Categoria>();
+			boolean disponible = false;
+			int proximo = 0;
+			
+			ResultSet rs = con.consultarTabla(sql);
+			
+			while(rs.next()){
+				
+				proximo = 0;
+				if(rs.next()){
+					proximo = rs.getInt("id");
+				}
+				rs.previous();
+				
+				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+				categoria.setId(rs.getInt("idcategorias"));
+				categorias.add(categoria);
+				
+				if(proximo != rs.getInt("id")){			
+					disponible = rs.getInt("estados_idestados") == Constantes.ID_ESTADO_ACTIVO ? true : false;
+					libro = new Libro(rs);
+					libros.add(libro);
+					categorias = new ArrayList<Categoria>();
+				}
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return libros;
+	}
+
+	public List<Libro> getLibrosPorCategoria(int idCategoria) {
+		
+		List<Libro> libros = new ArrayList<Libro>();
+		Libro libro = null;
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros_categorias lc inner join libros l on lc.libros_id=l.id inner join categorias c on lc.categorias_idcategorias=c.idcategorias where c.idcategorias = ? order by titulo";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			//Seteo los valores del preapred statement
+			ps.setInt(1, idCategoria);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				if (libro == null || (libro != null && libro.getId() != rs.getInt("id"))) {
+					libro = new Libro(rs);
+					libros.add(libro);
+				}
+				
+				libro.addCategoria(new Categoria(rs));
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+			
+		con.cerrarConexion();
+		
+		return libros;
+	}
+
+	public Libro getLibroById(int idLibro) {
+		
+		Libro libro = null;
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros WHERE id=?";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			//Seteo los valores del preapred statement
+			ps.setInt(1, idLibro);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				libro = new Libro(rs);
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		con.cerrarConexion();
+		
+		return libro;
 	}
 
 }

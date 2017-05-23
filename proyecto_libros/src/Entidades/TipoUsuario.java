@@ -2,18 +2,27 @@ package Entidades;
 
 public class TipoUsuario {
 	
-	public int Id;
-	public String Nombre;
+	private int id;
+	private String nombre;
 	
 	public TipoUsuario(int idTipoUsu, String nombre) {
 		
-		this.Id=idTipoUsu;
-		this.Nombre=nombre;
+		this.id=idTipoUsu;
+		this.nombre=nombre;
 		
 	}
-        public int getID() {
-		// TODO Auto-generated method stub
-		return Id;
+	
+	public TipoUsuario(int idTipoComun) {
+		this.id = idTipoComun;
 	}
+
+	public int getId(){
+		return this.id;
+	}
+	
+	public String getNombre(){
+		return this.nombre;
+	}
+
 
 }

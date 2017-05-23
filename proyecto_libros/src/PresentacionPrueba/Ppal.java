@@ -116,10 +116,10 @@ public class Ppal {
 				
 				if (usuario!=null){
 					
-					lblnombre.setText(usuario.nombre);
-					lblapellido.setText(usuario.apellido);
+					lblnombre.setText(usuario.getNombre());
+					lblapellido.setText(usuario.getApellido());
 					
-					if(usuario.tipoUsuario.Nombre.equals("Administrador")){
+					if(usuario.getTipoUsuario().getNombre().equals("Administrador")){
 						
 						btnNuevaCategoria.setEnabled(true);
 						btnNuevoLibro.setEnabled(true);
