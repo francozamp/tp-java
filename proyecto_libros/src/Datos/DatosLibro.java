@@ -306,4 +306,34 @@ public class DatosLibro {
 		return libros;
 	}
 
+	public Libro getLibroById(int idLibro) {
+		
+		Libro libro = null;
+		
+		Conexion con = new Conexion();
+		String sql = "SELECT * FROM libros WHERE id=?";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			//Seteo los valores del preapred statement
+			ps.setInt(1, idLibro);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				libro = new Libro(rs);
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		con.cerrarConexion();
+		
+		return libro;
+	}
+
 }

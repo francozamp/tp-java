@@ -43,4 +43,10 @@ public class NegocioLibro {
 		
 	}
 
+	public Libro getLibroById(int idLibro) {
+
+		DatosLibro datosLibro = new DatosLibro();
+		return datosLibro.getLibroById(idLibro);
+	}
+
 }

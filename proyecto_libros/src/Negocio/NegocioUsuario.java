@@ -1,6 +1,8 @@
 package Negocio;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import Datos.DatosUsuario;
 import Entidades.Constantes;
 import Entidades.Usuario;
@@ -37,5 +39,11 @@ public class NegocioUsuario {
 
         return usuario;
     }
+
+	public List<Usuario> getUsuarios() {
+		
+		DatosUsuario datosUsuario = new DatosUsuario();
+		return datosUsuario.getUsuarios();
+	}
 
 }

@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Categoria;
 import Entidades.Constantes;
 import Entidades.Libro;
 import Negocio.NegocioLibro;
@@ -83,7 +82,6 @@ public class administracionLibros extends MiServletPlantilla {
 		return html;
 	}
 
-	@Override
 	public String getContenido() {
 		
 		String html = "";
@@ -122,6 +120,7 @@ public class administracionLibros extends MiServletPlantilla {
 						html += "<td><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i></td>";
 					html += "</tr>";
 				}
+				
 			html += "</table>";
 			html += "<div class=\"pagination\">";
 			html += "<ul>";

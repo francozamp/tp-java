@@ -3,6 +3,9 @@ package Datos;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import Entidades.Usuario;
 
 public class DatosUsuario {
@@ -178,6 +181,35 @@ public class DatosUsuario {
 		con.cerrarConexion();
 		
 		return usu;
+	}
+
+	public List<Usuario> getUsuarios() {
+		List<Usuario> usuariosList = new ArrayList<Usuario>();
+		
+		Conexion con = new Conexion();
+		String sql = "select * from usuarios u "
+				+ "inner join estados e on u.estados_idestados=e.idestados "
+				+ "inner join tipousu tu on u.tipousu_idtipousu=tu.idtipousu";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				usuariosList.add(new Usuario(rs));
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		con.cerrarConexion();
+		
+		return usuariosList;
 	}
 
 }

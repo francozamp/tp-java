@@ -73,7 +73,6 @@ public class libros extends MiServletPlantilla {
 		doGet(request, response);
 	}
 
-	@Override
 	public String getContenido() {
 		
 		String html = "";

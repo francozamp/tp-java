@@ -30,4 +30,12 @@
     <servlet-name>administracionLibros</servlet-name>
     <servlet-class>Servlets.administracionLibros</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>administracionCategorias</servlet-name>
+    <servlet-class>Servlets.administracionCategorias</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>administracionUsuarios</servlet-name>
+    <servlet-class>Servlets.administracionUsuarios</servlet-class>
+  </servlet>
 </web-app>

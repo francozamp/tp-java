@@ -186,7 +186,7 @@ public abstract class MiServletPlantilla extends HttpServlet {
 			html = html + "<div class=\"container\">";
 				html = html + "<div class=\"row\">";
 					
-					html = html + this.getSideBar() + this.getContenido();
+					//html = html + this.getSideBar() + this.getContenido();
 					
 				html = html + "</div>";
 			html = html + "</div>";
@@ -219,7 +219,7 @@ public abstract class MiServletPlantilla extends HttpServlet {
 		return html;
 	}
 	
-	abstract public String getContenido();
+	//abstract public String getContenido();
 
 	public String getPie(){
     	

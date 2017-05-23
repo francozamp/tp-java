@@ -35,7 +35,6 @@ public class registrate extends MiServletPlantilla {
 		doGet(request, response);
 	}
 
-	@Override
 	public String getContenido() {
 		
 		String html = "";

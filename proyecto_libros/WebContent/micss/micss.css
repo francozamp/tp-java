@@ -104,3 +104,16 @@ input[type="text"].srchTxt {
 .table td.tapachica img {
 	height: 32px;
 }
+
+input[type="checkbox"][disabled] {
+	cursor: default;
+}
+
+.btn-default:focus {
+	background-color: #ffffff;
+    background-position: 0;
+}
+
+.frm input, textarea, .uneditable-input {
+	width: 450px;
+}
