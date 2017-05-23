@@ -59,7 +59,7 @@
 								</form>	
 							</div>
 							<div class="span2">
-								<a class="btn btn-default" href="frmusuario.jsp" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
+								<a class="btn btn-default" href="formularioUsuario" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
 								<!-- <button>Agregar</button> -->
 							</div>
 							<table class="table table-striped">

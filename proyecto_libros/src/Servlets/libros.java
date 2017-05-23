@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -62,7 +63,12 @@ public class libros extends MiServletPlantilla {
 		
 		librosPagina = categoria.getLibros().subList(paginaActual - 1, paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA <= categoria.getLibros().size() ? paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA : categoria.getLibros().size());
 		
-		responder(response);
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		String html = this.getHead() + this.getCabecera() + this.getCuerpo() + this.getPie();
+		
+		out.print(html);
 	}
 
 	/**
@@ -71,6 +77,23 @@ public class libros extends MiServletPlantilla {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	public String getCuerpo() {
+    	
+    	String html = "";
+    	
+	    html = html + "<div id=\"mainBody\">";
+			html = html + "<div class=\"container\">";
+				html = html + "<div class=\"row\">";
+					
+					html = html + this.getSideBar() + this.getContenido();
+					
+				html = html + "</div>";
+			html = html + "</div>";
+		html = html + "</div>";
+		
+		return html;
 	}
 
 	public String getContenido() {

@@ -9,7 +9,7 @@
 		<li class="subMenu open"><a> Categorías</a>
 			<ul>
 				<c:forEach items="${categorias }" var="categoria">
-					<li><a href="products.html"><i class="icon-chevron-right"></i>${categoria.nombre }</a></li>
+					<li><a href="libros?categoria=${categoria.id }"><i class="icon-chevron-right"></i>${categoria.nombre }</a></li>
 				</c:forEach>
 			</ul>
 		</li>
