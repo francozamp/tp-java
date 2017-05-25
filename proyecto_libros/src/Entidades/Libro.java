@@ -2,6 +2,7 @@ package Entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -127,7 +128,15 @@ public class Libro {
 	}
 
 	public Precio getPrecioActual() {
+		//Hasta que se carguen precios, despues se tiene que sacar esta linea
+		Precio precioActual = new Precio(Float.valueOf(10));
+		
 		return precioActual;
+	}
+	
+	public String getPrecioView(){
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(this.getPrecioActual().getPrecio());
 	}
 
 	public void setPrecioActual(Precio precioActual) {

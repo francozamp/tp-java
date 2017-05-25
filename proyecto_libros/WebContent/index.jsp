@@ -73,11 +73,11 @@
 										<h5>${libro.titulo }</h5>
 										<p>${libro.descripcion }</p>
 										<h4 style="text-align:center">
-											<a class="btn" href="#">
+											<a class="btn" href="agregarAlCarro?idLibro=${libro.id }">
 												Agregar al
 												<i class="icon-shopping-cart"></i>
 											</a>
-											<a class="btn btn-primary" href="#">
+											<a class="btn btn-primary" href="agregarAlCarro?idLibro=${libro.id }">
 												$222.00
 											</a>
 										</h4>

@@ -34,7 +34,8 @@ public abstract class MiServletPlantilla extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		usuario = Sesion.getUsuario(request.getSession(true));
+    	Sesion.setSession(request.getSession(true));
+		usuario = Sesion.getUsuario();
 		NegocioCategoria negocioCategoria = new NegocioCategoria();
 		categorias = negocioCategoria.getCategorias();
 		request.setAttribute("categorias", categorias);
