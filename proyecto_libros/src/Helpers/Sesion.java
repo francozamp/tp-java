@@ -43,6 +43,10 @@ public class Sesion {
 	public static void setCarro(Carro carro) {
 		session.setAttribute("carro", carro);
 	}
+
+	public static void vaciarCarro() {
+		session.setAttribute("carro", null);
+	}
 	
 
 }

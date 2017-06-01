@@ -1,6 +1,10 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+
+import Negocio.NegocioLibro;
 
 public class LineaPedido {
 	
@@ -11,6 +15,12 @@ public class LineaPedido {
 	public LineaPedido(Libro libro, int cantidad) {
 		this.setLibro(libro);
 		this.setCantidad(cantidad);
+	}
+
+	public LineaPedido(ResultSet rs) throws SQLException {
+		this.id = rs.getInt("idlinea");
+		this.cantidad = rs.getInt("cantidad");
+		this.libro = new NegocioLibro().getLibroById(rs.getInt("libros_id"));
 	}
 
 	public Libro getLibro() {

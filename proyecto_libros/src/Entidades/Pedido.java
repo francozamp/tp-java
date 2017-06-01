@@ -1,11 +1,15 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import Negocio.NegocioEstado;
+import Negocio.NegocioLineaPedido;
+import Negocio.NegocioUsuario;
 
 public class Pedido {
 	
@@ -20,6 +24,14 @@ public class Pedido {
 		lineasPedido = new ArrayList<LineaPedido>();
 	}
 	
+	public Pedido(ResultSet rs) throws SQLException {
+		this.id = rs.getInt("idpedidos");
+		this.fecha = rs.getDate("fecha");
+		this.usuario = new NegocioUsuario().getUsuarioPorId(rs.getInt("usuarios_id"));
+		this.estado = new NegocioEstado().getEstadoPorId(rs.getInt("estados_idestados"));
+		this.lineasPedido = new NegocioLineaPedido().getLineasPorPedido(this.id);
+	}
+
 	public int getId() {
 		return id;
 	}
