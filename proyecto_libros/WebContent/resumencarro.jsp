@@ -21,9 +21,9 @@
 						<li><a href="index.html">Home</a> <span class="divider">/</span></li>
 						<li class="active"> SHOPPING CART</li>
 					</ul> -->
-					<h3>  Carrito de compras [${pedido.getCantLibros() } Libro(s)]<a href="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continuar comprando </a></h3>	
+					<h3>  Carrito de compras [${sessionScope.pedido.getCantLibros() } Libro(s)]<a href="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continuar comprando </a></h3>	
 					<hr class="soft"/>
-					<form action="pagarPedido" method="post">
+					<form action="pagoyenvio" method="post">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -35,7 +35,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${pedido.getLineasPedido() }" var="lineaPedido">
+								<c:forEach items="${sessionScope.pedido.getLineasPedido() }" var="lineaPedido">
 									<tr>
 										<td> <img width="60" src="${lineaPedido.getLibro().getUrlImagen() }" alt=""/></td>
 										<td><strong>${lineaPedido.getLibro().getTitulo() } </strong><br/>${lineaPedido.getLibro().getEditorial() }<br/>${lineaPedido.getLibro().getEdicion() }</td>
@@ -49,15 +49,15 @@
 	
 								<tr>
 									<td colspan="6" style="text-align:right">Precio Total:	</td>
-									<td> $ ${pedido.getMontoTotalView() }</td>
+									<td> $ ${sessionScope.pedido.getMontoTotalView() }</td>
 								</tr>
 								<tr>
 									<td colspan="6" style="text-align:right">Descuento Total:	</td>
 									<td> $ 0.00</td>
 								</tr>
 								<tr>
-									<td colspan="6" style="text-align:right"><strong>TOTAL ($ ${pedido.getMontoTotalView() } - $ 0) =</strong></td>
-									<td class="label label-important" style="display:block"> <strong> $ ${pedido.getMontoTotalView() } </strong></td>
+									<td colspan="6" style="text-align:right"><strong>TOTAL ($ ${sessionScope.pedido.getMontoTotalView() } - $ 0) =</strong></td>
+									<td class="label label-important" style="display:block"> <strong> $ ${sessionScope.pedido.getMontoTotalView() } </strong></td>
 								</tr>
 							</tbody>
 						</table>

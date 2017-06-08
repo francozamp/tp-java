@@ -8,25 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Carro;
-import Entidades.Libro;
-import Entidades.LineaPedido;
+import Entidades.Constantes;
 import Entidades.Pedido;
 import Helpers.Sesion;
-import Negocio.NegocioLibro;
+import Negocio.NegocioEstado;
+import Negocio.NegocioPedido;
 
 /**
- * Servlet implementation class verCarro
+ * Servlet implementation class resultadooperacion
  */
-@WebServlet("/verCarro")
-public class verCarro extends MiServletPlantilla {
+@WebServlet("/resultadooperacion")
+public class resultadooperacion extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public verCarro() {
+    public resultadooperacion() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,31 +35,29 @@ public class verCarro extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		NegocioLibro negocioLibro =  new NegocioLibro();
-		
-		Pedido pedido = new Pedido();
-		Libro libro = null;
-		int cantidad = 0;
-		LineaPedido lineaPedido = null;
-		
-		Carro carro = Sesion.getCarro();
-		for (int idLibro : carro.getLibrosCarro().keySet()) {
-			libro = negocioLibro.getLibroById(idLibro);
-			cantidad = carro.getLibrosCarro().get(idLibro);
-			lineaPedido = new LineaPedido(libro, cantidad);
-			pedido.getLineasPedido().add(lineaPedido);
+		RequestDispatcher requestDispatcher = null;
+		Pedido pedido = Sesion.getPedido();
+		if(pedido!=null){
+			pedido.setEstado(new NegocioEstado().getEstadoPorId(Constantes.ID_ESTADO_PEDIDO_PAGADO));
+			pedido = new NegocioPedido().actualizarEstado(pedido);
+			if(pedido!=null){
+				Sesion.vaciarCarro();
+				Sesion.removePedido();
+				request.setAttribute("pedido", pedido);
+				requestDispatcher = request.getRequestDispatcher("resultadooperacion.jsp");
+			}
 		}
 		
-		Sesion.setPedido(pedido);
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("resumencarro.jsp");
+		requestDispatcher = request.getRequestDispatcher("resultadooperacion.jsp");
 		requestDispatcher.forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

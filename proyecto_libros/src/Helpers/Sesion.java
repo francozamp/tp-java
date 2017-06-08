@@ -3,6 +3,7 @@ package Helpers;
 import javax.servlet.http.HttpSession;
 
 import Entidades.Carro;
+import Entidades.Pedido;
 import Entidades.Usuario;
 import Negocio.NegocioUsuario;
 
@@ -46,6 +47,18 @@ public class Sesion {
 
 	public static void vaciarCarro() {
 		session.setAttribute("carro", null);
+	}
+
+	public static void setPedido(Pedido pedido) {
+		session.setAttribute("pedido", pedido);
+	}
+
+	public static Pedido getPedido() {
+		return (Pedido)session.getAttribute("pedido");
+	}
+
+	public static void removePedido() {
+		session.removeAttribute("pedido");
 	}
 	
 

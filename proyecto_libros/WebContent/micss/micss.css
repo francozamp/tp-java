@@ -117,3 +117,28 @@ input[type="checkbox"][disabled] {
 .frm input, textarea, .uneditable-input {
 	width: 450px;
 }
+
+.fechaPick {
+    width: 65px;
+}
+
+.codSeguridad {
+    width: 70px;
+}
+
+.monto {
+    text-align: right;
+    color: green;
+}
+
+.monto .total {
+    font-size: 16px;
+}
+
+.exito {
+    color: green;
+}
+
+.numero-pedido {
+    font-size: 16px;
+}

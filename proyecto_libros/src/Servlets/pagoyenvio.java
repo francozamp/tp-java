@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import Entidades.Carro;
 import Entidades.Constantes;
 import Entidades.Estado;
@@ -24,14 +22,14 @@ import Negocio.NegocioPedido;
 /**
  * Servlet implementation class pagarPedido
  */
-@WebServlet("/pagarPedido")
-public class pagarPedido extends MiServletPlantilla {
+@WebServlet("/pagoyenvio")
+public class pagoyenvio extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public pagarPedido() {
+    public pagoyenvio() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -76,11 +74,11 @@ public class pagarPedido extends MiServletPlantilla {
 		
 		RequestDispatcher requestDispatcher = null;
 		if (pedido != null) {
-			Sesion.vaciarCarro();
-			requestDispatcher = request.getRequestDispatcher("verCarro");
+			Sesion.setPedido(pedido);
+			requestDispatcher = request.getRequestDispatcher("pagoyenvio.jsp");
 		}
 		else{
-			requestDispatcher = request.getRequestDispatcher("index");
+			requestDispatcher = request.getRequestDispatcher("resultadooperacion.jsp");
 		}
 		requestDispatcher.forward(request, response);
 		

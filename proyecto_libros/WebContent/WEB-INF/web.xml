@@ -47,7 +47,7 @@
     <servlet-class>Servlets.verCarro</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>pagarPedido</servlet-name>
-    <servlet-class>Servlets.pagarPedido</servlet-class>
+    <servlet-name>pagoyenvio</servlet-name>
+    <servlet-class>Servlets.pagoyenvio</servlet-class>
   </servlet>
 </web-app>

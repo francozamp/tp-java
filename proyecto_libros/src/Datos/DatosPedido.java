@@ -14,10 +14,35 @@ public class DatosPedido {
 		
 		Pedido pedidoGuardado = null;
 		if(pedido.getId()!=0){
-			//TODO crear metodo para actualizar pedido existente
+			//TODO Hacer metodo para actualizar pedido
 		}
 		else{
 			pedidoGuardado = this.nuevoPedido(pedido);
+		}
+		
+		return pedidoGuardado;
+	}
+
+	public Pedido actualizarEstado(Pedido pedido) {
+		Pedido pedidoGuardado = null;
+		
+		Conexion conexion = new Conexion();
+		String query = "UPDATE pedidos SET estados_idestados=?";
+		
+		conexion.crearConexion();
+		PreparedStatement ps = conexion.preparedStatement(query);
+		
+		try{
+			ps.setInt(1, pedido.getEstado().getID());
+			
+			int resul = ps.executeUpdate();
+			
+			if(resul>0){
+				pedidoGuardado = this.findById(pedido.getId());
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		
 		return pedidoGuardado;
@@ -61,12 +86,12 @@ public class DatosPedido {
 		
 		conexion.cerrarConexion();
 		
-		pedidoGuardado = this.getFindPedidoById(idGuardado);
+		pedidoGuardado = this.findById(idGuardado);
 		
 		return pedidoGuardado;
 	}
 
-	private Pedido getFindPedidoById(int idPedido) {
+	public Pedido findById(int idPedido) {
 		Pedido pedido = null;
 		
 		Conexion conexion = new Conexion();

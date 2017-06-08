@@ -17,8 +17,7 @@ public class NegocioEstado {
 		
 	}
 
-	public Estado getEstadoPorId(int idEstado) {
-		
+	public Estado getEstadoPorId(int idEstado) {		
 		return new DatosEstado().getEstado(idEstado);
 	}
 

@@ -11,4 +11,12 @@ public class NegocioPedido {
 		return datosPedido.guardarPedido(pedido);
 	}
 
+	public Pedido findById(int id) {
+		return new DatosPedido().findById(id);
+	}
+
+	public Pedido actualizarEstado(Pedido pedido) {
+		return new DatosPedido().actualizarEstado(pedido);
+	}
+
 }
