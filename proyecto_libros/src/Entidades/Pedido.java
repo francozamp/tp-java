@@ -83,7 +83,7 @@ public class Pedido {
 	public double getMontoTotal(){
 		double monto = 0;
 		for (LineaPedido lineaPedido : lineasPedido) {
-			monto += lineaPedido.getLibro().getPrecioActual().getPrecio() + lineaPedido.getCantidad();
+			monto += lineaPedido.getLibro().getPrecioActual().getPrecio() * lineaPedido.getCantidad();
 		}
 		return monto;
 	}

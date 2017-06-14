@@ -223,6 +223,8 @@ public class DatosLibro {
 			System.out.println(ex.getMessage());
 		}
 		
+		con.cerrarConexion();
+		
 		return libros;
 	}
 
@@ -266,6 +268,8 @@ public class DatosLibro {
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
+		
+		con.cerrarConexion();
 		
 		return libros;
 	}

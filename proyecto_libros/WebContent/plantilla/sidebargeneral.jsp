@@ -6,7 +6,7 @@
 <div id="sidebar" class="span3">
 	<div class="well well-small">		
 		<c:choose>
-			<c:when test="${sessionScope.carro != null && sessionScope.carro.getCantLibros() >0 }">
+			<c:when test="${sessionScope.carro != null && sessionScope.carro.getCantLibros() > 0 }">
 				<a id="myCart" href="verCarro">
 					<img src="themes/images/ico-cart.png" alt="cart"> <c:out value="${sessionScope.carro.getCantLibros() }"/> Libros en tu carrito<span class="badge badge-warning pull-right"><c:out value="$ ${sessionScope.carro.getMontoTotalView() }"/> </span>
 				</a>

@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Precio {
@@ -10,6 +12,12 @@ public class Precio {
 	
 	public Precio(Float precio) {
 		this.precio = precio;
+	}
+
+	public Precio(ResultSet rs) throws SQLException {
+		this.fechaDes = rs.getDate("fecha");
+		this.precio = rs.getFloat("precio");
+		this.idLibro = rs.getInt("libros_id");
 	}
 
 	public Float getPrecio() {

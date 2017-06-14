@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Negocio.NegocioPrecio;
+
 public class Libro {
 	
 	private int id;
@@ -56,9 +58,11 @@ public class Libro {
 		
 		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
 		
-		fechaAlta=rs.getDate("fechaAlta");
+		this.fechaAlta=rs.getDate("fechaAlta");
 		
 		categorias =  new ArrayList<>();
+		
+		this.precioActual = new NegocioPrecio().getPrecioActualPorLibroId(this.id);
 		
 //		try {
 //			this.categorias=(List<Categoria>) list;
@@ -128,10 +132,7 @@ public class Libro {
 	}
 
 	public Precio getPrecioActual() {
-		//Hasta que se carguen precios, despues se tiene que sacar esta linea
-		Precio precioActual = new Precio(Float.valueOf(10));
-		
-		return precioActual;
+		return this.precioActual;
 	}
 	
 	public String getPrecioView(){

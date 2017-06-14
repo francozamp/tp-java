@@ -68,17 +68,17 @@
 						<c:forEach items="${librosRecientes}" var="libro">
 							<li class="span3">
 								<div class="thumbnail">
-									<a  href="product_details.html"><img src="${libro.urlImagen }" alt=""/></a>
+									<a  href="product_details.html"><img src="${libro.getUrlImagen() }" alt=""/></a>
 									<div class="caption">
-										<h5>${libro.titulo }</h5>
-										<p>${libro.descripcion }</p>
+										<h5>${libro.getTitulo() }</h5>
+										<p>${libro.getDescripcion() }</p>
 										<h4 style="text-align:center">
-											<a class="btn" href="agregarAlCarro?idLibro=${libro.id }">
+											<a class="btn" href="agregarAlCarro?idLibro=${libro.getId() }">
 												Agregar al
 												<i class="icon-shopping-cart"></i>
 											</a>
-											<a class="btn btn-primary" href="agregarAlCarro?idLibro=${libro.id }">
-												$222.00
+											<a class="btn btn-primary" href="agregarAlCarro?idLibro=${libro.getId() }">
+												$${libro.getPrecioView() }
 											</a>
 										</h4>
 									</div>

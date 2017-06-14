@@ -40,7 +40,6 @@ public class Carro {
 		NegocioLibro negocioLibro = new NegocioLibro();
 		
 		for (int idLibro : librosCarro.keySet()) {
-			monto += 10 * librosCarro.get(idLibro);
 			monto += negocioLibro.getLibroById(idLibro).getPrecioActual().getPrecio() * librosCarro.get(idLibro);
 		}
 		

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <head>
 	<meta charset="utf-8">
@@ -42,12 +43,12 @@
 				</a>
 	  			<div class="navbar-inner">
 	    			<a class="brand" href="index"><img id="logo" src="themes/images/logo.png" alt="Bootsshop"/></a>
-					<form class="form-inline navbar-search nav-element" method="post" action="products.html" >
-						<input id="" class="srchTxt" type="text" placeholder="Buscar" />
-			  			<select class="srchTxt">
-			  				<option>Todas las categorías</option>
+					<form class="form-inline navbar-search nav-element" method="post" action="libros" >
+						<input id="" class="srchTxt" type="text" placeholder="Buscar" name="titulo"/>
+			  			<select class="srchTxt" name="categoria">
+			  				<option value="0">Todas las categorías</option>
 			  				<c:forEach items="${categorias }" var="categoria">
-			  					<option>${categoria.nombre }</option>
+			  					<option value="${categoria.getId() }">${categoria.getNombre() }</option>
 			  				</c:forEach>
 						</select> 
 			  			<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
@@ -62,7 +63,7 @@
 			          				<ul class="dropdown-menu">
 			            				<li><a href="#">Mi cuenta</a></li>
 			            				<li><a href="#">Historial de pedidos</a></li>
-			            				<c:if test="${sessionScope.usuario.tipoUsuario.id == 1 }">
+			            				<c:if test="${sessionScope.usuario.getTipoUsuario().getIid() == 1 }">
 			            					<li><a href="admlibros">Administracion</a></li>
 			            				</c:if>
 			            				<li role="separator" class="divider"></li>
@@ -73,7 +74,7 @@
  		 					<c:otherwise>
  		 						<li class=""><a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Iniciar Sesión</span></a>
  		 						
- 		 						<c:set var="paginaActual" value="index" scope="request"/>
+<%--  		 						<c:set var="paginaActual" value="index" scope="request"/> --%>
  		 						<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 				  					<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
