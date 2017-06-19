@@ -38,4 +38,16 @@
     <servlet-name>administracionUsuarios</servlet-name>
     <servlet-class>Servlets.administracionUsuarios</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>agregarAlCarro</servlet-name>
+    <servlet-class>Servlets.agregarAlCarro</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>verCarro</servlet-name>
+    <servlet-class>Servlets.verCarro</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>pagoyenvio</servlet-name>
+    <servlet-class>Servlets.pagoyenvio</servlet-class>
+  </servlet>
 </web-app>

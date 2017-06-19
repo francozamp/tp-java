@@ -2,8 +2,6 @@ package Negocio;
 
 import java.util.List;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import Datos.DatosCategoria;
 import Entidades.Categoria;
 

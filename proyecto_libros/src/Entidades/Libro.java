@@ -2,9 +2,12 @@ package Entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import Negocio.NegocioPrecio;
 
 public class Libro {
 	
@@ -22,7 +25,7 @@ public class Libro {
 	private Precio precioActual;
 	
 	@SuppressWarnings("unchecked")
-	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<?> list){
+	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list){
 		this.isbn=isbn.replaceAll("\\s+", "");
 		this.titulo=titulo;
 		this.autor=autor;
@@ -55,9 +58,11 @@ public class Libro {
 		
 		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
 		
-		fechaAlta=rs.getDate("fechaAlta");
+		this.fechaAlta=rs.getDate("fechaAlta");
 		
 		categorias =  new ArrayList<>();
+		
+		this.precioActual = new NegocioPrecio().getPrecioActualPorLibroId(this.id);
 		
 //		try {
 //			this.categorias=(List<Categoria>) list;
@@ -127,7 +132,12 @@ public class Libro {
 	}
 
 	public Precio getPrecioActual() {
-		return precioActual;
+		return this.precioActual;
+	}
+	
+	public String getPrecioView(){
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(this.getPrecioActual().getPrecio());
 	}
 
 	public void setPrecioActual(Precio precioActual) {

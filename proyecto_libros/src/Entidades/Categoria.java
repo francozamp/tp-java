@@ -2,7 +2,10 @@ package Entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import Negocio.NegocioLibro;
 
 public class Categoria {
 	
@@ -16,6 +19,7 @@ public class Categoria {
 		
 		this.nombre=nombre;
 		this.detalle=detalle;
+		this.libros = new ArrayList<Libro>();
 		
 	}
 
@@ -23,6 +27,7 @@ public class Categoria {
 		this.id = rs.getInt("idcategorias");
 		this.nombre = rs.getString("nombre");
 		this.detalle = rs.getString("descripcion");
+		this.libros = new ArrayList<Libro>();
 	}
 
 	public void setId(int id) {
