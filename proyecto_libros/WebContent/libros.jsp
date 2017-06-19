@@ -18,9 +18,19 @@
 				<!-- Sidebar end=============================================== -->
 				<!-- Inicio contenido -->
 				<div class="span9">
-					<h3>${categoria.getNombre() }<small class="pull-right">${categoria.getLibros().size() } Libros disponibles</small></h3>
-					<hr class="soft" />
-					<p>${categoria.getDescripcion() }</p>
+					<c:choose>
+						<c:when test="${categoria != null }">
+							<h3>${categoria.getNombre() }<small class="pull-right">${categoria.getLibros().size() } Libros disponibles</small></h3>
+							<hr class="soft" />
+							<p>${categoria.getDescripcion() }</p>
+						</c:when>
+						
+						<c:otherwise>
+							<h3>Resultados </h3>						
+						</c:otherwise>
+					
+					</c:choose>
+					
 					<hr class="soft" />
 					<div class="row">
 						<form class="form-horizontal span6">
@@ -41,9 +51,9 @@
 					<br class="clr" />
 					<div class="tab-content">
 						<div class="tab-pane" id="listView">
-							
+
 							<c:forEach items="${librosPagina }" var="libro">
-	
+
 								<div class="row">
 									<div class="span2">
 										<img src="${libro.getUrlImagen() }" alt="" />
@@ -94,31 +104,66 @@
 					</div>
 					<div class="pagination">
 						<ul>
+							<c:choose>
+								<c:when test="${categoria != null }">
+									<li><a href="libros?idCategoria=${categoria.getId() }">&lsaquo;</a></li>
 							
-							<li><a href="libros?categoria=${categoria.getId() }">&lsaquo;</a></li>
-							
-							<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
-							<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
-												
-							<c:forEach var="pagina" begin="${inicio }" end="${fin }">
-								
-								<c:choose>
-									<c:when test="${pagina eq (paginaActual-3) }">
-										<li><a href="#">...</a></li>
-									</c:when>
+									<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
+									<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
+														
+									<c:forEach var="pagina" begin="${inicio }" end="${fin }">
+										
+										<c:choose>
+											<c:when test="${pagina eq (paginaActual-3) }">
+												<li><a href="#">...</a></li>
+											</c:when>
+											
+											<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
+												<li><a href="libros?idCategoria=${categoria.getId() }&page=${pagina }">${pagina }</a></li>
+											</c:when>
+											
+											<c:when test="${pagina eq (paginaActual+3) }">
+												<li><a href="#">...</a></li>
+											</c:when>
+										</c:choose>
+										
+									</c:forEach>
 									
-									<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
-										<li><a href="libros?categoria=${categoria.getId() }&page=${pagina }">${pagina }</a></li>
-									</c:when>
-									
-									<c:when test="${pagina eq (paginaActual+3) }">
-										<li><a href="#">...</a></li>
-									</c:when>
-								</c:choose>
+									<li><a href="libros?idCategoria=${categoria.getId() }&page=${cantPaginas }">&rsaquo;</a></li>	
+								</c:when>
 								
-							</c:forEach>
+								<c:otherwise>
+								
+									<li><a href="libros?titulo=${titulo }&idCategoria=${idCategoria }">&lsaquo;</a></li>
 							
-							<li><a href="libros?categoria=${categoria.getId() }&page=${cantPaginas }">&rsaquo;</a></li>
+									<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
+									<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
+														
+									<c:forEach var="pagina" begin="${inicio }" end="${fin }">
+										
+										<c:choose>
+											<c:when test="${pagina eq (paginaActual-3) }">
+												<li><a href="#">...</a></li>
+											</c:when>
+											
+											<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
+												<li><a href="libros?tirulo=${titulo }&idCategoria=${idCategoria }&page=${pagina }">${pagina }</a></li>
+											</c:when>
+											
+											<c:when test="${pagina eq (paginaActual+3) }">
+												<li><a href="#">...</a></li>
+											</c:when>
+										</c:choose>
+										
+									</c:forEach>
+									
+									<li><a href="libros?titulo=${titulo }idCategoria=${idCategoria }&page=${cantPaginas }">&rsaquo;</a></li>
+								
+								</c:otherwise>
+							
+							
+							</c:choose>
+							
 							
 						</ul>
 					</div>

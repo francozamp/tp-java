@@ -7,6 +7,7 @@ import java.util.List;
 
 import Entidades.Categoria;
 import Entidades.Libro;
+import Negocio.NegocioLibro;
 
 public class DatosCategoria {
 	
@@ -68,8 +69,8 @@ public class DatosCategoria {
 		
 		Conexion con = new Conexion();
 		String sql = "SELECT * FROM categorias c "
-				+ "INNER JOIN libros_categorias lc on c.idcategorias=lc.categorias_idcategorias "
-				+ "INNER JOIN libros l on lc.libros_id=l.id "
+//				+ "INNER JOIN libros_categorias lc on c.idcategorias=lc.categorias_idcategorias "
+//				+ "INNER JOIN libros l on lc.libros_id=l.id "
 				+ "WHERE idcategorias=?";
 		
 		con.crearConexion();
@@ -83,13 +84,15 @@ public class DatosCategoria {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				if (categoria == null){
-					categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
-					categoria.setId(rs.getInt("idcategorias"));
-				}
-				libros.add(new Libro(rs));
+				
+				categoria = new Categoria(rs);
+//				if (categoria == null){
+//					categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+//					categoria.setId(rs.getInt("idcategorias"));
+//				}
+//				libros.add(new Libro(rs));
 			}
-			categoria.setLibros(libros);
+			categoria.setLibros(new NegocioLibro().getLibrosPorCategoria(idCategoria));
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());

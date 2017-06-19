@@ -25,7 +25,7 @@ public class Libro {
 	private Precio precioActual;
 	
 	@SuppressWarnings("unchecked")
-	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<?> list){
+	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list){
 		this.isbn=isbn.replaceAll("\\s+", "");
 		this.titulo=titulo;
 		this.autor=autor;

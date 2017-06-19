@@ -43,9 +43,9 @@
 				</a>
 	  			<div class="navbar-inner">
 	    			<a class="brand" href="index"><img id="logo" src="themes/images/logo.png" alt="Bootsshop"/></a>
-					<form class="form-inline navbar-search nav-element" method="post" action="libros" >
+					<form class="form-inline navbar-search nav-element" method="get" action="libros" >
 						<input id="" class="srchTxt" type="text" placeholder="Buscar" name="titulo"/>
-			  			<select class="srchTxt" name="categoria">
+			  			<select class="srchTxt" name="idCategoria">
 			  				<option value="0">Todas las categorías</option>
 			  				<c:forEach items="${categorias }" var="categoria">
 			  					<option value="${categoria.getId() }">${categoria.getNombre() }</option>
@@ -74,7 +74,7 @@
  		 					<c:otherwise>
  		 						<li class=""><a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Iniciar Sesión</span></a>
  		 						
-<%--  		 						<c:set var="paginaActual" value="index" scope="request"/> --%>
+ 		 						<c:set var="nombPaginaActual" value="index" scope="request"/>
  		 						<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 				  					<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

@@ -49,4 +49,8 @@ public class NegocioLibro {
 		return datosLibro.getLibroById(idLibro);
 	}
 
+	public List<Libro> getLibroPorTituloYCategoria(String tituloLibro, int idCategoria) {
+		return new DatosLibro().getLibroPorTituloYCategoria(tituloLibro,idCategoria);
+	}
+
 }

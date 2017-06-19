@@ -340,4 +340,59 @@ public class DatosLibro {
 		return libro;
 	}
 
+	public List<Libro> getLibroPorTituloYCategoria(String tituloLibro, int idCategoria) {
+		List<Libro> librosResultado = new ArrayList<Libro>();
+		
+		Conexion conexion = new Conexion();
+		String query = "SELECT * FROM libros l "
+				+ " INNER JOIN libros_categorias lc on lc.libros_id = l.id "
+				+ " INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias "
+				+ " WHERE l.titulo like ? ";
+		if(idCategoria != 0){
+			query += " AND lc.categorias_idcategorias = ?";
+		}
+		
+		conexion.crearConexion();
+		
+		PreparedStatement ps = conexion.preparedStatement(query);
+		try {
+			Libro libro = null;
+			Categoria categoria = null;
+			List<Categoria> categorias = new ArrayList<Categoria>();
+			boolean disponible = false;
+			int proximo = 0;
+			
+			tituloLibro = "%" + tituloLibro.replaceAll("\\s+", "%") + "%";
+			ps.setString(1, tituloLibro);
+			if(idCategoria != 0){
+				ps.setInt(2, idCategoria);
+			}
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				proximo = 0;
+				if(rs.next()){
+					proximo = rs.getInt("id");
+				}
+				rs.previous();
+				
+				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+				categoria.setId(rs.getInt("idcategorias"));
+				categorias.add(categoria);
+				
+				if(proximo != rs.getInt("id")){			
+					disponible = rs.getInt("estados_idestados") == Constantes.ID_ESTADO_ACTIVO ? true : false;
+					libro = new Libro(rs);
+					librosResultado.add(libro);
+					categorias = new ArrayList<Categoria>();
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return librosResultado;
+	}
+
 }

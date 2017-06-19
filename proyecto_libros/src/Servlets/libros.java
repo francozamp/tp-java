@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import Entidades.Categoria;
 import Entidades.Constantes;
 import Entidades.Libro;
 import Negocio.NegocioCategoria;
+import Negocio.NegocioLibro;
 
 /**
  * Servlet implementation class libros
@@ -41,37 +43,69 @@ public class libros extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		idCategoria  = Integer.parseInt(request.getParameter("categoria"));
+		String tituloLibro = request.getParameter("titulo");
+		idCategoria  = Integer.parseInt(request.getParameter("idCategoria"));
+		
 		int paginaActual = 0;
 		
 		HttpSession session = request.getSession();
 		
-		if (request.getParameter("page") == null) {
-			paginaActual = 1;	
-			NegocioCategoria negocioCategoria = new NegocioCategoria();
-			categoria = negocioCategoria.getCategoria(idCategoria);
-			if(categoria != null && !categoria.getLibros().isEmpty()){
-				cantPaginas = (categoria.getLibros().size() / Constantes.CANT_LIBROS_POR_PAGINA + 1);	
+		if(tituloLibro == null || tituloLibro.isEmpty()){
+			if (request.getParameter("page") == null) {
+				paginaActual = 1;	
+				NegocioCategoria negocioCategoria = new NegocioCategoria();
+				categoria = negocioCategoria.getCategoria(idCategoria);
+				if(categoria != null && !categoria.getLibros().isEmpty()){
+					cantPaginas = (categoria.getLibros().size() / Constantes.CANT_LIBROS_POR_PAGINA + 1);	
+				}
+				else{
+					cantPaginas = 0;
+				}
+				request.setAttribute("categoria", categoria);
 			}
 			else{
-				cantPaginas = 0;
+				paginaActual = Integer.parseInt(request.getParameter("page"));
+				categoria = (Categoria)session.getAttribute("categoria");
 			}
-			session.setAttribute("categoria", categoria);
+			
+			if(categoria != null && !categoria.getLibros().isEmpty()){
+				librosPagina = categoria.getLibros().subList(paginaActual - 1, paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA <= categoria.getLibros().size() ? paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA : categoria.getLibros().size());
+			}
+			else{
+				librosPagina = new ArrayList<Libro>();
+			}
+			
+			request.setAttribute("categoria", categoria);
 		}
 		else{
-			paginaActual = Integer.parseInt(request.getParameter("page"));
-			categoria = (Categoria)session.getAttribute("categoria");
+			List<Libro> resultadoLibrosList = new NegocioLibro().getLibroPorTituloYCategoria(tituloLibro,idCategoria);
+			if (request.getParameter("page") == null) {
+				paginaActual = 1;	
+				if(!resultadoLibrosList.isEmpty()){
+					cantPaginas = (resultadoLibrosList.size() / Constantes.CANT_LIBROS_POR_PAGINA + 1);	
+				}
+				else{
+					cantPaginas = 0;
+				}
+			}
+			else{
+				paginaActual = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			if(!resultadoLibrosList.isEmpty()){
+				librosPagina = resultadoLibrosList.subList(paginaActual - 1, paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA <= resultadoLibrosList.size() ? paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA : resultadoLibrosList.size());
+			}
+			else{
+				librosPagina = new ArrayList<Libro>();
+			}
 		}
 		
-		if(categoria != null && !categoria.getLibros().isEmpty()){
-			librosPagina = categoria.getLibros().subList(paginaActual - 1, paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA <= categoria.getLibros().size() ? paginaActual - 1 + Constantes.CANT_LIBROS_POR_PAGINA : categoria.getLibros().size());
-		}
-		
+		request.setAttribute("titulo", request.getParameter("titulo"));
+		request.setAttribute("idCategoria", request.getParameter("categoria"));
 		request.setAttribute("librosPagina", librosPagina);
-		request.setAttribute("categoria", categoria);
 		request.setAttribute("paginaActual", paginaActual);
 		request.setAttribute("cantPaginas", cantPaginas);
-
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("libros.jsp");
 		requestDispatcher.forward(request, response);
 	}
@@ -80,7 +114,6 @@ public class libros extends MiServletPlantilla {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	
