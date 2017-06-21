@@ -31,7 +31,7 @@
 		                    <button type="button" class="close" data-dismiss="alert">×</button>
 		                    <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 		                </div> -->
-		                <form class="form-horizontal frm" action="nuevousuario" method="POST" >
+		                <form class="form-horizontal frm" action="formularioLibro" method="POST" >
 		                    <h4>Información del libro</h4>
 		                    <div class="control-group">
 		                        <label class="control-label" for="isbn">ISBN <sup>*</sup></label>
@@ -108,12 +108,22 @@
 		                            <c:choose>
 		                            	<c:when test="${libro != null }">
 		                            		<textarea id="descripcion" placeholder="Descripcion" name="descripcion" rows="5" cols="6"><c:out value="${libro.descripcion }"/></textarea>
-<%-- 		                            		<input type="text" id="descripcion" placeholder="Descripcion" name="descripcion" value="${libro.descripcion }"/> --%>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="text" id="descripcion" placeholder="Descripcion" name="descripcion"/>
 		                            	</c:otherwise>
 		                            </c:choose>
+		                        </div>
+		                    </div>
+		                    <div class="control-group">
+		                        <label class="control-label" for="categorias">Categorias </label>
+		                        <div class="controls">
+									<select multiple name="categorias">
+						  				<option value="">Seleccione una Categoría</option>
+						  				<c:forEach items="${categorias }" var="categoria">
+						  					<option value="${categoria.getId() }">${categoria.getNombre() }</option>
+						  				</c:forEach>
+									</select> 
 		                        </div>
 		                    </div>
 		                    <div class="control-group">

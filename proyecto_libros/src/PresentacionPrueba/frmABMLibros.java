@@ -185,7 +185,7 @@ public class frmABMLibros extends JFrame {
 		btnCancelar.setBounds(379, 427, 89, 23);
 		contentPane.add(btnCancelar);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		/*JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Libro libro = new Libro(txtIsbn.getText(),txtTitulo.getText(),textAutor.getText(),txtEditorial.getText(),txtEdicion.getText(),txtDescripcion.getText(),chckbxDisponible.isSelected(),listTodas.getSelectedValuesList());
@@ -202,6 +202,6 @@ public class frmABMLibros extends JFrame {
 			}
 		});
 		btnAceptar.setBounds(379, 393, 89, 23);
-		contentPane.add(btnAceptar);
+		contentPane.add(btnAceptar);*/
 	}
 }
