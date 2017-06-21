@@ -1,6 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidades.Categoria;
 import Entidades.Libro;
+import Negocio.NegocioCategoria;
 import Negocio.NegocioLibro;
 
 /**
@@ -24,6 +28,7 @@ public class formularioLibro extends MiServletPlantilla {
     public formularioLibro() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -38,8 +43,6 @@ public class formularioLibro extends MiServletPlantilla {
 			request.setAttribute("libro", libro);
 		}
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("frmlibro.jsp");
-		requestDispatcher.forward(request, response);
 	}
 
 	/**
@@ -47,7 +50,32 @@ public class formularioLibro extends MiServletPlantilla {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String isbn = request.getParameter("isbn");
+		String titulo = request.getParameter("titulo");
+		String autor = request.getParameter("autor");
+		String editorial = request.getParameter("editorial");
+		String edicion = request.getParameter("edicion");
+		String descripcion = request.getParameter("descripcion");
+		String[] idsCategorias = request.getParameterValues("categorias");
+		List<Categoria> categorias = new ArrayList<Categoria>();
+
+		for (String idCategoria : idsCategorias) {
+			int id = Integer.parseInt(idCategoria); 
+			NegocioCategoria negocioCategoria = new NegocioCategoria();
+			Categoria categoria = negocioCategoria.getCategoria(id);
+			categorias.add(categoria);
+		}
+		
+		Libro libro = new Libro(isbn, titulo, autor, editorial, edicion, descripcion, true, categorias);
+		NegocioLibro negocioLibro = new NegocioLibro();
+		Libro guardado = negocioLibro.guardarLibro(libro);
+		if (guardado != null) {
+			List<Libro> libros = negocioLibro.getLibros();
+			request.setAttribute("libros", libros);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			requestDispatcher.forward(request, response);
+		}
+		
 	}
 
 }

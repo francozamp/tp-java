@@ -36,10 +36,11 @@ public abstract class MiServletPlantilla extends HttpServlet {
 		
     	Sesion.setSession(request.getSession(true));
 		usuario = Sesion.getUsuario();
-		NegocioCategoria negocioCategoria = new NegocioCategoria();
-		categorias = negocioCategoria.getCategorias();
-		request.setAttribute("categorias", categorias);
-		
+		if (request.getSession().getAttribute("categorias") == null) {
+			NegocioCategoria negocioCategoria = new NegocioCategoria();
+			categorias = negocioCategoria.getCategorias();
+			request.getSession().setAttribute("categorias", categorias);
+		}
 	}
     
     protected void responder(HttpServletResponse response) throws IOException {
