@@ -21,9 +21,8 @@
 						<li><a href="index.html">Home</a> <span class="divider">/</span></li>
 						<li class="active"> SHOPPING CART</li>
 					</ul> -->
-					<h3>  Carrito de compras [${sessionScope.pedido.getCantLibros() } Libro(s)]<a href="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continuar comprando </a></h3>	
+					<h3>Pedido #${pedido.getId() } [${pedido.getCantLibros() } Libro(s)]</h3>	
 					<hr class="soft"/>
-					<form action="pagoyenvio" method="post">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -35,13 +34,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${sessionScope.pedido.getLineasPedido() }" var="lineaPedido">
+								<c:forEach items="${pedido.getLineasPedido() }" var="lineaPedido">
 									<tr>
 										<td> <img width="60" src="${lineaPedido.getLibro().getUrlImagen() }" alt=""/></td>
 										<td><strong>${lineaPedido.getLibro().getTitulo() } </strong><br/>${lineaPedido.getLibro().getEditorial() }<br/>${lineaPedido.getLibro().getEdicion() }</td>
-										<td>
-											<div class="input-append"><input class="span1" style="max-width:34px" size="16" name="cant${lineaPedido.getLibro().getId()}" type="text" value="${lineaPedido.getCantidad() }"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button></div>
-										</td>
+										<td>${lineaPedido.getCantidad() }</td>
 										<td>$ ${lineaPedido.getLibro().getPrecioView() }</td>
 										<td>$ ${lineaPedido.getMontoLineaView() } </td>
 									</tr>
@@ -49,15 +46,15 @@
 	
 								<tr>
 									<td colspan="4" style="text-align:right">Precio Total:	</td>
-									<td> $ ${sessionScope.pedido.getMontoTotalView() }</td>
+									<td> $ ${pedido.getMontoTotalView() }</td>
 								</tr>
 								<tr>
 									<td colspan="4" style="text-align:right">Descuento Total:	</td>
 									<td> $ 0.00</td>
 								</tr>
 								<tr>
-									<td colspan="4" style="text-align:right"><strong>TOTAL ($ ${sessionScope.pedido.getMontoTotalView() } - $ 0) =</strong></td>
-									<td class="label label-important" style="display:block"> <strong> $ ${sessionScope.pedido.getMontoTotalView() } </strong></td>
+									<td colspan="4" style="text-align:right"><strong>TOTAL ($ ${pedido.getMontoTotalView() } - $ 0) =</strong></td>
+									<td class="label label-important" style="display:block"> <strong> $ ${pedido.getMontoTotalView() } </strong></td>
 								</tr>
 							</tbody>
 						</table>
@@ -71,7 +68,6 @@
 											<label class="control-label"><strong> Codigo de descuento: </strong> </label>
 											<div class="controls">
 												<input type="text" class="input-medium" placeholder="Codigo">
-												<a href=""><button type="button" class="btn"> Aplicar </button></a>
 											</div>
 										</div>
 									</td>
@@ -105,18 +101,7 @@
 									</form>				  
 								</td>
 							</tr>
-						</table>	 -->	
-						<a href="index" class="btn btn-large"><i class="icon-arrow-left"></i> Continuar comprando </a>
-						<c:choose>
-							<c:when test="${sessionScope.usuario != null }">
-								<button type="submit" class="btn btn-large pull-right">Comprar <i class="icon-arrow-right"></i></button>
-							</c:when>
-							<c:otherwise>
-	<!-- 							<a href="#login" role="button" data-toggle="modal" class="btn btn-large pull-right">Comprar <i class="icon-arrow-right"></i></a> -->
-								<a href="#login" role="button" data-toggle="modal" class="pull-right"><span class="btn btn-large btn-success">Iniciar Sesión</span></a>
-							</c:otherwise>
-						</c:choose>
-					</form>
+						</table>	 -->
 				</div>
 				<!-- Fin contenido -->
 			</div>

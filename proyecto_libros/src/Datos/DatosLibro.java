@@ -232,7 +232,10 @@ public class DatosLibro {
 		List<Libro> libros = new ArrayList<Libro>();
 		
 		Conexion con = new Conexion();
-		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		String sql = "SELECT * FROM libros l "
+				+ " INNER JOIN libros_categorias lc ON l.id=lc.libros_id "
+				+ " INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias"
+				+ " ORDER BY fechaAlta DESC LIMIT 9";
 		
 		con.crearConexion();
 
