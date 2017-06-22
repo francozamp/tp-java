@@ -50,4 +50,8 @@
     <servlet-name>pagoyenvio</servlet-name>
     <servlet-class>Servlets.pagoyenvio</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>detalleproducto</servlet-name>
+    <servlet-class>Servlets.detalleproducto</servlet-class>
+  </servlet>
 </web-app>
