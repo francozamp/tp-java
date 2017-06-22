@@ -16,7 +16,7 @@ public class DatosLibro {
 		boolean libroGuardado = false;
 		boolean categoriaGuardada = false;
 		
-		String ISBN = null;
+		String idLibro = null;
 		String ISBN2 = null;
 		int idCategoria = 0;
 		
@@ -28,7 +28,6 @@ public class DatosLibro {
 		
 		if(!this.existeLibro(libro.getISBN())){
 			sql="INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados) VALUES (?,?,?,?,?,?,?)";
-			sql2="INSERT INTO libros_categorias (libros_ISBN, categorias_idCategorias) VALUES (?,?)";
 		}
 		
 		PreparedStatement ps=conexion.preparedStatement(sql);
@@ -46,10 +45,10 @@ public class DatosLibro {
 			
 			ResultSet rs = ps.getGeneratedKeys();
             while (rs.next()) {
-               ISBN = rs.getString(1);
+               idLibro = rs.getString(1);
             }
                    
-            if (!ISBN.replaceAll("\\s+", "").isEmpty()){
+            if (!idLibro.replaceAll("\\s+", "").isEmpty()){
             	libroGuardado = true;
             }
             
@@ -63,7 +62,7 @@ public class DatosLibro {
 		try{
 			for (Categoria categoria : libro.getCategorias()) {
 				
-				ps.setString(1, libro.getISBN());
+				ps.setInt(1, Integer.parseInt(idLibro));
 				ps.setInt(2, categoria.getId());
 				
 				ps.executeUpdate();
@@ -74,9 +73,9 @@ public class DatosLibro {
 	               idCategoria = rs.getInt(2);
 	            }
 	                   
-	            if (!(libro.getISBN()==ISBN2&&categoria.getId()==idCategoria)){
-	            	categoriaGuardada = false;
-	            }		
+//	            if (!(libro.getISBN()==ISBN2&&categoria.getId()==idCategoria)){
+//	            	categoriaGuardada = false;
+//	            }		
 			}      
 		}
 		catch(Exception exception){
@@ -84,7 +83,7 @@ public class DatosLibro {
 		}
 		
 		if(libroGuardado){
-			libro = this.getLibro(ISBN);
+			libro = this.getLibro(libro.getISBN());
 		}
 		
 		conexion.cerrarConexion();
@@ -122,31 +121,31 @@ public class DatosLibro {
 			System.out.println(ex.getMessage());
 		}
 		
-		if (libro != null) {
-			Categoria categoria = null;
-			
-			String sql2 = "SELECT * FROM libros_categorias INNER JOIN categorias ON libros_categorias.categorias_idcategorias=categorias.idcategorias WHERE libros_ISBN=?";
-			
-			PreparedStatement ps2=con.preparedStatement(sql2);
-			
-			try{
-				//Seteo los valores del preapred statement
-				ps.setString(1, isbn);
-				
-				ResultSet rs = ps.executeQuery();
-				
-				while(rs.next()){
-					categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
-					categoria.setId(rs.getInt("idcategorias"));
-					categorias.add(categoria);
-				}
-				
-				libro.setCategorias(categorias);
-			}
-			catch(Exception ex){
-				System.out.println(ex.getMessage());
-			}
-		}	
+//		if (libro != null) {
+//			Categoria categoria = null;
+//			
+//			String sql2 = "SELECT * FROM libros_categorias INNER JOIN categorias ON libros_categorias.categorias_idcategorias=categorias.idcategorias WHERE libros_ISBN=?";
+//			
+//			PreparedStatement ps2=con.preparedStatement(sql2);
+//			
+//			try{
+//				//Seteo los valores del preapred statement
+//				ps.setString(1, isbn);
+//				
+//				ResultSet rs = ps.executeQuery();
+//				
+//				while(rs.next()){
+//					categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+//					categoria.setId(rs.getInt("idcategorias"));
+//					categorias.add(categoria);
+//				}
+//				
+//				libro.setCategorias(categorias);
+//			}
+//			catch(Exception ex){
+//				System.out.println(ex.getMessage());
+//			}
+//		}	
 		con.cerrarConexion();
 		
 		return libro;
@@ -186,7 +185,7 @@ public class DatosLibro {
 		List<Libro> libros = new ArrayList<Libro>();
 		
 		Conexion con = new Conexion();
-		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias";
+		String sql = "SELECT * FROM libros l INNER JOIN libros_categorias lc ON l.id=lc.libros_id INNER JOIN categorias c ON lc.categorias_idcategorias=c.idcategorias GROUP BY l.id";
 		
 		con.crearConexion();
 
