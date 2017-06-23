@@ -33,11 +33,19 @@ public class historialpedidos extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		List<Pedido> pedidosList = new NegocioPedido().findPedidosByUsuario(this.getUsuario().getId());
+		RequestDispatcher requestDispatcher = null;
 		
-		request.setAttribute("pedidosList", pedidosList);
+		if(this.getUsuario() != null){
+			List<Pedido> pedidosList = new NegocioPedido().findPedidosByUsuario(this.getUsuario().getId());
+			
+			request.setAttribute("pedidosList", pedidosList);
+			
+			requestDispatcher = request.getRequestDispatcher("historialpedidos.jsp");
+		}
+		else{
+			requestDispatcher = request.getRequestDispatcher("login.jsp");
+		}
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("historialpedidos.jsp");
 		requestDispatcher.forward(request, response);
 		
 	}
