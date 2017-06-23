@@ -88,9 +88,7 @@
 					  							<input type="password" id="inputPassword" placeholder="Contraseña" name="password">
 					  						</div>
 					  						<div class="control-group">
-												<label class="checkbox">
-													<input type="checkbox"> Recuerdame
-												</label>
+												<label id="recuerdame" class="checkbox"><input type="checkbox"> Recuerdame</label>
 					  						</div>
 					  						<input type="hidden" name="paginaLlamado" value="index">
 					  						<button type="submit" class="btn btn-success">Iniciar Sesión</button>
