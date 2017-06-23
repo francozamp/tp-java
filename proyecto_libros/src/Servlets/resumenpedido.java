@@ -32,13 +32,21 @@ public class resumenpedido extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		int idPedido = Integer.valueOf(request.getParameter("idPedido"));
+		RequestDispatcher requestDispatcher = null;
 		
-		Pedido pedido = new NegocioPedido().findById(idPedido);
+		if(this.getUsuario() != null){
+			int idPedido = Integer.valueOf(request.getParameter("idPedido"));
+			
+			Pedido pedido = new NegocioPedido().findById(idPedido);
+			
+			request.setAttribute("pedido", pedido);
+			
+			requestDispatcher = request.getRequestDispatcher("resumenpedido.jsp");
+		}
+		else{
+			requestDispatcher = request.getRequestDispatcher("login.jsp");
+		}
 		
-		request.setAttribute("pedido", pedido);
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("resumenpedido.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

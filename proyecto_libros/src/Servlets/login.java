@@ -54,7 +54,15 @@ public class login extends HttpServlet {
 			
 		String destino = (String)request.getParameter("paginaLlamado");
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destino);
+		RequestDispatcher requestDispatcher = null;
+		
+		if(destino != null){
+			requestDispatcher = request.getRequestDispatcher(destino);
+		}
+		else{
+			requestDispatcher = request.getRequestDispatcher("index");
+		}
+		
 		requestDispatcher.forward(request, response);
 		
 //		response.sendRedirect(request.getHeader("referer"));

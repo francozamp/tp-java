@@ -142,3 +142,7 @@ input[type="checkbox"][disabled] {
 .numero-pedido {
     font-size: 16px;
 }
+
+#loginCont {
+    margin: 0 30%;
+}
