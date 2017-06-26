@@ -2,22 +2,23 @@ package Datos;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import Entidades.Estado;
 
 public class DatosEstado {
 	
-	@SuppressWarnings("null")
 	public List<Estado> getEstados(){
 		
-		List<Estado> estados = null;
+		List<Estado> estados = new ArrayList<Estado>();
 		Estado estado = null;
+		
 		Conexion con = new Conexion();
 		String sql = "SELECT * FROM estados";
-		con.crearConexion();
-		ResultSet rs = con.consultarTabla(sql);
 		
+		con.crearConexion();
+		ResultSet rs = con.consultarTabla(sql);	
 		try{
 			while (rs.next()){
 				estado = new Estado(rs.getInt("idestados"), rs.getString("nombre"));

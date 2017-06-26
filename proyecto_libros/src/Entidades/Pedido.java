@@ -18,6 +18,7 @@ public class Pedido {
 	private Usuario usuario;
 	private Estado estado;
 	private List<LineaPedido> lineasPedido;
+	private String seguimiento;
 	
 	public Pedido(){
 		this.fecha = new Date();
@@ -30,6 +31,7 @@ public class Pedido {
 		this.usuario = new NegocioUsuario().getUsuarioPorId(rs.getInt("usuarios_id"));
 		this.estado = new NegocioEstado().getEstadoPorId(rs.getInt("estados_idestados"));
 		this.lineasPedido = new NegocioLineaPedido().getLineasPorPedido(this.id);
+		this.seguimiento = rs.getString("seguimiento");
 	}
 
 	public int getId() {
@@ -91,6 +93,14 @@ public class Pedido {
 	public String getMontoTotalView(){
 		DecimalFormat df = new DecimalFormat("0.00");
 		return df.format(this.getMontoTotal());
+	}
+
+	public String getSeguimiento() {
+		return seguimiento;
+	}
+
+	public void setSeguimiento(String seguimiento) {
+		this.seguimiento = seguimiento;
 	}
 
 }
