@@ -62,9 +62,9 @@
 			          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.usuario.nombre} ${sessionScope.usuario.apellido} <span class="caret"></span></a>
 			          				<ul class="dropdown-menu">
 			            				<li><a href="#">Mi cuenta</a></li>
-			            				<li><a href="#">Historial de pedidos</a></li>
+			            				<li><a href="historialpedidos">Historial de pedidos</a></li>
 			            				<c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 }">
-			            					<li><a href="admlibros">Administracion</a></li>
+			            					<li><a href="admPedidos">Administracion</a></li>
 			            				</c:if>
 			            				<li role="separator" class="divider"></li>
 			            				<li><a href="logout?paginaLlamado=index">Cerrar sesión</a></li>

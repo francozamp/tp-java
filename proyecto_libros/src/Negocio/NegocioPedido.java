@@ -1,7 +1,6 @@
 package Negocio;
 
 import java.util.List;
-
 import Datos.DatosPedido;
 import Entidades.Pedido;
 
@@ -23,6 +22,17 @@ public class NegocioPedido {
 
 	public List<Pedido> findPedidosByUsuario(int idUsuario) {
 		return new DatosPedido().findPedidosByUsuario(idUsuario);
+	}
+
+	public List<Pedido> getPedidosList() {
+		return new DatosPedido().getPedidosList();
+	}
+
+	public Pedido actualizarPedido(Pedido pedido) {
+
+		pedido = new DatosPedido().actualizarPedido(pedido);
+		
+		return pedido;
 	}
 
 }

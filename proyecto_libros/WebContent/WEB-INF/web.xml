@@ -58,4 +58,8 @@
     <servlet-name>resumenpedido</servlet-name>
     <servlet-class>Servlets.resumenpedido</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>administracionPedidos</servlet-name>
+    <servlet-class>Servlets.administracionPedidos</servlet-class>
+  </servlet>
 </web-app>
