@@ -42,7 +42,8 @@ public abstract class MiServletPlantilla extends HttpServlet {
     	
     	Sesion.setSession(request.getSession(true));
 		usuario = Sesion.getUsuario();
-		if (request.getSession().getAttribute("categorias") == null) {
+		List<Categoria> categorias = (List<Categoria>) request.getSession().getAttribute("categorias");
+		if (categorias == null || categorias.isEmpty()) {
 			NegocioCategoria negocioCategoria = new NegocioCategoria();
 			categorias = negocioCategoria.getCategorias();
 			request.getSession().setAttribute("categorias", categorias);
