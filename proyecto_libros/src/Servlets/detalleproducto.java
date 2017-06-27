@@ -1,25 +1,27 @@
 package Servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Carro;
-import Helpers.Sesion;
+import Entidades.Libro;
+import Negocio.NegocioLibro;
 
 /**
- * Servlet implementation class agregarAlCarro
+ * Servlet implementation class detalleproducto
  */
-@WebServlet("/agregarAlCarro")
-public class agregarAlCarro extends MiServletPlantilla {
+@WebServlet("/detalleproducto")
+public class detalleproducto extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
-       
+    private Libro libro;
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public agregarAlCarro() {
+    public detalleproducto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +31,16 @@ public class agregarAlCarro extends MiServletPlantilla {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-		String redir ="/libros/index";
-		if(request.getParameter("idLibro")!=null){
-			int idLibro = Integer.valueOf(request.getParameter("idLibro"));
-			int cantidad = request.getParameter("cantidad") != null ? Integer.valueOf(request.getParameter("cantidad")) : 1;
-			 redir = request.getParameter("redir")!=null? request.getParameter("redir") : "/libros/index";
-			if(cantidad>0){
-				Carro carro = Sesion.getCarro();
-				carro.agregarAlCarro(idLibro, cantidad);
-				Sesion.setCarro(carro);
-			}
-		}
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		int idLibro = Integer.parseInt(request.getParameter("id"));
+		NegocioLibro negocioLibro= new NegocioLibro();
+		libro= negocioLibro.getLibroById(idLibro);
+		request.setAttribute("libro", libro);
 		
-		response.sendRedirect(redir);
-		//ver como volver exactamente a la misma página que estaba antes
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("detalleproducto.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
