@@ -20,7 +20,7 @@
 		<li class="subMenu open"><a> Categorías</a>
 			<ul>
 				<c:forEach items="${categorias }" var="categoria">
-					<li><a href="libros?idCategoria=${categoria.id }"><i class="icon-chevron-right"></i>${categoria.nombre }</a></li>
+					<li><a href="libros?idCategoria=${categoria.getId() }"><i class="icon-chevron-right"></i>${categoria.getNombre() }</a></li>
 				</c:forEach>
 			</ul>
 		</li>

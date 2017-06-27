@@ -35,7 +35,7 @@
 					<div class="row">
 						<form class="form-horizontal span6">
 							<div class="control-group">
-								<label class="control-label alignL">Ordenado por </label> 
+								<label class="control-label alignL">Ordenado por</label> 
 								<select>
 									<option>Alfabético A - Z</option>
 									<option>Alfabético Z - A</option>
@@ -49,124 +49,132 @@
 						</div>
 					</div>
 					<br class="clr" />
-					<div class="tab-content">
-						<div class="tab-pane" id="listView">
-
-							<c:forEach items="${librosPagina }" var="libro">
-
-								<div class="row">
-									<div class="span2">
-										<img src="${libro.getUrlImagen() }" alt="" />
-									</div>
-									<div class="span4">
-										<h3>${libro.getTitulo() }</h3>
-										<hr class="soft" />
-										<h5>${libro.getEditorial() }</h5>
-										<p>${libro.getDescripcion() }</p>
-										<br class="clr" />
-									</div>
-									<div class="span3 alignR">
-										<form class="form-horizontal qtyFrm">
-											<h3>$${libro.getPrecioView() }</h3>
-											<a href="product_details.html" class="btn btn-large btn-primary"> Agregar al <i class=" icon-shopping-cart"></i></a>
-										</form>
-									</div>
-								</div>
-								<hr class="soft" />
+					
+					<c:choose>
+						<c:when test="${cantPaginas != 0 }">
+							<div class="tab-content">
+								<div class="tab-pane" id="listView">
 		
-							</c:forEach>
+									<c:forEach items="${librosPagina }" var="libro">
 		
-						</div>
-						<div class="tab-pane  active" id="blockView">
-							<ul class="thumbnails">
-		
-								<c:forEach items="${librosPagina }" var="libro">
-	
-									<li class="span3">
-										<div class="thumbnail">
-											<a href="product_details.html"><img src="${libro.getUrlImagen() }" alt=""/></a>
-											<div class="caption">
-												<h5>${libro.getTitulo() }</h5>
+										<div class="row">
+											<div class="span2">
+												<img src="${libro.getUrlImagen() }" alt="" />
+											</div>
+											<div class="span4">
+												<h3>${libro.getTitulo() }</h3>
+												<hr class="soft" />
+												<h5>${libro.getEditorial() }</h5>
 												<p>${libro.getDescripcion() }</p>
-												<h4 style="text-align: center">
-													<a class="btn" href="#">Agregar al <i class="icon-shopping-cart"></i></a> 
-													<a class="btn btn-primary" href="#">$${libro.getPrecioView() }</a>
-												</h4>
+												<br class="clr" />
+											</div>
+											<div class="span3 alignR">
+												<form class="form-horizontal qtyFrm">
+													<h3>$${libro.getPrecioView() }</h3>
+													<a href="product_details.html" class="btn btn-large btn-primary"> Agregar al <i class=" icon-shopping-cart"></i></a>
+												</form>
 											</div>
 										</div>
-									</li>
-		
-								</c:forEach>
-								
-							</ul>
-							<hr class="soft" />
-						</div>
-					</div>
-					<div class="pagination">
-						<ul>
-							<c:choose>
-								<c:when test="${categoria != null }">
-									<li><a href="libros?idCategoria=${categoria.getId() }">&lsaquo;</a></li>
-							
-									<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
-									<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
-														
-									<c:forEach var="pagina" begin="${inicio }" end="${fin }">
-										
-										<c:choose>
-											<c:when test="${pagina eq (paginaActual-3) }">
-												<li><a href="#">...</a></li>
-											</c:when>
-											
-											<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
-												<li><a href="libros?idCategoria=${categoria.getId() }&page=${pagina }">${pagina }</a></li>
-											</c:when>
-											
-											<c:when test="${pagina eq (paginaActual+3) }">
-												<li><a href="#">...</a></li>
-											</c:when>
-										</c:choose>
-										
+										<hr class="soft" />
+				
 									</c:forEach>
-									
-									<li><a href="libros?idCategoria=${categoria.getId() }&page=${cantPaginas }">&rsaquo;</a></li>	
-								</c:when>
-								
-								<c:otherwise>
-								
-									<li><a href="libros?titulo=${titulo }&idCategoria=${idCategoria }">&lsaquo;</a></li>
-							
-									<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
-									<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
-														
-									<c:forEach var="pagina" begin="${inicio }" end="${fin }">
+				
+								</div>
+								<div class="tab-pane  active" id="blockView">
+									<ul class="thumbnails">
+				
+										<c:forEach items="${librosPagina }" var="libro">
+			
+											<li class="span3">
+												<div class="thumbnail">
+													<a href="product_details.html"><img src="${libro.getUrlImagen() }" alt=""/></a>
+													<div class="caption">
+														<h5>${libro.getTitulo() }</h5>
+														<p>${libro.getDescripcion() }</p>
+														<h4 style="text-align: center">
+															<a class="btn" href="#">Agregar al <i class="icon-shopping-cart"></i></a> 
+															<a class="btn btn-primary" href="#">$${libro.getPrecioView() }</a>
+														</h4>
+													</div>
+												</div>
+											</li>
+				
+										</c:forEach>
 										
-										<c:choose>
-											<c:when test="${pagina eq (paginaActual-3) }">
-												<li><a href="#">...</a></li>
-											</c:when>
-											
-											<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
-												<li><a href="libros?tirulo=${titulo }&idCategoria=${idCategoria }&page=${pagina }">${pagina }</a></li>
-											</c:when>
-											
-											<c:when test="${pagina eq (paginaActual+3) }">
-												<li><a href="#">...</a></li>
-											</c:when>
-										</c:choose>
-										
-									</c:forEach>
+									</ul>
+									<hr class="soft" />
+								</div>
+							</div>
+							<div class="pagination">
+								<ul>
+									<c:choose>
+										<c:when test="${categoria != null }">
+											<li><a href="libros?idCategoria=${categoria.getId() }">&lsaquo;</a></li>
 									
-									<li><a href="libros?titulo=${titulo }idCategoria=${idCategoria }&page=${cantPaginas }">&rsaquo;</a></li>
-								
-								</c:otherwise>
-							
-							
-							</c:choose>
-							
-							
-						</ul>
-					</div>
+											<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
+											<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
+																
+											<c:forEach var="pagina" begin="${inicio }" end="${fin }">
+												
+												<c:choose>
+													<c:when test="${pagina eq (paginaActual-3) }">
+														<li><a href="#">...</a></li>
+													</c:when>
+													
+													<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
+														<li><a href="libros?idCategoria=${categoria.getId() }&page=${pagina }">${pagina }</a></li>
+													</c:when>
+													
+													<c:when test="${pagina eq (paginaActual+3) }">
+														<li><a href="#">...</a></li>
+													</c:when>
+												</c:choose>
+												
+											</c:forEach>
+											
+											<li><a href="libros?idCategoria=${categoria.getId() }&page=${cantPaginas }">&rsaquo;</a></li>	
+										</c:when>
+										
+										<c:otherwise>
+										
+											<li><a href="libros?titulo=${titulo }&idCategoria=${idCategoria }">&lsaquo;</a></li>
+									
+											<c:set var="inicio" value="${paginaActual-3>0?paginaActual-3:paginaActual-2>0?paginaActual-2:paginaActual-1>0?paginaActual-1:1 }"/>
+											<c:set var="fin" value="${paginaActual+3<cantPaginas?paginaActual+3:paginaActual+2<cantPaginas?paginaActual+2:paginaActual+1<cantPaginas?paginaActual+1:paginaActual }"/>
+																
+											<c:forEach var="pagina" begin="${inicio }" end="${fin }">
+												
+												<c:choose>
+													<c:when test="${pagina eq (paginaActual-3) }">
+														<li><a href="#">...</a></li>
+													</c:when>
+													
+													<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
+														<li><a href="libros?tirulo=${titulo }&idCategoria=${idCategoria }&page=${pagina }">${pagina }</a></li>
+													</c:when>
+													
+													<c:when test="${pagina eq (paginaActual+3) }">
+														<li><a href="#">...</a></li>
+													</c:when>
+												</c:choose>
+												
+											</c:forEach>
+											
+											<li><a href="libros?titulo=${titulo }idCategoria=${idCategoria }&page=${cantPaginas }">&rsaquo;</a></li>
+										
+										</c:otherwise>
+									</c:choose>
+									
+								</ul>
+							</div>
+						</c:when>
+						<c:otherwise>
+						
+							<p>No se encontraron libros</p>
+						
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 				<!-- Fin contenido -->
 			</div>

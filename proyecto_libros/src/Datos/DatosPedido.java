@@ -3,6 +3,8 @@ package Datos;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import Entidades.LineaPedido;
 import Entidades.Pedido;
@@ -113,7 +115,38 @@ public class DatosPedido {
 			System.out.println(exception.getMessage());
 		}
 		
+		conexion.cerrarConexion();
+		
 		return pedido;
+	}
+
+	public List<Pedido> findPedidosByUsuario(int idUsuario) {
+		List<Pedido> pedidosList = new ArrayList<Pedido>();
+		
+		Conexion conexion = new Conexion();
+		String query = "SELECT * FROM pedidos "
+				+ " WHERE usuarios_id = ? "
+				+ " ORDER BY idpedidos DESC";
+		
+		conexion.crearConexion();
+		PreparedStatement ps = conexion.preparedStatement(query);
+		
+		try{
+			ps.setInt(1, idUsuario);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				pedidosList.add(new Pedido(rs));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		conexion.cerrarConexion();
+		
+		return pedidosList;
 	}
 
 }

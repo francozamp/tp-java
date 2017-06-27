@@ -10,7 +10,7 @@
 					<h5>CUENTA</h5>
 					<a href="login.html">Tu cuenta</a>
 					<a href="login.html">Informacion personal</a> 
-					<a href="login.html">Historial de pedidos</a>
+					<a href="historialpedidos">Historial de pedidos</a>
 					<a href="#">Registrate</a>
 				</div>
 				<div class="span4">
