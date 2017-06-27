@@ -51,9 +51,13 @@
     <servlet-class>Servlets.pagoyenvio</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>detalleproducto</servlet-name>
+    <servlet-class>Servlets.detalleproducto</servlet-class>
+   </servlet>
+<servlet>
     <servlet-name>historialpedidos</servlet-name>
     <servlet-class>Servlets.histtorialpedidos</servlet-class>
-  </servlet>
+ </servlet>
   <servlet>
     <servlet-name>resumenpedido</servlet-name>
     <servlet-class>Servlets.resumenpedido</servlet-class>

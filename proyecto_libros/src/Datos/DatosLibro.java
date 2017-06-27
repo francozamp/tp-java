@@ -28,7 +28,6 @@ public class DatosLibro {
 		
 		if(!this.existeLibro(libro.getISBN())){
 			sql="INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados) VALUES (?,?,?,?,?,?,?)";
-			sql2="INSERT INTO libros_categorias (libros_id, categorias_idcategorias) VALUES (?,?)";
 		}
 		
 		PreparedStatement ps=conexion.preparedStatement(sql);
