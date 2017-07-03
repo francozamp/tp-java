@@ -25,9 +25,6 @@ public abstract class MiServletPlantilla extends HttpServlet {
 	private Usuario usuario;
 	private List<Categoria> categorias;
 	
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,10 +32,8 @@ public abstract class MiServletPlantilla extends HttpServlet {
         super();  
     }
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-    	this.request = request;
-    	this.response = response;
+    @SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	Sesion.setSession(request.getSession(true));
 		usuario = Sesion.getUsuario();
@@ -54,21 +49,21 @@ public abstract class MiServletPlantilla extends HttpServlet {
 		return this.usuario;
 	}
 	
-	public void validarUsuarioLogueado() throws ServletException, IOException{
+	public void validarUsuarioLogueado() throws Exception{
 		
 		if(this.usuario == null){
-			RequestDispatcher requestDispatcher = this.request.getRequestDispatcher("login");
-			requestDispatcher.forward(this.request, this.response);
+			Exception exception = new Exception("login.jsp");
+			throw exception;
 		}
 		
 	}
 	
-	public void validarAdministrador() throws ServletException, IOException{
+	public void validarAdministrador() throws Exception{
 		this.validarUsuarioLogueado();
 		
 		if(usuario.getTipoUsuario().getId() != Constantes.ID_TIPO_ADMINISTRADOR){
-			RequestDispatcher requestDispatcher = this.request.getRequestDispatcher("index");
-			requestDispatcher.forward(this.request, this.response);
+			Exception exception = new Exception("index");
+			throw exception;
 		}
 	}
 

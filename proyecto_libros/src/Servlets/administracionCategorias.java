@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Constantes;
+import Entidades.Pedido;
+import Negocio.NegocioPedido;
 
 /**
  * Servlet implementation class administracionCategorias
@@ -32,12 +35,13 @@ public class administracionCategorias extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		if (this.getUsuario() != null && this.getUsuario().getTipousu() == Constantes.ID_TIPO_ADMINISTRADOR) {
+		try {
+			this.validarAdministrador();
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
 			requestDispatcher.forward(request, response);
-		}
-		else {
-			response.sendRedirect("/libros/index");
+		} catch (Exception e) {
+			response.sendRedirect(e.getMessage());
 		}
 	}
 

@@ -3,6 +3,8 @@ package Entidades;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Arrays;
+
 import Datos.DatosEstado;
 import Datos.DatosTipoUsuario;
 
@@ -39,6 +41,7 @@ public class Usuario {
 	public Usuario(ResultSet rs) throws SQLException {
 		this.id=rs.getInt("id");
 		this.email=rs.getString("email");
+		this.password=rs.getString("contrasena");
 		this.nombre=rs.getString("nombre");
 		this.apellido=rs.getString("apellido");
 		this.telefono=rs.getString("telefono");
@@ -122,6 +125,16 @@ public class Usuario {
 
 	public void setFechaAlta(LocalDate now) {
 		this.fechaAlta = now;
+	}
+	
+	public String getPasswordView(){
+		char[] caracteres = new char[this.password.length()];
+		Arrays.fill(caracteres, '*');
+		return new String(caracteres);
+	}
+	
+	public String getNombreApellido(){
+		return this.nombre + " " + this.apellido;
 	}
 
 }
