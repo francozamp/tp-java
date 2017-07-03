@@ -163,3 +163,7 @@ input[type="checkbox"][disabled] {
 #loginCont {
     margin: 0 30%;
 }
+
+h4 span.dato, h5 span.dato {
+	color: #555555;
+}

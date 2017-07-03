@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-				<jsp:include page="plantilla/sidebaradministracion.jsp"/>
+				<jsp:include page="plantilla/sidebarusuario.jsp"/>
 				<!-- Sidebar end=============================================== -->
 				<!-- Inicio contenido -->
 				<div id="contenido" class="span9">

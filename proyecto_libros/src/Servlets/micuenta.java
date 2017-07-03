@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Pedido;
-import Negocio.NegocioPedido;
-
 /**
- * Servlet implementation class historialpedidos
+ * Servlet implementation class micuenta
  */
-@WebServlet("/historialpedidos")
-public class historialpedidos extends MiServletPlantilla {
+@WebServlet("/micuenta")
+public class micuenta extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public historialpedidos() {
+    public micuenta() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,16 +32,12 @@ public class historialpedidos extends MiServletPlantilla {
 		try {
 			this.validarUsuarioLogueado();
 			
-			List<Pedido> pedidosList = new NegocioPedido().findPedidosByUsuario(this.getUsuario().getId());
-			
-			request.setAttribute("pedidosList", pedidosList);
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("historialpedidos.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("micuenta.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());
-			//requestDispatcher = request.getRequestDispatcher(e.getMessage());
 		}
+		
 	}
 
 	/**

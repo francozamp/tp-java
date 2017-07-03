@@ -61,7 +61,7 @@
  		 						<li class="dropdown">
 			          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.usuario.nombre} ${sessionScope.usuario.apellido} <span class="caret"></span></a>
 			          				<ul class="dropdown-menu">
-			            				<li><a href="#">Mi cuenta</a></li>
+			            				<li><a href="micuenta">Mi cuenta</a></li>
 			            				<li><a href="historialpedidos">Historial de pedidos</a></li>
 			            				<c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 }">
 			            					<li><a href="admPedidos">Administracion</a></li>

@@ -68,7 +68,7 @@
 						<c:forEach items="${librosRecientes}" var="libro">
 							<li class="span3">
 								<div class="thumbnail">
-									<a  href="product_details.html"><img src="${libro.getUrlImagen() }" alt=""/></a>
+									<a  href="detalleproducto?idLibro=${libro.getId() }"><img src="${libro.getUrlImagen() }" alt=""/></a>
 									<div class="caption">
 										<h5>${libro.getTitulo() }</h5>
 										<p>${libro.getDescripcion() }</p>
