@@ -33,7 +33,7 @@ public class detalleproducto extends MiServletPlantilla {
 		super.doGet(request, response);
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		int idLibro = Integer.parseInt(request.getParameter("idLibro"));
+		int idLibro = Integer.parseInt(request.getParameter("id"));
 		NegocioLibro negocioLibro= new NegocioLibro();
 		libro= negocioLibro.getLibroById(idLibro);
 		request.setAttribute("libro", libro);
