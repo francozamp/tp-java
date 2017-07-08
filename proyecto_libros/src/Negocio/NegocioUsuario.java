@@ -31,9 +31,15 @@ public class NegocioUsuario {
 
         DatosUsuario datosUsuario = new DatosUsuario();
         
-        usuario.setEstado(Constantes.ID_ESTADO_ACTIVO);
-        usuario.setTipoUsuario(Constantes.ID_TIPO_COMUN);
-        usuario.setFechaAlta(LocalDate.now());
+        if(usuario.getEstado() == null){
+        	usuario.setEstado(Constantes.ID_ESTADO_ACTIVO);
+        }
+        if(usuario.getTipoUsuario() == null){
+        	usuario.setTipoUsuario(Constantes.ID_TIPO_COMUN);
+        }
+        if (usuario.getFechaAlta() == null) {
+        	usuario.setFechaAlta(LocalDate.now());
+		}
         
         usuario = datosUsuario.guardarUsuario(usuario);
 

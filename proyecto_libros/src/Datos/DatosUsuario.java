@@ -50,9 +50,9 @@ public class DatosUsuario {
         conexion.crearConexion();
         insert = !this.existeUsuario(usuario.getEmail());
         if (insert) {
-            sql = "INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasena, estados_idestados, tipousu_idtipousu, fechaAlta) VALUES (?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasena, estados_idestados, tipousu_idtipousu, fechaAlta, direccion2) VALUES (?,?,?,?,?,?,?,?,?,?)";
         } else {
-            sql = "UPDATE usuarios SET nombre=?, apellido=?, telefono=?, direccion=?, contrasena=?, estados_idestados=?, tipousu_idtipousu=? WHERE email=?";
+            sql = "UPDATE usuarios SET nombre=?, apellido=?, telefono=?, direccion=?, contrasena=?, estados_idestados=?, tipousu_idtipousu=?, direccion2=? WHERE email=?";
         }
 
         PreparedStatement ps = conexion.preparedStatement(sql);
@@ -68,6 +68,7 @@ public class DatosUsuario {
                 ps.setInt(7, usuario.getEstado().getID());
                 ps.setInt(8, usuario.getTipoUsuario().getId());
                 ps.setDate(9, Date.valueOf(usuario.getFechaAlta()));
+                ps.setString(10, usuario.getDireccion2());
             } else {
                 ps.setString(1, usuario.getNombre());
                 ps.setString(2, usuario.getApellido());
@@ -76,7 +77,8 @@ public class DatosUsuario {
                 ps.setString(5, usuario.getContrasena());
                 ps.setInt(6, usuario.getEstado().getID());
                 ps.setInt(7, usuario.getTipoUsuario().getId());
-                ps.setString(8, usuario.getEmail());
+                ps.setString(8, usuario.getDireccion2());
+                ps.setString(9, usuario.getEmail());
             }
 
             guardado = ps.executeUpdate();
@@ -141,7 +143,7 @@ public class DatosUsuario {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                usuario = new Usuario(rs.getString("email"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("telefono"), rs.getString("direccion"), rs.getString("contrasena"), rs.getInt("estados_idestados"), rs.getInt("tipousu_idtipousu"));
+                usuario = new Usuario(rs);
             }
 
         } catch (Exception ex) {

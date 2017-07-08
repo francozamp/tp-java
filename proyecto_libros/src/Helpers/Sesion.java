@@ -1,5 +1,7 @@
 package Helpers;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import Entidades.Carro;
@@ -59,6 +61,19 @@ public class Sesion {
 
 	public static void removePedido() {
 		session.removeAttribute("pedido");
+	}
+
+	public static void agregarDireccion(Map<String, String> direccionCompleta) {
+		session.setAttribute("direccionCompleta", direccionCompleta);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> getDireccionCompleta() {
+		return (Map<String, String>) session.getAttribute("direccionCompleta");
+	}
+
+	public static void removerDireccionCompleta() {
+		session.removeAttribute("direccionCompleta");
 	}
 	
 

@@ -37,13 +37,13 @@
 							<div class="control-group">
 								<label class="control-label" for="inputFname1">Número de tarjeta </label>
 								<div class="controls">
-									<input type="text" id="inputFname1" name="nroTarjeta"required>
+									<input type="text" id="inputFname1" name="nroTarjeta" pattern=".{16}" title="La tajeta debe contener 16 digitos" required>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputLnam">Nombre y Apellido </label>
 								<div class="controls">
-									<input type="text" id="inputLnam" name="nombYAp"required>
+									<input type="text" id="inputLnam" name="nombYAp" required>
 								</div>
 							</div>
 							<div class="control-group">
@@ -67,7 +67,7 @@
 							<div class="control-group">
 								<label class="control-label" for="inputPassword2">Cód. seguridad </label>
 								<div class="controls">
-									<input type="text" id="inputPassword2" name="codigo" class="codSeguridad" required>
+									<input type="text" id="inputPassword2" name="codigo" class="codSeguridad" pattern=".{3}" title="El código de seguridad debe tener 3 dígitos" required>
 								</div>
 							</div>
 
