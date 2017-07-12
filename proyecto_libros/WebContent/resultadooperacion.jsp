@@ -28,7 +28,7 @@
 						<strong>Código postal:</strong> ${codPostal } <br>
 						<strong>Provincia:</strong> ${provincia }</p>
 						<hr class="soft"/>
-						<button class="btn btn-large">Salir </button>
+						<a href="index"><button class="btn btn-large">Salir </button></a>
 					</div>
 				</div>
 				<!-- Fin contenido -->

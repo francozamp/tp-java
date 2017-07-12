@@ -46,7 +46,7 @@
 						<h4>Pago</h4>
 						<p>Paga con tarjeta de crédito terminada en <strong>${nroTarjeta }</strong></p>
 						<hr class="soft"/>
-						<h4>Dirección</h4>
+						<h4>Dirección de envío</h4>
 						<p><strong>Dirección:</strong> ${direccion }</p>
 						<p><strong>Localidad:</strong> ${localidad }</p>
 						<p><strong>Código postal:</strong> ${codPostal }</p>

@@ -93,6 +93,7 @@
 					  						<input type="hidden" name="paginaLlamado" value="index">
 					  						<button type="submit" class="btn btn-success">Iniciar Sesión</button>
 											<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+											<span> No tienes cuenta? <a href="formularioUsuario">Regístrate</a></span>
 										</form>
 									</div>
 								</div>

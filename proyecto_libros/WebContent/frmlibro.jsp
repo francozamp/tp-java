@@ -38,7 +38,7 @@
 		                        <div class="controls">
 		                        	<c:choose>
 		                        		<c:when test="${libro != null }">
-		                        			<input type="text" id="isbn" placeholder="ISBN" name="isbn" value="${libro.ISBN }" required>
+		                        			<input type="text" id="isbn" placeholder="ISBN" name="isbn" value="${libro.ISBN }" required readonly>
 		                        		</c:when>
 		                        		<c:otherwise>
 		                        			<input type="text" id="isbn" placeholder="ISBN" name="isbn" required>
@@ -134,6 +134,9 @@
 		                    </div>
 		                    <div class="control-group">
 		                        <div class="controls">
+		                        	<c:if test="${libro != null && libro.getId() != null }">
+		                        		<input type="hidden" name="idLibro" value="${libro.getId() }">
+		                        	</c:if>
 		                            <input class="btn btn-large btn-success" type="submit" value="Guardar" />
 		                        </div>
 		                    </div>

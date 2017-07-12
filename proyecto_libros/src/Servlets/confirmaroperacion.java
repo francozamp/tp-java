@@ -1,12 +1,16 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Helpers.Sesion;
 
 /**
  * Servlet implementation class confirmaroperacion
@@ -55,6 +59,16 @@ public class confirmaroperacion extends MiServletPlantilla {
 		
 		RequestDispatcher requestDispatcher = null;
 		if(todoOk){
+			Map<String, String> direccionCompleta = new HashMap<String, String>();
+			
+			direccionCompleta.put("dir1", dir1);
+			direccionCompleta.put("dir2", dir2);
+			direccionCompleta.put("codpos", codpos);
+			direccionCompleta.put("localidad", localidad);
+			direccionCompleta.put("provincia", provincia);
+			
+			Sesion.agregarDireccion(direccionCompleta);
+			
 			nroTarjeta = nroTarjeta.substring(nroTarjeta.length() - 4);
 			request.setAttribute("nroTarjeta", nroTarjeta);
 			String direccion = dir1 + ", " + dir2;

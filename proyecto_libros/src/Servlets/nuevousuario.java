@@ -41,10 +41,12 @@ public class nuevousuario extends MiServletPlantilla {
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String direccion = request.getParameter("direccion") + ", " + request.getParameter("direccion2");
+		String direccion1 = request.getParameter("direccion");
+		String direccion2 = request.getParameter("direccion2");
 		String telefono = request.getParameter("telefono");
+		Integer idTipoUsuario = Integer.valueOf(request.getParameter("idTipoUsuario"));
 		
-		Usuario usuario = new Usuario(nombre,apellido,email,password,direccion,telefono);
+		Usuario usuario = new Usuario(nombre,apellido,email,password,direccion1,direccion2,telefono, idTipoUsuario);
 		
 		NegocioUsuario negocioUsuario = new NegocioUsuario();
 		negocioUsuario.guardarUsuario(usuario);

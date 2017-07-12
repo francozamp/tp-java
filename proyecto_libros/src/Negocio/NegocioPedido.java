@@ -35,4 +35,8 @@ public class NegocioPedido {
 		return pedido;
 	}
 
+	public List<Pedido> findByDescripcion(String descripcion) {
+		return new DatosPedido().findByDescripcion(descripcion);
+	}
+
 }
