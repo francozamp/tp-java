@@ -6,12 +6,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import Negocio.NegocioPrecio;
 
 public class Libro {
 	
-	private int id;
+	private Integer id;
 	private String isbn;
 	private String titulo;
 	private String autor;
@@ -123,7 +124,11 @@ public class Libro {
 		return fechaAlta;
 	}
 
-	public int getId() {
+	public void setId(Integer idLibro){
+		this.id = idLibro;
+	}
+	
+	public Integer getId() {
 		return id;
 	}
 

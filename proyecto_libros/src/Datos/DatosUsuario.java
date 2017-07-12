@@ -214,4 +214,41 @@ public class DatosUsuario {
 		return usuariosList;
 	}
 
+	public List<Usuario> findByDescripcion(String descripcion) {
+		List<Usuario> usuariosList = new ArrayList<Usuario>();
+		
+		Conexion con = new Conexion();
+		String sql = "select * from usuarios u "
+				+ " inner join estados e on u.estados_idestados=e.idestados "
+				+ " inner join tipousu tu on u.tipousu_idtipousu=tu.idtipousu "
+				+ " where concat(u.nombre,' ',u.apellido) like ? "
+				+ " or concat(u.apellido,' ',u.nombre) like ? "
+				+ " or u.email like ?";
+		
+		con.crearConexion();
+		
+		PreparedStatement ps=con.preparedStatement(sql); //Creo el prepared statement
+		//cuando haya ganas mover esto adentro de Conexion	
+		try{
+			
+			descripcion = "%" + descripcion.replaceAll("\\s+", "%") + "%";
+			ps.setString(1, descripcion);
+			ps.setString(2, descripcion);
+			ps.setString(3, descripcion);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				usuariosList.add(new Usuario(rs));
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		con.cerrarConexion();
+		
+		return usuariosList;
+	}
+
 }

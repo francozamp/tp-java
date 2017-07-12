@@ -10,6 +10,13 @@ public class NegocioLibro {
 	public Libro guardarLibro(Libro libro){
 		
 		DatosLibro datosLibro = new DatosLibro();
+		
+		//Si no tiene id y el isbn ya existe quiere decir que se intenta crear un libro con un isbn repetido
+		//entonces devuelve null. Manejarlo de mejor manera para avisar por que no se guarda el libro
+		if(libro.getId() == null && datosLibro.existeLibro(libro.getISBN())){
+			return null;
+		}
+			
 		libro = datosLibro.guardarLibro(libro);
 		
 		return libro;
@@ -51,6 +58,10 @@ public class NegocioLibro {
 
 	public List<Libro> getLibroPorTituloYCategoria(String tituloLibro, int idCategoria) {
 		return new DatosLibro().getLibroPorTituloYCategoria(tituloLibro,idCategoria);
+	}
+
+	public List<Libro> findByDescripcion(String descripcion) {
+		return new DatosLibro().findByDescripcion(descripcion);
 	}
 
 }

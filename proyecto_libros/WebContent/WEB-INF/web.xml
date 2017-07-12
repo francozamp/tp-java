@@ -70,4 +70,12 @@
     <servlet-name>micuenta</servlet-name>
     <servlet-class>Servlets.micuenta</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>buscar</servlet-name>
+    <servlet-class>Servlets.buscar</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>editarLibro</servlet-name>
+    <servlet-class>Servlets.editarLibro</servlet-class>
+  </servlet>
 </web-app>

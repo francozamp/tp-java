@@ -150,7 +150,7 @@
 													</c:when>
 													
 													<c:when test="${pagina gt (paginaActual-3) && pagina lt (paginaActual+3) }">
-														<li><a href="libros?tirulo=${titulo }&idCategoria=${idCategoria }&page=${pagina }">${pagina }</a></li>
+														<li><a href="libros?titulo=${titulo }&idCategoria=${idCategoria }&page=${pagina }">${pagina }</a></li>
 													</c:when>
 													
 													<c:when test="${pagina eq (paginaActual+3) }">
@@ -160,7 +160,7 @@
 												
 											</c:forEach>
 											
-											<li><a href="libros?titulo=${titulo }idCategoria=${idCategoria }&page=${cantPaginas }">&rsaquo;</a></li>
+											<li><a href="libros?titulo=${titulo }&idCategoria=${idCategoria }&page=${cantPaginas }">&rsaquo;</a></li>
 										
 										</c:otherwise>
 									</c:choose>

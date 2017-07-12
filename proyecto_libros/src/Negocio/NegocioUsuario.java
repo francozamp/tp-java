@@ -52,4 +52,8 @@ public class NegocioUsuario {
 		return datosUsuario.getUsuarios();
 	}
 
+	public List<Usuario> findByDescripcion(String descripcion) {
+		return new DatosUsuario().findByDescripcion(descripcion);
+	}
+
 }

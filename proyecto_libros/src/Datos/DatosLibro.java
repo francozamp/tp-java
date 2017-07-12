@@ -1,8 +1,10 @@
 package Datos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Entidades.Categoria;
@@ -11,84 +13,176 @@ import Entidades.Libro;
 
 public class DatosLibro {
 	
+//	public Libro guardarLibro(Libro libro){
+//		
+//		boolean libroGuardado = false;
+//		boolean categoriaGuardada = false;
+//		
+//		String idLibro = null;
+//		String ISBN2 = null;
+//		int idCategoria = 0;
+//		
+//		Conexion conexion=new Conexion();
+//		conexion.crearConexion();
+//		
+//		String sql = null;
+//		String sql2 = null;
+//		
+//		if(!this.existeLibro(libro.getISBN())){
+//			sql="INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados) VALUES (?,?,?,?,?,?,?)";
+//		}
+//		
+//		PreparedStatement ps=conexion.preparedStatement(sql);
+//		
+//		try{
+//			ps.setString(1, libro.getISBN());
+//			ps.setString(2, libro.getTitulo());
+//			ps.setString(3, libro.getAutor());
+//			ps.setString(4, libro.getEditorial());
+//			ps.setString(5, libro.getEdicion());
+//			ps.setString(6, libro.getDescripcion());
+//			ps.setInt(7, libro.getIdEstado());
+//			
+//			ps.executeUpdate();
+//			
+//			ResultSet rs = ps.getGeneratedKeys();
+//            while (rs.next()) {
+//               idLibro = rs.getString(1);
+//            }
+//                   
+//            if (!idLibro.replaceAll("\\s+", "").isEmpty()){
+//            	libroGuardado = true;
+//            }
+//            
+//		}
+//		catch(Exception exception){
+//			System.out.println(exception.getMessage());
+//		}
+//		
+//		ps=conexion.preparedStatement(sql2);
+//		
+//		try{
+//			for (Categoria categoria : libro.getCategorias()) {
+//				
+//				ps.setInt(1, Integer.parseInt(idLibro));
+//				ps.setInt(2, categoria.getId());
+//				
+//				ps.executeUpdate();
+//				
+//				ResultSet rs = ps.getGeneratedKeys();
+//	            while (rs.next()) {
+//	               ISBN2 = rs.getString(1);
+//	               idCategoria = rs.getInt(2);
+//	            }
+//	                   
+////	            if (!(libro.getISBN()==ISBN2&&categoria.getId()==idCategoria)){
+////	            	categoriaGuardada = false;
+////	            }		
+//			}      
+//		}
+//		catch(Exception exception){
+//			System.out.println(exception.getMessage());
+//		}
+//		
+//		if(libroGuardado){
+//			libro = this.getLibro(libro.getISBN());
+//		}
+//		
+//		conexion.cerrarConexion();
+//		
+//		return libro;
+//	}
+	
 	public Libro guardarLibro(Libro libro){
 		
-		boolean libroGuardado = false;
-		boolean categoriaGuardada = false;
+		Libro libroGuardado = null;
+		Integer idLibroGuardado = null;
 		
-		String idLibro = null;
-		String ISBN2 = null;
-		int idCategoria = 0;
+		Conexion conexion = new Conexion();
 		
-		Conexion conexion=new Conexion();
 		conexion.crearConexion();
 		
+		Boolean nuevoLibro = (libro.getId() == null);
+		
 		String sql = null;
-		String sql2 = null;
 		
-		if(!this.existeLibro(libro.getISBN())){
-			sql="INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados) VALUES (?,?,?,?,?,?,?)";
+		//Primero guardo el libro
+		if (nuevoLibro) {
+			sql = "INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados, fechaAlta) VALUES (?,?,?,?,?,?,?,?)";
+		}
+		else{
+			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? WHERE id = ?";
 		}
 		
-		PreparedStatement ps=conexion.preparedStatement(sql);
-		
+		PreparedStatement ps = conexion.preparedStatement(sql);
 		try{
-			ps.setString(1, libro.getISBN());
-			ps.setString(2, libro.getTitulo());
-			ps.setString(3, libro.getAutor());
-			ps.setString(4, libro.getEditorial());
-			ps.setString(5, libro.getEdicion());
-			ps.setString(6, libro.getDescripcion());
-			ps.setInt(7, libro.getIdEstado());
+			int cont = 1;
 			
-			ps.executeUpdate();
+			if (nuevoLibro) {
+				ps.setString(cont++, libro.getISBN());
+			}
+			ps.setString(cont++, libro.getTitulo());
+			ps.setString(cont++, libro.getAutor());
+			ps.setString(cont++, libro.getEditorial());
+			ps.setString(cont++, libro.getEdicion());
+			ps.setString(cont++, libro.getDescripcion());
+			ps.setInt(cont++, libro.getIdEstado());
+			if (nuevoLibro) {
+				Calendar ahora = Calendar.getInstance();
+				ps.setDate(cont++, new Date((ahora.getTime()).getTime()));
+			}
+			if (!nuevoLibro) {
+				ps.setInt(cont++, libro.getId());
+			}
 			
-			ResultSet rs = ps.getGeneratedKeys();
-            while (rs.next()) {
-               idLibro = rs.getString(1);
-            }
-                   
-            if (!idLibro.replaceAll("\\s+", "").isEmpty()){
-            	libroGuardado = true;
-            }
-            
-		}
-		catch(Exception exception){
-			System.out.println(exception.getMessage());
-		}
-		
-		ps=conexion.preparedStatement(sql2);
-		
-		try{
-			for (Categoria categoria : libro.getCategorias()) {
+			int resul = ps.executeUpdate();
+			if (resul > 0) {
+				if (nuevoLibro) {
+					ResultSet rs = ps.getGeneratedKeys();
+					while(rs.next()){
+						idLibroGuardado = rs.getInt(1);
+					}
+				}
+				else{
+					idLibroGuardado = libro.getId();
+				}
+			}
+			
+			if(idLibroGuardado != null){
+				//Si se guardo el libro guardo la relacion con las categorias
+				//La voy a hacer facil.. primero elimino todas las relaciones del libro con categorias y despues agrego las seleccionadas
 				
-				ps.setInt(1, Integer.parseInt(idLibro));
-				ps.setInt(2, categoria.getId());
+				String sqlDelete = "DELETE FROM libros_categorias WHERE	libros_id = ?";
 				
+				ps = conexion.preparedStatement(sqlDelete);
+				ps.setInt(1, idLibroGuardado);
 				ps.executeUpdate();
 				
-				ResultSet rs = ps.getGeneratedKeys();
-	            while (rs.next()) {
-	               ISBN2 = rs.getString(1);
-	               idCategoria = rs.getInt(2);
-	            }
-	                   
-//	            if (!(libro.getISBN()==ISBN2&&categoria.getId()==idCategoria)){
-//	            	categoriaGuardada = false;
-//	            }		
-			}      
-		}
-		catch(Exception exception){
-			System.out.println(exception.getMessage());
-		}
-		
-		if(libroGuardado){
-			libro = this.getLibro(libro.getISBN());
+				sql = "INSERT INTO libros_categorias (libros_id,categorias_idcategorias) VALUES (?,?)";
+				
+				int registrosCreados = 0;
+				
+				for (Categoria categoria : libro.getCategorias()) {
+					ps = conexion.preparedStatement(sql);
+					ps.setInt(1, idLibroGuardado);
+					ps.setInt(2, categoria.getId());
+					
+					registrosCreados += ps.executeUpdate();
+				}
+				
+				if (registrosCreados > 0) {
+					libroGuardado = this.getLibroById(idLibroGuardado);
+				}
+				
+			}
+			
+		}catch (Exception e) {
+			System.out.println("Hubo un problema al registrar el libro: " + e.getMessage());
 		}
 		
 		conexion.cerrarConexion();
 		
-		return libro;
+		return libroGuardado;
 	}
 
 	public Libro getLibro(String isbn) {
@@ -395,6 +489,10 @@ public class DatosLibro {
 		}
 		
 		return librosResultado;
+	}
+
+	public List<Libro> findByDescripcion(String descripcion) {
+		return this.getLibroPorTituloYCategoria(descripcion, 0);
 	}
 
 }

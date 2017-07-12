@@ -49,11 +49,11 @@ public class libros extends MiServletPlantilla {
 		int paginaActual = 0;
 		
 		HttpSession session = request.getSession();
+		NegocioCategoria negocioCategoria = new NegocioCategoria();
 		
 		if(tituloLibro == null || tituloLibro.isEmpty()){
 			if (request.getParameter("page") == null) {
 				paginaActual = 1;	
-				NegocioCategoria negocioCategoria = new NegocioCategoria();
 				categoria = negocioCategoria.getCategoria(idCategoria);
 				if(categoria != null && !categoria.getLibros().isEmpty()){
 					cantPaginas = (categoria.getLibros().size() / Constantes.CANT_LIBROS_POR_PAGINA + 1);	
@@ -65,7 +65,7 @@ public class libros extends MiServletPlantilla {
 			}
 			else{
 				paginaActual = Integer.parseInt(request.getParameter("page"));
-				categoria = (Categoria)session.getAttribute("categoria");
+				categoria = negocioCategoria.getCategoria(idCategoria);
 			}
 			
 			if(categoria != null && !categoria.getLibros().isEmpty()){
@@ -100,8 +100,8 @@ public class libros extends MiServletPlantilla {
 			}
 		}
 		
-		request.setAttribute("titulo", request.getParameter("titulo"));
-		request.setAttribute("idCategoria", request.getParameter("categoria"));
+		request.setAttribute("titulo", tituloLibro);
+		request.setAttribute("idCategoria", idCategoria);
 		request.setAttribute("librosPagina", librosPagina);
 		request.setAttribute("paginaActual", paginaActual);
 		request.setAttribute("cantPaginas", cantPaginas);

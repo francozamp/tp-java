@@ -47,4 +47,8 @@ public class NegocioCategoria {
 		
 	}
 
+	public List<Categoria> findByDescripcion(String descripcion) {
+		return new DatosCategoria().findByDescripcion(descripcion);
+	}
+
 }

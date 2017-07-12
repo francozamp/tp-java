@@ -209,4 +209,36 @@ public class DatosPedido {
 		return pedidoGuardado;
 	}
 
+	public List<Pedido> findByDescripcion(String descripcion) {
+		List<Pedido> pedidosList = new ArrayList<Pedido>();
+		
+		Conexion conexion = new Conexion();
+		String query = "SELECT * FROM pedidos p "
+				+ " INNER JOIN usuarios u ON p.usuarios_id = u.id "
+				+ " WHERE u.email LIKE ? "
+				+ " ORDER BY idpedidos DESC";
+		
+		conexion.crearConexion();
+		PreparedStatement ps = conexion.preparedStatement(query);
+		
+		try{
+			
+			descripcion = "%" + descripcion.replaceAll("\\s+", "%") + "%";
+			ps.setString(1, descripcion);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				pedidosList.add(new Pedido(rs));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		conexion.cerrarConexion();
+		
+		return pedidosList;
+	}
+
 }

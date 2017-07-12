@@ -127,6 +127,45 @@ public class DatosCategoria {
 			System.out.println(exception.getMessage());
 		}
 		
+		conexion.cerrarConexion();
+		
+		return categorias;
+	}
+
+	public List<Categoria> findByDescripcion(String descripcion) {
+
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		Categoria categoria=null;
+		
+		String sql = "SELECT * FROM categorias "
+				+ "WHERE nombre like ?";
+		
+		Conexion conexion = new Conexion();
+		
+		conexion.crearConexion();
+		
+		PreparedStatement ps = conexion.preparedStatement(sql);
+		
+		try{
+			
+			descripcion = "%" + descripcion.replaceAll("\\s+", "%") + "%";
+			ps.setString(1, descripcion);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				categoria = new Categoria(rs.getString("nombre"), rs.getString("descripcion"));
+				categoria.setId(rs.getInt("idcategorias"));
+				
+				categorias.add(categoria);
+			}
+		}
+		catch(Exception exception){
+			System.out.println(exception.getMessage());
+		}
+		
+		conexion.cerrarConexion();
+		
 		return categorias;
 	}
 
