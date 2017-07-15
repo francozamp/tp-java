@@ -51,6 +51,7 @@ public class verCarro extends MiServletPlantilla {
 		}
 		
 		Sesion.setPedido(pedido);
+		request.setAttribute("redireccion", "verCarro");
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("resumencarro.jsp");
 		requestDispatcher.forward(request, response);

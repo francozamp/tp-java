@@ -139,7 +139,7 @@
 							</div>
 							<table class="table table-striped">
 								<tr>
-									<th>Codódigo</th>
+									<th>Código</th>
 									<th>% de Descuento</th>
 									<th>Fecha desde</th>
 									<th>Fecha hasta</th>

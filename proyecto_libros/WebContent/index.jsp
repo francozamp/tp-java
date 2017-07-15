@@ -14,38 +14,22 @@
 			<div class="carousel-inner">
 				<div class="item active">
 					<div class="container">
-						<a href="register.html"><img style="width:100%" src="imagenes/imagen1.jpeg" alt="special offers"/></a>
-						<div class="carousel-caption">
-					  		<h4>Second Thumbnail label</h4>
-					  		<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
+						<img style="width:100%" src="imagenes/imagen1.jpeg" alt="special offers"/>
 					</div>
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href="register.html"><img style="width:100%" src="imagenes/imagen2.jpeg" alt=""/></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
+						<img style="width:100%" src="imagenes/imagen2.jpeg" alt=""/>
 					</div>
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href="register.html"><img src="imagenes/imagen3.jpg" alt=""/></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
+						<img src="imagenes/imagen3.jpg" alt=""/>
 					</div>
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href="register.html"><img src="imagenes/imagen4.jpeg" alt=""/></a>
-						<div class="carousel-caption">
-							<h4>Second Thumbnail label</h4>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						</div>
+						<img src="imagenes/imagen4.jpeg" alt=""/>
 					</div>
 				</div>
 			</div>
@@ -68,9 +52,9 @@
 						<c:forEach items="${librosRecientes}" var="libro">
 							<li class="span3">
 								<div class="thumbnail">
-									<a  href="detalleproducto?idLibro=${libro.getId() }"><img src="${libro.getUrlImagen() }" alt=""/></a>
+									<a href="detalleproducto?idLibro=${libro.getId() }"><img src="${libro.getUrlImagen() }" alt=""/></a>
 									<div class="caption">
-										<h5>${libro.getTitulo() }</h5>
+										<a href="detalleproducto?idLibro=${libro.getId() }"><h5>${libro.getTitulo() }</h5></a>
 										<p>${libro.getDescripcion() }</p>
 										<h4 style="text-align:center">
 											<a class="btn" href="agregarAlCarro?idLibro=${libro.getId() }">

@@ -90,7 +90,14 @@
 					  						<div class="control-group">
 												<label id="recuerdame" class="checkbox"><input type="checkbox"> Recuerdame</label>
 					  						</div>
-					  						<input type="hidden" name="paginaLlamado" value="index">
+					  						<c:choose>
+					  							<c:when test="${redireccion != null }">
+					  								<input type="hidden" name="paginaLlamado" value="${redireccion }">
+					  							</c:when>
+					  							<c:otherwise>
+					  								<input type="hidden" name="paginaLlamado" value="index">
+					  							</c:otherwise>
+					  						</c:choose>
 					  						<button type="submit" class="btn btn-success">Iniciar Sesión</button>
 											<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
 											<span> No tienes cuenta? <a href="formularioUsuario">Regístrate</a></span>

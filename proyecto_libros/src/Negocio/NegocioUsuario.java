@@ -31,6 +31,10 @@ public class NegocioUsuario {
 
         DatosUsuario datosUsuario = new DatosUsuario();
         
+        if (usuario.getId() == null && datosUsuario.existeUsuario(usuario.getEmail())) {
+			return null;
+		}
+        
         if(usuario.getEstado() == null){
         	usuario.setEstado(Constantes.ID_ESTADO_ACTIVO);
         }
