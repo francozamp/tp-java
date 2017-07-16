@@ -23,6 +23,23 @@
 					</ul> -->
 					<h3>  Carrito de compras [${sessionScope.pedido.getCantLibros() } Libro(s)]<a href="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continuar comprando </a></h3>	
 					<hr class="soft"/>
+					<form action="aplicarDescuento" method="get">
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<td> 
+										<div class="control-group form-horizontal">
+											<label class="control-label"><strong> Codigo de descuento: </strong> </label>
+											<div class="controls">
+												<input id="codDesc" type="text" class="input-medium" name="codDesc" placeholder="Codigo">
+												<button type="submit" class="btn"> Aplicar </button>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 					<form action="pagoyenvio" method="post">
 						<table class="table table-bordered">
 							<thead>
@@ -59,24 +76,6 @@
 									<td colspan="4" style="text-align:right"><strong>TOTAL ($ ${sessionScope.pedido.getMontoTotalView() } - $ 0) =</strong></td>
 									<td class="label label-important" style="display:block"> <strong> $ ${sessionScope.pedido.getMontoTotalView() } </strong></td>
 								</tr>
-							</tbody>
-						</table>
-	
-	
-						<table class="table table-bordered">
-							<tbody>
-								<tr>
-									<td> 
-										<div class="control-group form-horizontal">
-											<label class="control-label"><strong> Codigo de descuento: </strong> </label>
-											<div class="controls">
-												<input type="text" class="input-medium" placeholder="Codigo">
-												<a href=""><button type="button" class="btn"> Aplicar </button></a>
-											</div>
-										</div>
-									</td>
-								</tr>
-	
 							</tbody>
 						</table>
 	

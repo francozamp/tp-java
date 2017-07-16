@@ -86,4 +86,16 @@
     <servlet-name>formularioDescuento</servlet-name>
     <servlet-class>Servlets.formularioDescuento</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>reportes</servlet-name>
+    <servlet-class>Servlets.reportes</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>filtrosreporte</servlet-name>
+    <servlet-class>Servlets.filtrosreporte</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>imprimirReporte</servlet-name>
+    <servlet-class>Servlets.imprimirReporte</servlet-class>
+  </servlet>
 </web-app>
