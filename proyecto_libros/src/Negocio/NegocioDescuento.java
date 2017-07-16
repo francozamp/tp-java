@@ -52,10 +52,15 @@ public class NegocioDescuento {
 	}
 	
 	public Integer registrarDescuentoUtilizado(){
-		int idDescuento = Sesion.getDescuento().getId();
-		int idUsuario = Sesion.getUsuario().getId();
 		
-		return new DatosDescuento().registrarDescuentoUtilizado(idDescuento,idUsuario);
+		if(Sesion.getDescuento() != null){
+			int idDescuento = Sesion.getDescuento().getId();
+			int idUsuario = Sesion.getUsuario().getId();
+			
+			return new DatosDescuento().registrarDescuentoUtilizado(idDescuento,idUsuario);
+		}
+		
+		return 0;
 	}
 	
 	public List<Descuento> getDescuentos() {
@@ -100,7 +105,7 @@ public class NegocioDescuento {
 		
 		}
 		else{
-			Exception ex = new Exception("* El código ingresado es inexistente.");
+			Exception ex = new Exception("* El cï¿½digo ingresado es inexistente.");
 			throw ex;
 		}
 		
@@ -113,7 +118,7 @@ public class NegocioDescuento {
 		Notificacion notif = new Notificacion();
 		
 		if(!new DatosDescuento().validarDescuentoDisponibleUsuario(idDescuento,idUsuario)){
-			notif.agregarError("El código de descuento ya fue utilizado por el usuario.");
+			notif.agregarError("El cï¿½digo de descuento ya fue utilizado por el usuario.");
 		}
 		
 		return notif;

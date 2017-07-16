@@ -29,6 +29,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<link rel="stylesheet" type="text/css" href="micss/micss.css">
+	<link rel="stylesheet" type="text/css" href="micss/puntuacion.css">
 	<style type="text/css" id="enject"></style>
 </head>
 <body>

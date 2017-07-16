@@ -72,6 +72,10 @@ public class Libro {
 //		}
 	}
 
+	public Libro() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getISBN() {
 		// TODO Auto-generated method stub
 		return this.isbn;
@@ -147,6 +151,30 @@ public class Libro {
 
 	public void setPrecioActual(Precio precioActual) {
 		this.precioActual = precioActual;
+	}
+
+	public void setISBN(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
+
+	public void setEdicion(String edicion) {
+		this.edicion = edicion;
+	}
+
+	public void setDescripcion(String descripcon) {
+		this.descripcion = descripcon;
 	}
 	
 
