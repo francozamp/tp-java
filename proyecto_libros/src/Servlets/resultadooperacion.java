@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entidades.Constantes;
 import Entidades.Pedido;
 import Helpers.Sesion;
+import Negocio.NegocioDescuento;
 import Negocio.NegocioEstado;
 import Negocio.NegocioPedido;
 
@@ -44,6 +45,8 @@ public class resultadooperacion extends MiServletPlantilla {
 			if(pedido!=null){
 				Sesion.vaciarCarro();
 				Sesion.removePedido();
+				new NegocioDescuento().registrarDescuentoUtilizado();
+				Sesion.removeDescuento();
 				request.setAttribute("pedido", pedido);
 				
 				Map<String, String> direccionCompleta = Sesion.getDireccionCompleta();

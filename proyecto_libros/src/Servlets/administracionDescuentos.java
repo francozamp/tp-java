@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Descuento;
+import Negocio.NegocioDescuento;
 
 /**
  * Servlet implementation class administracionDescuentos
@@ -37,8 +38,8 @@ public class administracionDescuentos extends MiServletPlantilla {
 			this.validarAdministrador();
 			
 			List<Descuento> descuentosList = new ArrayList<Descuento>();
-			//Tu codigo va aca fabi
-			
+			//Recupero todos los descuentos
+			descuentosList = new NegocioDescuento().getDescuentos();			
 			
 			request.setAttribute("descuentos", descuentosList);
 			

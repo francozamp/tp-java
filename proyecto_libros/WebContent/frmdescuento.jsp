@@ -51,7 +51,7 @@
 		                        <div class="controls">
 		                        	<c:choose>
 			                        	<c:when test="${descuento != null }">
-			                        		<input type="text" placeholder="% de descuento" name="porcDesc" value="${descuento.getFechaHasta() }" required>
+			                        		<input type="text" placeholder="% de descuento" name="porcDesc" value="${descuento.getPorcDescuento() }" required>
 			                        	</c:when>
 			                        	<c:otherwise>
 			                        		<input type="text" placeholder="% de descuento" name="porcDesc" required>
@@ -64,7 +64,7 @@
 		                        <div class="controls">
 		                        	<c:choose>
 		                        		<c:when test="${descuento != null }">
-		                        			<input type="date" name="fechaDesde" required>
+		                        			<input type="date" name="fechaDesde" value="${descuento.getFechaDesde() }" required>
 		                        		</c:when>
 		                        		<c:otherwise>
 		                        			<input type="date" name="fechaDesde" required>
@@ -77,10 +77,10 @@
 		                        <div class="controls">
 		                        	<c:choose>
 		                        		<c:when test="${descuento != null }">
-		                        			<input type="date" name="fechaDesde" required>
+		                        			<input type="date" name="fechaHasta" value="${descuento.getFechaHasta()}" required>
 		                        		</c:when>
 		                        		<c:otherwise>
-		                        			<input type="date" name="fechaDesde" required>
+		                        			<input type="date" name="fechaHasta" required>
 		                        		</c:otherwise>
 		                        	</c:choose>
 		                        </div>
@@ -98,6 +98,9 @@
 		                        </div>
 		                    </div>
 		                </form>
+		                <c:if test="${errores != null}">
+							<p style="color:red;">${errores}</p>
+						</c:if>
 		            </div>
 				</div>
 				<!-- Fin contenido -->
