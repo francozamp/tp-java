@@ -1,32 +1,26 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Constantes;
-import Entidades.Pedido;
-import Entidades.Usuario;
-import Negocio.NegocioPedido;
-import Negocio.NegocioUsuario;
+import Entidades.Valoracion;
 
 /**
- * Servlet implementation class administracionUsuarios
+ * Servlet implementation class editarvaloracion
  */
-@WebServlet("/admusuarios")
-public class administracionUsuarios extends MiServletPlantilla {
+@WebServlet("/editarvaloracion")
+public class editarvaloracion extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public administracionUsuarios() {
+    public editarvaloracion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,16 +32,19 @@ public class administracionUsuarios extends MiServletPlantilla {
 		super.doGet(request, response);
 		
 		try {
-			this.validarAdministrador();
+			this.validarUsuarioLogueado();
 			
-			List<Usuario> usuariosList = new NegocioUsuario().getUsuarios();
+			Valoracion valoracion = null;
+			//TODO Recuperar la valoracion
 			
-			request.setAttribute("usuarios", usuariosList);
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			request.setAttribute("valoracion", valoracion);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("editarvaloracion.jsp");
 			requestDispatcher.forward(request, response);
+			
 		} catch (Exception e) {
-			response.sendRedirect(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

@@ -1,32 +1,24 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Constantes;
-import Entidades.Pedido;
-import Entidades.Usuario;
-import Negocio.NegocioPedido;
-import Negocio.NegocioUsuario;
-
 /**
- * Servlet implementation class administracionUsuarios
+ * Servlet implementation class reportes
  */
-@WebServlet("/admusuarios")
-public class administracionUsuarios extends MiServletPlantilla {
+@WebServlet("/reportes")
+public class reportes extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public administracionUsuarios() {
+    public reportes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,11 +32,7 @@ public class administracionUsuarios extends MiServletPlantilla {
 		try {
 			this.validarAdministrador();
 			
-			List<Usuario> usuariosList = new NegocioUsuario().getUsuarios();
-			
-			request.setAttribute("usuarios", usuariosList);
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("reportes.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());

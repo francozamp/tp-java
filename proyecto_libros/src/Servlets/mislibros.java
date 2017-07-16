@@ -6,27 +6,25 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Constantes;
-import Entidades.Pedido;
-import Entidades.Usuario;
-import Negocio.NegocioPedido;
-import Negocio.NegocioUsuario;
+import Entidades.Libro;
+import Entidades.Valoracion;
+import Negocio.NegocioLibro;
+import Negocio.NegocioValoracion;
 
 /**
- * Servlet implementation class administracionUsuarios
+ * Servlet implementation class mislibros
  */
-@WebServlet("/admusuarios")
-public class administracionUsuarios extends MiServletPlantilla {
+@WebServlet("/mislibros")
+public class mislibros extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public administracionUsuarios() {
+    public mislibros() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,13 +36,13 @@ public class administracionUsuarios extends MiServletPlantilla {
 		super.doGet(request, response);
 		
 		try {
-			this.validarAdministrador();
+			this.validarUsuarioLogueado();
 			
-			List<Usuario> usuariosList = new NegocioUsuario().getUsuarios();
+			List<Valoracion> valoracionesList = new NegocioValoracion().findByUsuario(this.getUsuario());
 			
-			request.setAttribute("usuarios", usuariosList);
+			request.setAttribute("valoraciones", valoracionesList);
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("mislibros.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());

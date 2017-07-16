@@ -9,7 +9,7 @@
 			<ul>
 				<li><a href="micuenta"><i class="icon-chevron-right"></i>Mi Cuenta</a></li>
 				<li><a href="historialpedidos"><i class="icon-chevron-right"></i>Historial de pedidos</a></li>
-				<li><a href="#"><i class="icon-chevron-right"></i>Mis libros</a></li>
+				<li><a href="mislibros"><i class="icon-chevron-right"></i>Mis libros y valoraciones</a></li>
 			</ul>
 		</li>
 	</ul>

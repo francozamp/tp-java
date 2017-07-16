@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 	
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,29 @@
 					</ul> -->
 					<h3>  Carrito de compras [${sessionScope.pedido.getCantLibros() } Libro(s)]<a href="index" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continuar comprando </a></h3>	
 					<hr class="soft"/>
+					<c:if test="${errores != null}">
+						<p style="color:red;">${errores}</p>
+					</c:if>
+					<c:if test="${sessionScope.descuento == null}">
+						<form method="post" action="aplicarDescuento" name="frmDescuento" id="frmDescuento">
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td> 
+											<div class="control-group form-horizontal">
+												<label class="control-label"><strong> Codigo de descuento: </strong> </label>
+												<div class="controls">
+													<input type="text" class="input-medium" placeholder="Codigo" name="codigoDescuento" id="codigoDescuento">
+													<button type="submit" class="btn"> Aplicar </button>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</c:if>
+
 					<form action="pagoyenvio" method="post">
 						<table class="table table-bordered">
 							<thead>
@@ -53,30 +77,23 @@
 								</tr>
 								<tr>
 									<td colspan="4" style="text-align:right">Descuento Total:	</td>
-									<td> $ 0.00</td>
+									<c:choose>
+										<c:when test="${sessionScope.descuento != null }">
+											<c:set var = "montoDescontado" scope = "session" value = "${sessionScope.pedido.getMontoTotalView()*sessionScope.descuento.getPorcDescuento()}"></c:set>
+											<fmt:formatNumber var="formatMontoDescontado" type = "number" maxFractionDigits = "2" value = "${montoDescontado}" />
+											<td> $ - <c:out value="${formatMontoDescontado}" /></td>
+										</c:when>
+										<c:otherwise>
+										<c:set var = "formatMontoDescontado" scope = "session" value = "0.00"></c:set>
+											<td> $ <c:out value="${formatMontoDescontado}" /></td>
+										</c:otherwise>
+									</c:choose>
+									
 								</tr>
 								<tr>
-									<td colspan="4" style="text-align:right"><strong>TOTAL ($ ${sessionScope.pedido.getMontoTotalView() } - $ 0) =</strong></td>
-									<td class="label label-important" style="display:block"> <strong> $ ${sessionScope.pedido.getMontoTotalView() } </strong></td>
+									<td colspan="4" style="text-align:right"><strong>TOTAL ($ ${sessionScope.pedido.getMontoTotalView() } - $ <c:out value="${formatMontoDescontado}" />) =</strong></td>
+									<td class="label label-important" style="display:block"> <strong> $ ${sessionScope.pedido.getMontoTotalView() - formatMontoDescontado} </strong></td>
 								</tr>
-							</tbody>
-						</table>
-	
-	
-						<table class="table table-bordered">
-							<tbody>
-								<tr>
-									<td> 
-										<div class="control-group form-horizontal">
-											<label class="control-label"><strong> Codigo de descuento: </strong> </label>
-											<div class="controls">
-												<input type="text" class="input-medium" placeholder="Codigo">
-												<a href=""><button type="button" class="btn"> Aplicar </button></a>
-											</div>
-										</div>
-									</td>
-								</tr>
-	
 							</tbody>
 						</table>
 	

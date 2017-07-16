@@ -58,7 +58,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="text" id="inputLnam" placeholder="Apellido" name="apellido" value="${usuarioEditar.apellido }" required>
+		                            		<input type="text" id="inputLnam" placeholder="Apellido" name="apellido" value="${usuarioEditar.getApellido() }" required>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="text" id="inputLnam" placeholder="Apellido" name="apellido" required>
@@ -71,7 +71,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="email" id="input_email" placeholder="Email" name="email" value="${usuarioEditar.email }" readonly>
+		                            		<input type="email" id="input_email" placeholder="Email" name="email" value="${usuarioEditar.getEmail() }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="email" id="input_email" placeholder="Email" name="email" required>
@@ -84,7 +84,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" value="${usuarioEditar.password }" readonly>
+		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" value="${usuarioEditar.getPassword() }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres" required>
@@ -97,7 +97,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" value="${usuarioEditar.password }" readonly>
+		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" value="${usuarioEditar.getPassword() }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres" required>
@@ -114,7 +114,7 @@
 		                        <div class="controls">
 		                        	<c:choose>
 		                        		<c:when test="${usuarioEditar != null }">
-		                        			<input type="text" id="address" placeholder="Dirección" name="direccion" value="${usuarioEditar.direccion }" required/> <span>Calle y número</span>
+		                        			<input type="text" id="address" placeholder="Dirección" name="direccion" value="${usuarioEditar.getDireccion() }" required/> <span>Calle y número</span>
 		                        		</c:when>
 		                        		<c:otherwise>
 		                        			<input type="text" id="address" placeholder="Dirección" name="direccion" required/> <span>Calle y número</span>
@@ -125,7 +125,14 @@
 		                    <div class="control-group">
 		                        <label class="control-label" for="address2">Dirección (Adicional) </label>
 		                        <div class="controls">
-		                          <input type="text" id="address2" placeholder="Dirección (Adicional)" name="direccion2"/> <span>Piso, departamento, etc.</span>
+		                        	<c:choose>
+		                        		<c:when test="${usuarioEditar != null }">
+		                        			<input type="text" id="address2" placeholder="Dirección (Adicional)" name="direccion2" value="${usuarioEditar.getDireccion2() }"/> <span>Calle y número</span>
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			<input type="text" id="address2" placeholder="Dirección (Adicional)" name="direccion2"/> <span>Piso, departamento, etc.</span>
+		                        		</c:otherwise>
+		                        	</c:choose>
 		                        </div>
 		                    </div>
 		                    <div class="control-group">
@@ -133,7 +140,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="text" id="phone" placeholder="Teléfono" name="telefono" value="${usuarioEditar.telefono }" required/>
+		                            		<input type="text" id="phone" placeholder="Teléfono" name="telefono" value="${usuarioEditar.getTelefono() }" required/>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="text" id="phone" placeholder="Teléfono" name="telefono" required/>
@@ -158,11 +165,16 @@
 		                    </c:if>
 		                    <div class="control-group">
 		                        <div class="controls">
+		                        	<c:if test="${usuarioEditar != null && usuarioEditar.getId() != null }">
+		                        		<input type="hidden" name="idUsuario" value="${usuarioEditar.getId() }">
+		                        	</c:if>
 		                        	<c:choose>
 		                        		<c:when test="${usuarioEditar != null }">
+		                        			<input type="hidden" name="callback" value="admusuarios"/>
 		                        			<input class="btn btn-large btn-success" type="submit" value="Guardar" />
 		                        		</c:when>
 		                        		<c:otherwise>
+		                        			<input type="hidden" name="callback" value="index"/>
 		                        			<input class="btn btn-large btn-success" type="submit" value="Registrarse" />
 		                        		</c:otherwise>
 		                        	</c:choose>

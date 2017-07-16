@@ -11,7 +11,7 @@ import Negocio.NegocioTipoUsuario;
 
 public class Usuario {
 	
-	private int id;
+	private Integer id;
 	private String email;
 	private String nombre;
 	private String apellido;
@@ -105,8 +105,12 @@ public class Usuario {
 		return this.tipoUsuario;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
+	}
+	
+	public void setId(Integer id){
+		this.id = id;
 	}
 
     public String getContrasena() {

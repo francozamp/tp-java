@@ -43,7 +43,7 @@ public class DatosUsuario {
 	}
 
     public Usuario guardarUsuario(Usuario usuario) {
-        int guardado = 0;
+        Usuario usuarioGuardado = null;
         String sql = null;
         boolean insert;
         Conexion conexion = new Conexion();
@@ -52,7 +52,7 @@ public class DatosUsuario {
         if (insert) {
             sql = "INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasena, estados_idestados, tipousu_idtipousu, fechaAlta, direccion2) VALUES (?,?,?,?,?,?,?,?,?,?)";
         } else {
-            sql = "UPDATE usuarios SET nombre=?, apellido=?, telefono=?, direccion=?, contrasena=?, estados_idestados=?, tipousu_idtipousu=?, direccion2=? WHERE email=?";
+            sql = "UPDATE usuarios SET nombre=?, apellido=?, telefono=?, direccion=?, contrasena=?, estados_idestados=?, tipousu_idtipousu=?, direccion2=? WHERE id=?";
         }
 
         PreparedStatement ps = conexion.preparedStatement(sql);
@@ -78,16 +78,21 @@ public class DatosUsuario {
                 ps.setInt(6, usuario.getEstado().getID());
                 ps.setInt(7, usuario.getTipoUsuario().getId());
                 ps.setString(8, usuario.getDireccion2());
-                ps.setString(9, usuario.getEmail());
+                ps.setInt(9, usuario.getId());
             }
-
-            guardado = ps.executeUpdate();
-
-            if (guardado != 0) {
-                usuario = this.getUsuario(usuario.getEmail());
-            } else {
-                usuario = null;
-            }
+            
+            int resul = ps.executeUpdate();
+			if (resul > 0) {
+				if (insert) {
+					ResultSet rs = ps.getGeneratedKeys();
+					while(rs.next()){
+						usuarioGuardado = this.getUsuarioPorId(rs.getInt(1));
+					}
+				}
+				else{
+					usuarioGuardado = this.getUsuarioPorId(usuario.getId());
+				}
+			}
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

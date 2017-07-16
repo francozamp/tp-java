@@ -1,9 +1,11 @@
 package Negocio;
 
 import java.util.List;
+import java.util.Set;
 
 import Datos.DatosLibro;
 import Entidades.Libro;
+import Entidades.Usuario;
 
 public class NegocioLibro {
 	
@@ -62,6 +64,10 @@ public class NegocioLibro {
 
 	public List<Libro> findByDescripcion(String descripcion) {
 		return new DatosLibro().findByDescripcion(descripcion);
+	}
+
+	public Set<Integer> findIdLibrosPorUsuario(Usuario usuario) {
+		return new DatosLibro().findIdLibrosPorUsuario(usuario);
 	}
 
 }

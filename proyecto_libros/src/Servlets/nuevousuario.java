@@ -37,6 +37,10 @@ public class nuevousuario extends MiServletPlantilla {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Integer idUsuario = null;
+		if(request.getParameter("idUsuario") != null){
+			idUsuario = Integer.valueOf(request.getParameter("idUsuario"));
+		}
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
@@ -48,16 +52,17 @@ public class nuevousuario extends MiServletPlantilla {
 		
 		Usuario usuario = new Usuario(nombre,apellido,email,password,direccion1,direccion2,telefono, idTipoUsuario);
 		
+		if (idUsuario != null) {
+			usuario.setId(idUsuario);
+		}
+		
 		NegocioUsuario negocioUsuario = new NegocioUsuario();
 		negocioUsuario.guardarUsuario(usuario);
 		
-		response.sendRedirect("/libros/index");
+		//Cambiar para que recupere la ultima pagina
+		String callback = request.getParameter("callback") != null ? request.getParameter("callback") : "index";
+		response.sendRedirect(callback);
 		
-	}
-
-	public String getContenido() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

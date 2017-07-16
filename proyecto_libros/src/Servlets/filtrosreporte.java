@@ -1,32 +1,28 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Constantes;
-import Entidades.Pedido;
-import Entidades.Usuario;
-import Negocio.NegocioPedido;
-import Negocio.NegocioUsuario;
-
 /**
- * Servlet implementation class administracionUsuarios
+ * Servlet implementation class filtrosreporte
  */
-@WebServlet("/admusuarios")
-public class administracionUsuarios extends MiServletPlantilla {
+@WebServlet("/filtrosreporte")
+public class filtrosreporte extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public administracionUsuarios() {
+    public filtrosreporte() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,12 +36,32 @@ public class administracionUsuarios extends MiServletPlantilla {
 		try {
 			this.validarAdministrador();
 			
-			List<Usuario> usuariosList = new NegocioUsuario().getUsuarios();
+			RequestDispatcher requestDispatcher = null;
+			String reporte = request.getParameter("reporte");
 			
-			request.setAttribute("usuarios", usuariosList);
+			switch (reporte) {
+			case "ventas":
+				requestDispatcher = request.getRequestDispatcher("filtrosReporteVentas.jsp");
+				break;
+
+			default:
+				requestDispatcher = request.getRequestDispatcher("reportes");
+				break;
+			}
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			Calendar calendar = Calendar.getInstance();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date hasta = calendar.getTime();
+			String hastaDefault = df.format(hasta);
+			calendar.roll(Calendar.MONTH, false);
+			Date desde = calendar.getTime();
+			String desdeDefault = df.format(desde);
+			
+			request.setAttribute("desdeDefault", desdeDefault);
+			request.setAttribute("hastaDefault", hastaDefault);
+			
 			requestDispatcher.forward(request, response);
+			
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());
 		}

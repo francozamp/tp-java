@@ -18,28 +18,26 @@
 				<div id="contenido" class=span9>
 					<div class="row">	  
 						<div id="gallery" class="span3">
-
-								<img src="${libro.getUrlImagen()}" style="width:100%" alt="${libro.getTitulo()} - ${libro.getAutor()}"/>
-
+							<img src="${libro.getUrlImagen()}" style="width:100%" alt="${libro.getTitulo()} - ${libro.getAutor()}"/>
 						</div>
 						<div class="span6">
 							<h3>${libro.getTitulo()}</h3>
 							<small>- ${libro.getAutor()}</small>
 							<hr class="soft"/>
-							<form  action="/libros/agregarAlCarro"class="form-horizontal qtyFrm">
+							<form  action="agregarAlCarro" class="form qtyFrm">
 								<div class="control-group">
-									<label class="control-label"><span>$ ${libro.getPrecioView()}</span></label>
+									<h3>$ ${libro.getPrecioView()}</h3>
 									<div class="controls">
 										<input id="idLibro" name="idLibro" type="hidden" value="${libro.getId()}">
-										<input id="redir" name="redir" type="hidden" value="/libros/detalleproducto?id=${libro.getId()}">
-										<input id="cantidad" name="cantidad" type="number" class="span1" placeholder="Cant." value="1"/>
-										<button type="submit" class="btn btn-large btn-primary pull-right"> Agregar al carrito <i class=" icon-shopping-cart"></i></button>
+										<input id="redir" name="redir" type="hidden" value="detalleproducto?idLibro=${libro.getId()}">
+										<label class="control-label">Cantidad <input id="cantidad" name="cantidad" type="number" class="span1" placeholder="Cant." value="1" min="1" required/></label>
+										<button type="submit" class="btn btn-large btn-primary"> Agregar al carrito <i class=" icon-shopping-cart"></i></button>
 									</div>
 								</div>
 							</form>
 						</div>
-
 						<div class="span9">
+							<hr class="soft"/>
 							<ul id="productDetail" class="nav nav-tabs">
 								<li class="active"><a href="#home" data-toggle="tab">Detalles</a></li>
 								<li><a href="#profile" data-toggle="tab">Sinopsis</a></li>
