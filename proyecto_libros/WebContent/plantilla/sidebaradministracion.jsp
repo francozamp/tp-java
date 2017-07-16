@@ -11,6 +11,7 @@
 				<li><a href="admlibros"><i class="icon-chevron-right"></i>Libros</a></li>
 				<li><a href="admcategorias"><i class="icon-chevron-right"></i>Categorías</a></li>
 				<li><a href="admusuarios"><i class="icon-chevron-right"></i>Usuarios</a></li>
+				<li><a href="admdescuentos"><i class="icon-chevron-right"></i>Descuentos</a></li>
 			</ul>
 		</li>
 	</ul>
