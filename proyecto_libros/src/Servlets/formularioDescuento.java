@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Descuento;
+import Negocio.NegocioDescuento;
 
 /**
  * Servlet implementation class formularioDescuento
@@ -41,7 +42,7 @@ public class formularioDescuento extends MiServletPlantilla {
 			
 			if(idDescuento != null){
 				
-				Descuento descuento = null;
+				Descuento descuento = new NegocioDescuento().getDescuentoById(idDescuento);
 				
 				//Si te pasan un descuento como parametro apra editar aca lo recuperas y lo pasas a laproxima pagina
 				

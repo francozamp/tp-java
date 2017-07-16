@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <!-- Cabecera -->
@@ -55,8 +56,17 @@
 						<h4>Monto</h4>
 						<p class="monto">
 							Total libros: $${sessionScope.pedido.getMontoTotalView() }<br>
-							Descuento: $0<br>
-							<span class="total"><strong>Precio final: $${sessionScope.pedido.getMontoTotalView() }</strong></span>
+							<c:choose>
+								<c:when test="${sessionScope.descuento != null}">
+									<c:set var = "montoDescontado" scope = "session" value = "${sessionScope.pedido.getMontoTotalView()*sessionScope.descuento.getPorcDescuento()}"></c:set>
+									<fmt:formatNumber var="formatMontoDescontado" type = "number" maxFractionDigits = "2" value = "${montoDescontado}" />
+								</c:when>
+								<c:otherwise>
+									<c:set var = "formatMontoDescontado" scope = "session" value = "0.00"></c:set>
+								</c:otherwise>
+							</c:choose>	
+							Descuento: $<c:out value="${formatMontoDescontado}" /><br>
+							<span class="total"><strong>Precio final: $${sessionScope.pedido.getMontoTotalView() - formatMontoDescontado}</strong></span>
 						</p>
 						<hr class="soft"/>
 						<a href="cancelarpedido"><button class="btn btn-large">Cancelar </button></a>

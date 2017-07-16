@@ -150,7 +150,7 @@
 										<td>${descuento.getPorcDescuento() }</td>
 										<td>${descuento.getFechaDesde() }</td>
 										<td>${descuento.getFechaHasta() }</td>
-										<td><a href="formularioDescuento?idUsuario=${descuento.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
+										<td><a href="formularioDescuento?idDescuento=${descuento.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
 									</tr>
 								</c:forEach>
 							</table>

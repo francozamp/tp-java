@@ -1,6 +1,11 @@
 package Entidades;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+
+import Negocio.NegocioPrecio;
 
 public class Descuento {
 
@@ -9,6 +14,23 @@ public class Descuento {
 	private Float porcDescuento;
 	private Date fechaDesde;
 	private Date fechaHasta;
+	
+	public Descuento(String codigo,Float porcDescuento,Date fechaDesde,Date fechaHasta){
+		this.codigo = codigo;
+		this.porcDescuento = porcDescuento;
+		this.fechaDesde = fechaDesde;
+		this.fechaHasta = fechaHasta;
+	}
+	
+public Descuento(ResultSet rs) throws SQLException {
+		
+		this.id=rs.getInt("id");
+		this.codigo=rs.getString("codigo").replaceAll("\\s+", "");
+		this.porcDescuento=rs.getFloat("porcDesc");
+		this.fechaDesde=rs.getDate("fechaDesde");
+		this.fechaHasta=rs.getDate("fechaHasta");	
+		
+	}
 	
 	public Integer getId() {
 		return id;
