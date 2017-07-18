@@ -55,7 +55,7 @@
 			  			<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
 	    			</form>
 	    			<ul id="topMenu" class="nav pull-right">
-		 				<li class=""><a href="contact.html">Contacto</a></li>
+		 				<li class=""><a href="contacto">Contacto</a></li>
  		 				
  		 				<c:choose>
  		 					<c:when test="${sessionScope.usuario != null }">

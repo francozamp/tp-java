@@ -98,4 +98,12 @@
     <servlet-name>imprimirReporte</servlet-name>
     <servlet-class>Servlets.imprimirReporte</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>contacto</servlet-name>
+    <servlet-class>Servlets.contacto</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>enviaMail</servlet-name>
+    <servlet-class>Servlets.enviaMail</servlet-class>
+  </servlet>
 </web-app>
