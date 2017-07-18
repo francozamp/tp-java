@@ -62,9 +62,9 @@
 			          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.usuario.nombre} ${sessionScope.usuario.apellido} <span class="caret"></span></a>
 			          				<ul class="dropdown-menu">
 			            				<li><a href="#">Mi cuenta</a></li>
-			            				<li><a href="#">Historial de pedidos</a></li>
+			            				<li><a href="historialpedidos">Historial de pedidos</a></li>
 			            				<c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 }">
-			            					<li><a href="admlibros">Administracion</a></li>
+			            					<li><a href="admPedidos">Administracion</a></li>
 			            				</c:if>
 			            				<li role="separator" class="divider"></li>
 			            				<li><a href="logout?paginaLlamado=index">Cerrar sesión</a></li>
@@ -72,9 +72,8 @@
 			        			</li>
  		 					</c:when>
  		 					<c:otherwise>
- 		 						<li class=""><a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Iniciar Sesión</span></a>
+ 		 						<li><a id="btnLogin" href="#login" role="button" data-toggle="modal"><span class="btn btn-large btn-success">Iniciar Sesión</span></a>
  		 						
- 		 						<c:set var="nombPaginaActual" value="index" scope="request"/>
  		 						<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 				  					<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -89,9 +88,7 @@
 					  							<input type="password" id="inputPassword" placeholder="Contraseña" name="password">
 					  						</div>
 					  						<div class="control-group">
-												<label class="checkbox">
-													<input type="checkbox"> Recuerdame
-												</label>
+												<label id="recuerdame" class="checkbox"><input type="checkbox"> Recuerdame</label>
 					  						</div>
 					  						<input type="hidden" name="paginaLlamado" value="index">
 					  						<button type="submit" class="btn btn-success">Iniciar Sesión</button>

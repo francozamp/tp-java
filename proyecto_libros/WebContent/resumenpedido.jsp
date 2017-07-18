@@ -75,6 +75,32 @@
 	
 							</tbody>
 						</table>
+						
+						<c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 && editarPedido }">
+							<div>
+								<form class="form-inline" action="actualizarpedido" method="post">
+									<label>Estado:
+										<select name="idEstado">
+											<c:forEach items="${estadosList }" var="estado">
+												<option value="${estado.getID() }">${estado.getNombre() }</option>
+											</c:forEach>
+										</select>
+									</label>
+									
+									<c:choose>
+										<c:when test="${pedido.getSeguimiento() != null && pedido.getSeguimiento() != '' }">
+											<label>Código de seguimiento <input type="text" name="seguimiento" value="${pedido.getSeguimiento() }" disabled></label>
+										</c:when>
+										<c:otherwise>
+											<label>Código de seguimiento <input type="text" name="seguimiento" placeholder="Código de seguimiento"></label>
+										</c:otherwise>
+									</c:choose>
+									
+									<input type="hidden" name="idPedido" value="${pedido.getId() }">
+									<input type="submit" class="btn btn-primary" value="Guardar">
+								</form>
+							</div>
+						</c:if>
 	
 						<!-- <table class="table table-bordered">
 							<tr><th>ESTIMATE YOUR SHIPPING </th></tr>

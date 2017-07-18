@@ -13,16 +13,16 @@ import Entidades.Pedido;
 import Negocio.NegocioPedido;
 
 /**
- * Servlet implementation class historialpedidos
+ * Servlet implementation class administracionPedidos
  */
-@WebServlet("/historialpedidos")
-public class historialpedidos extends MiServletPlantilla {
+@WebServlet("/admPedidos")
+public class administracionPedidos extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public historialpedidos() {
+    public administracionPedidos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +33,14 @@ public class historialpedidos extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		RequestDispatcher requestDispatcher = null;
+		this.validarAdministrador();
 		
-		if(this.getUsuario() != null){
-			List<Pedido> pedidosList = new NegocioPedido().findPedidosByUsuario(this.getUsuario().getId());
-			
-			request.setAttribute("pedidosList", pedidosList);
-			
-			requestDispatcher = request.getRequestDispatcher("historialpedidos.jsp");
-		}
-		else{
-			requestDispatcher = request.getRequestDispatcher("login.jsp");
-		}
+		List<Pedido> pedidosList = new NegocioPedido().getPedidosList();
 		
-		requestDispatcher.forward(request, response);
+		request.setAttribute("pedidos", pedidosList);
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+		requestDispatcher.forward(request, response);	
 	}
 
 	/**

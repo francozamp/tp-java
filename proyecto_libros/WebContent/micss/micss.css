@@ -35,6 +35,23 @@ input[type="text"].srchTxt {
 	margin-top: 8px;
 }
 
+.modal {
+	width: 400px;
+	margin: -250px 0 0 -200px;
+}
+
+.modal .loginFrm, .modal .loginFrm .btn {
+	margin: 0;
+}
+
+.modal input[type="text"], .modal input[type="password"] {
+	width: 95%;
+}
+
+#recuerdame {
+	color: #317eac;
+}
+
 #myCarousel {
 	max-height: 400px;
 	overflow: hidden;
@@ -141,4 +158,8 @@ input[type="checkbox"][disabled] {
 
 .numero-pedido {
     font-size: 16px;
+}
+
+#loginCont {
+    margin: 0 30%;
 }

@@ -7,6 +7,7 @@
 	<ul id="sideManu" class="nav nav-tabs nav-stacked">
 		<li class="subMenu open"><a>Administración</a>
 			<ul>
+				<li><a href="admPedidos"><i class="icon-chevron-right"></i>Pedidos</a></li>
 				<li><a href="admlibros"><i class="icon-chevron-right"></i>Libros</a></li>
 				<li><a href="admcategorias"><i class="icon-chevron-right"></i>Categorías</a></li>
 				<li><a href="admusuarios"><i class="icon-chevron-right"></i>Usuarios</a></li>

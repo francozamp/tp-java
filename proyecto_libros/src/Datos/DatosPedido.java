@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import Entidades.LineaPedido;
 import Entidades.Pedido;
 import Negocio.NegocioLineaPedido;
@@ -46,6 +45,8 @@ public class DatosPedido {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		conexion.cerrarConexion();
 		
 		return pedidoGuardado;
 	}
@@ -147,6 +148,65 @@ public class DatosPedido {
 		conexion.cerrarConexion();
 		
 		return pedidosList;
+	}
+
+	public List<Pedido> getPedidosList() {
+		List<Pedido> pedidosList = new ArrayList<Pedido>();
+		
+		Conexion conexion = new Conexion();
+		String query = "SELECT * FROM pedidos "
+				+ " ORDER BY idpedidos DESC";
+		
+		conexion.crearConexion();
+		PreparedStatement ps = conexion.preparedStatement(query);
+		
+		try{			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				pedidosList.add(new Pedido(rs));
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		conexion.cerrarConexion();
+		
+		return pedidosList;
+	}
+
+	public Pedido actualizarPedido(Pedido pedido) {
+		Pedido pedidoGuardado = null;
+		
+		Conexion conexion = new Conexion();
+		String query = "UPDATE pedidos SET "
+				+ " estados_idestados = ?, "
+				+ " seguimiento = ? "
+				+ " WHERE idpedidos = ?";
+		
+		conexion.crearConexion();
+		PreparedStatement ps = conexion.preparedStatement(query);
+		
+		try{
+			
+			ps.setInt(1, pedido.getEstado().getID());
+			ps.setString(2, pedido.getSeguimiento());
+			ps.setInt(3, pedido.getId());
+			
+			int resul = ps.executeUpdate();
+			
+			if(resul>0){
+				pedidoGuardado = this.findById(pedido.getId());
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		conexion.cerrarConexion();
+		
+		return pedidoGuardado;
 	}
 
 }

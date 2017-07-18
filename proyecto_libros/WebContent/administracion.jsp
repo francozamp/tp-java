@@ -15,6 +15,35 @@
 				<!-- Inicio contenido -->
 				<div id="contenido" class="span9">
 					<c:choose>
+						<c:when test="${pedidos != null }">
+							<h4>Administración de pedidos</h4>
+							<div class="span6">
+								<form class="form-inline" method="get" action="products.html" >
+									<input class="srchTxt" type="text" placeholder="Buscar" />
+									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
+								</form>	
+							</div>
+							<table class="table table-striped">
+								<tr>
+									<th>Pedido</th>
+									<th>Usuario</th>
+									<th>Cant Libros</th>
+									<th>Fecha</th>
+									<th>Estado</th>
+									<th>Acciones</th>
+								</tr>
+								<c:forEach items="${pedidos }" var="pedido">
+									<tr>
+										<td>${pedido.getId() }</td>
+										<td>${pedido.getUsuario().getEmail() }</td>
+										<td>${pedido.getCantLibros() }</td>
+										<td>${pedido.getFecha() }</td>
+										<td>${pedido.getEstado().getNombre() }</td>
+										<td><a href="editarpedido?idPedido=${pedido.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</c:when>
 						<c:when test="${libros != null }">
 							<h4>Administración de libros</h4>
 							<div class="span6">

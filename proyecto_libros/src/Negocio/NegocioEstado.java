@@ -8,10 +8,9 @@ import Entidades.Estado;
 public class NegocioEstado {
 	
 	public List<Estado> getEstados(){
-		
-		List<Estado> estados = null;
+
 		DatosEstado dEstado = new DatosEstado();
-		estados = dEstado.getEstados();
+		List<Estado> estados = dEstado.getEstados();
 		
 		return estados;
 		

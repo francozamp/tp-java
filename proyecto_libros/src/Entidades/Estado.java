@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.sql.ResultSet;
-
 public class Estado {
 	
 	private int id;
@@ -9,8 +7,8 @@ public class Estado {
 	
 	public Estado(int idEstado, String nombreEstado) {
 		
-		id = idEstado;
-		setNombre(nombreEstado);
+		this.id = idEstado;
+		this.nombre = nombreEstado;
 		
 	}
 
@@ -18,12 +16,7 @@ public class Estado {
 		this.id = idEstadoActivo;
 	}
 
-	public Estado(ResultSet rs) {
-		
-	}
-
 	public int getID() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 
