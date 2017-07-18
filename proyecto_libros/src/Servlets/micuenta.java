@@ -1,31 +1,24 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.TipoUsuario;
-import Entidades.Usuario;
-import Negocio.NegocioTipoUsuario;
-import Negocio.NegocioUsuario;
-
 /**
- * Servlet implementation class formularioUsuario
+ * Servlet implementation class micuenta
  */
-@WebServlet("/formularioUsuario")
-public class formularioUsuario extends MiServletPlantilla {
+@WebServlet("/micuenta")
+public class micuenta extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public formularioUsuario() {
+    public micuenta() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,20 +30,14 @@ public class formularioUsuario extends MiServletPlantilla {
 		super.doGet(request, response);
 		
 		try {
-			if (request.getParameter("idUsuario") != null) {
-				this.validarAdministrador();
-				NegocioUsuario negocioUsuario = new NegocioUsuario();
-				Usuario usuarioEditar = negocioUsuario.getUsuarioPorId(Integer.valueOf(request.getParameter("idUsuario")));
-				request.setAttribute("usuarioEditar", usuarioEditar);
-				List<TipoUsuario> tipoUsuarioList = new NegocioTipoUsuario().getTipoUsuarioList();
-				request.setAttribute("tipoUsuarioList", tipoUsuarioList);
-			}
+			this.validarUsuarioLogueado();
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("frmusuario.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("micuenta.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());
 		}
+		
 	}
 
 	/**

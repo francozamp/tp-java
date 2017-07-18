@@ -12,7 +12,14 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-				<jsp:include page="plantilla/sidebaradministracion.jsp"/>
+				<c:choose>
+					<c:when test="${sessionScope.usuario.getTipoUsuario().getId() == 1 && usuarioEditar != null }">
+						<jsp:include page="plantilla/sidebaradministracion.jsp"></jsp:include>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="plantilla/sidebargeneral.jsp"></jsp:include>
+					</c:otherwise>
+				</c:choose>
 				<!-- Sidebar end=============================================== -->
 				<!-- Inicio contenido -->
 				<div id="contenido" class="span9">
@@ -64,7 +71,7 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="email" id="input_email" placeholder="Email" name="email" value="${usuarioEditar.email }" required>
+		                            		<input type="email" id="input_email" placeholder="Email" name="email" value="${usuarioEditar.email }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		<input type="email" id="input_email" placeholder="Email" name="email" required>
@@ -77,10 +84,10 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" value="${usuarioEditar.password }" required>
+		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" value="${usuarioEditar.password }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
-		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" required>
+		                            		<input type="password" id="inputPassword1" placeholder="Contraseña" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres" required>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                        </div>
@@ -90,10 +97,10 @@
 		                        <div class="controls">
 		                            <c:choose>
 		                            	<c:when test="${usuarioEditar != null }">
-		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" value="${usuarioEditar.password }" required>
+		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" value="${usuarioEditar.password }" readonly>
 		                            	</c:when>
 		                            	<c:otherwise>
-		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" required>
+		                            		<input type="password" id="inputPassword2" placeholder="Contraseña" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres" required>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                        </div>
@@ -134,9 +141,31 @@
 		                            </c:choose>
 		                        </div>
 		                    </div>
+		                    <c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 && usuarioEditar != null }">
+			                    <div class="control-group">
+			                        <label class="control-label" for="phone">Tipo usuario </label>
+			                        <div class="controls">
+	                            		<select name="idTipoUsuario">
+	                            				<option value="${usuarioEditar.getTipoUsuario().getId() }">${usuarioEditar.getTipoUsuario().getNombre() }</option> 
+	                            			<c:forEach items="${tipoUsuarioList }" var="tipoUsuario">
+	                            				<c:if test="${tipoUsuario.getId() != usuarioEditar.getTipoUsuario().getId() }">
+	                            					<option value="${tipoUsuario.getId() }">${tipoUsuario.getNombre() }</option>
+	                            				</c:if>
+	                            			</c:forEach>
+	                            		</select>
+			                        </div>
+			                    </div>
+		                    </c:if>
 		                    <div class="control-group">
 		                        <div class="controls">
-		                            <input class="btn btn-large btn-success" type="submit" value="Registrarse" />
+		                        	<c:choose>
+		                        		<c:when test="${usuarioEditar != null }">
+		                        			<input class="btn btn-large btn-success" type="submit" value="Guardar" />
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			<input class="btn btn-large btn-success" type="submit" value="Registrarse" />
+		                        		</c:otherwise>
+		                        	</c:choose>
 		                        </div>
 		                    </div>
 		                </form>

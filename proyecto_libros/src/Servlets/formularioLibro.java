@@ -37,19 +37,18 @@ public class formularioLibro extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		if (request.getParameter("idLibro")!=null) {
-			NegocioLibro negocioLibro = new NegocioLibro();
-			Libro libro = negocioLibro.getLibroById(Integer.valueOf(request.getParameter("idLibro")));
-			request.setAttribute("libro", libro);
-		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		super.doGet(request, response);
+		
+		Integer idLibro = null;
+		if(request.getParameter("idLibro") != null){
+			idLibro = Integer.valueOf(request.getParameter("idLibro"));
+		}
 		String isbn = request.getParameter("isbn");
 		String titulo = request.getParameter("titulo");
 		String autor = request.getParameter("autor");
@@ -67,6 +66,9 @@ public class formularioLibro extends MiServletPlantilla {
 		}
 		
 		Libro libro = new Libro(isbn, titulo, autor, editorial, edicion, descripcion, true, categorias);
+		if(idLibro != null){
+			libro.setId(idLibro);
+		}
 		NegocioLibro negocioLibro = new NegocioLibro();
 		Libro guardado = negocioLibro.guardarLibro(libro);
 		if (guardado != null) {

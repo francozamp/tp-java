@@ -6,28 +6,30 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entidades.Constantes;
+import Entidades.Categoria;
 import Entidades.Libro;
 import Entidades.Pedido;
+import Entidades.Usuario;
+import Negocio.NegocioCategoria;
 import Negocio.NegocioLibro;
 import Negocio.NegocioPedido;
+import Negocio.NegocioUsuario;
 
 /**
- * Servlet implementation class administracionLibros
+ * Servlet implementation class buscar
  */
-@WebServlet("/admlibros")
-public class administracionLibros extends MiServletPlantilla {
+@WebServlet("/buscar")
+public class buscar extends MiServletPlantilla {
 	private static final long serialVersionUID = 1L;
-    
-	private List<Libro> libros;
-	
+       
     /**
      * @see MiServletPlantilla#MiServletPlantilla()
      */
-    public administracionLibros() {
+    public buscar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +41,46 @@ public class administracionLibros extends MiServletPlantilla {
 		super.doGet(request, response);
 		
 		try {
+			
 			this.validarAdministrador();
 			
-			NegocioLibro negocioLibro = new NegocioLibro();
-			libros = negocioLibro.getLibros();
+			String descripcion = request.getParameter("descripcion");
+			String objeto = request.getParameter("objeto");
 			
-			request.setAttribute("libros", libros);
+			RequestDispatcher requestDispatcher = null;
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			switch (objeto) {
+			case "pedido":
+				List<Pedido> pedidosList = new NegocioPedido().findByDescripcion(descripcion);
+				request.setAttribute("pedidos", pedidosList);
+				break;
+				
+			case "libro":
+				List<Libro> librosList = new NegocioLibro().findByDescripcion(descripcion);
+				request.setAttribute("libros", librosList);
+				break;
+				
+			case "categoria":
+				List<Categoria> categoriasList = new NegocioCategoria().findByDescripcion(descripcion);
+				request.setAttribute("categorias", categoriasList);
+				break;
+				
+			case "usuario":
+				List<Usuario> usuariosList = new NegocioUsuario().findByDescripcion(descripcion);
+				request.setAttribute("usuarios", usuariosList);
+				break;
+
+			default:
+				break;
+			}
+			
+			requestDispatcher = request.getRequestDispatcher("administracion.jsp");
 			requestDispatcher.forward(request, response);
+			
 		} catch (Exception e) {
 			response.sendRedirect(e.getMessage());
 		}
+		
 	}
 
 	/**

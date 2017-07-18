@@ -33,14 +33,18 @@ public class administracionPedidos extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		this.validarAdministrador();
-		
-		List<Pedido> pedidosList = new NegocioPedido().getPedidosList();
-		
-		request.setAttribute("pedidos", pedidosList);
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
-		requestDispatcher.forward(request, response);	
+		try {
+			this.validarAdministrador();
+			
+			List<Pedido> pedidosList = new NegocioPedido().getPedidosList();
+			
+			request.setAttribute("pedidos", pedidosList);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("administracion.jsp");
+			requestDispatcher.forward(request, response);
+		} catch (Exception e) {
+			response.sendRedirect(e.getMessage());
+		}	
 	}
 
 	/**

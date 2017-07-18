@@ -53,11 +53,11 @@
   <servlet>
     <servlet-name>detalleproducto</servlet-name>
     <servlet-class>Servlets.detalleproducto</servlet-class>
-   </servlet>
-<servlet>
+  </servlet>
+  <servlet>
     <servlet-name>historialpedidos</servlet-name>
     <servlet-class>Servlets.histtorialpedidos</servlet-class>
- </servlet>
+  </servlet>
   <servlet>
     <servlet-name>resumenpedido</servlet-name>
     <servlet-class>Servlets.resumenpedido</servlet-class>
@@ -65,5 +65,17 @@
   <servlet>
     <servlet-name>administracionPedidos</servlet-name>
     <servlet-class>Servlets.administracionPedidos</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>micuenta</servlet-name>
+    <servlet-class>Servlets.micuenta</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>buscar</servlet-name>
+    <servlet-class>Servlets.buscar</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>editarLibro</servlet-name>
+    <servlet-class>Servlets.editarLibro</servlet-class>
   </servlet>
 </web-app>

@@ -73,7 +73,7 @@ public class frmUsuarios extends javax.swing.JFrame {
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+//                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -164,17 +164,17 @@ public class frmUsuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Usuario usuario = new Usuario(txtEmail.getText(), txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtDireccion.getText(), txtPassword.getText(), Integer.parseInt(txtEstado.getText()), Integer.parseInt(txtTipousuario.getText()));
-        NegocioUsuario negocioUsuario = new NegocioUsuario();
-        Usuario guardado = null;
-        guardado = negocioUsuario.guardarUsuario(usuario);
-        if (guardado != null) {
-            JOptionPane.showMessageDialog(null, "El usuario con email: " + usuario.getEmail() + " fue guardado correctamente!", "Usuario guardado", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "El usuario no pudo ser guardado!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+//    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+//        Usuario usuario = new Usuario(txtEmail.getText(), txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtDireccion.getText(), txtPassword.getText(), Integer.parseInt(txtEstado.getText()), Integer.parseInt(txtTipousuario.getText()));
+//        NegocioUsuario negocioUsuario = new NegocioUsuario();
+//        Usuario guardado = null;
+//        guardado = negocioUsuario.guardarUsuario(usuario);
+//        if (guardado != null) {
+//            JOptionPane.showMessageDialog(null, "El usuario con email: " + usuario.getEmail() + " fue guardado correctamente!", "Usuario guardado", JOptionPane.INFORMATION_MESSAGE);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "El usuario no pudo ser guardado!", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

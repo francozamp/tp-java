@@ -18,10 +18,11 @@
 						<c:when test="${pedidos != null }">
 							<h4>Administración de pedidos</h4>
 							<div class="span6">
-								<form class="form-inline" method="get" action="products.html" >
-									<input class="srchTxt" type="text" placeholder="Buscar" />
+								<form class="form-inline" method="post" action="buscar" >
+									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
+									<input type="hidden" name="objeto" value="pedido">
 									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
-								</form>	
+								</form>
 							</div>
 							<table class="table table-striped">
 								<tr>
@@ -47,8 +48,9 @@
 						<c:when test="${libros != null }">
 							<h4>Administración de libros</h4>
 							<div class="span6">
-								<form class="form-inline" method="get" action="products.html" >
-									<input class="srchTxt" type="text" placeholder="Buscar" />
+								<form class="form-inline" method="post" action="buscar" >
+									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
+									<input type="hidden" name="objeto" value="libro">
 									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
 								</form>	
 							</div>
@@ -74,7 +76,7 @@
 										<td>${libro.autor }</td>
 										<td>${libro.editorial }</td>
 										<td>${libro.edicion }</td>
-										<td><a href="formularioLibro?idLibro=${libro.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
+										<td><a href="editarLibro?idLibro=${libro.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -82,10 +84,11 @@
 						<c:when test="${usuarios != null }">
 							<h4>Administración de usuarios</h4>
 							<div class="span6">
-								<form class="form-inline" method="get" action="products.html" >
-									<input class="srchTxt" type="text" placeholder="Buscar" />
+								<form class="form-inline" method="post" action="buscar" >
+									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
+									<input type="hidden" name="objeto" value="usuario">
 									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
-								</form>	
+								</form>
 							</div>
 							<div class="span2">
 								<a class="btn btn-default" href="formularioUsuario" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
@@ -124,10 +127,11 @@
 						<c:when test="${categorias != null }">
 							<h4>Administración de categorias</h4>
 							<div class="span6">
-								<form class="form-inline" method="get" action="products.html" >
-									<input class="srchTxt" type="text" placeholder="Buscar" />
+								<form class="form-inline" method="post" action="buscar" >
+									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
+									<input type="hidden" name="objeto" value="categoria">
 									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
-								</form>	
+								</form>
 							</div>
 							<div class="span2">
 								<a class="btn btn-default" href="#" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
