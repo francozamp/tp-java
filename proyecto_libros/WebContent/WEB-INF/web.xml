@@ -78,4 +78,12 @@
     <servlet-name>editarLibro</servlet-name>
     <servlet-class>Servlets.editarLibro</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>contacto</servlet-name>
+    <servlet-class>Servlets.contacto</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>enviaMail</servlet-name>
+    <servlet-class>Servlets.enviaMail</servlet-class>
+  </servlet>
 </web-app>
