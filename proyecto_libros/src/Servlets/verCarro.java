@@ -35,26 +35,31 @@ public class verCarro extends MiServletPlantilla {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		NegocioLibro negocioLibro =  new NegocioLibro();
-		
-		Pedido pedido = new Pedido();
-		Libro libro = null;
-		int cantidad = 0;
-		LineaPedido lineaPedido = null;
-		
-		Carro carro = Sesion.getCarro();
-		for (int idLibro : carro.getLibrosCarro().keySet()) {
-			libro = negocioLibro.getLibroById(idLibro);
-			cantidad = carro.getLibrosCarro().get(idLibro);
-			lineaPedido = new LineaPedido(libro, cantidad);
-			pedido.getLineasPedido().add(lineaPedido);
+		if(Sesion.getCarro() != null && Sesion.getCarro().getLibrosCarro().size() > 0){
+			NegocioLibro negocioLibro =  new NegocioLibro();
+			
+			Pedido pedido = new Pedido();
+			Libro libro = null;
+			int cantidad = 0;
+			LineaPedido lineaPedido = null;
+			
+			Carro carro = Sesion.getCarro();
+			for (int idLibro : carro.getLibrosCarro().keySet()) {
+				libro = negocioLibro.getLibroById(idLibro);
+				cantidad = carro.getLibrosCarro().get(idLibro);
+				lineaPedido = new LineaPedido(libro, cantidad);
+				pedido.getLineasPedido().add(lineaPedido);
+			}
+			
+			Sesion.setPedido(pedido);
+			request.setAttribute("redireccion", "verCarro");
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("resumencarro.jsp");
+			requestDispatcher.forward(request, response);
 		}
-		
-		Sesion.setPedido(pedido);
-		request.setAttribute("redireccion", "verCarro");
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("resumencarro.jsp");
-		requestDispatcher.forward(request, response);
+		else{
+			response.sendRedirect("index");
+		}
 	}
 
 	/**

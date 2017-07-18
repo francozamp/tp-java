@@ -27,25 +27,30 @@
 					<c:if test="${errores != null}">
 						<p style="color:red;">${errores}</p>
 					</c:if>
-					<c:if test="${sessionScope.descuento == null}">
-						<form method="post" action="aplicarDescuento" name="frmDescuento" id="frmDescuento">
-							<table class="table table-bordered">
-								<tbody>
-									<tr>
-										<td> 
-											<div class="control-group form-horizontal">
-												<label class="control-label"><strong> Codigo de descuento: </strong> </label>
-												<div class="controls">
-													<input type="text" class="input-medium" placeholder="Codigo" name="codigoDescuento" id="codigoDescuento">
-													<button type="submit" class="btn"> Aplicar </button>
-												</div>
+					<form method="post" action="aplicarDescuento" name="frmDescuento" id="frmDescuento">
+						<table class="table table-bordered">
+							<tbody>
+								<tr>
+									<td> 
+										<div class="control-group form-horizontal">
+											<label class="control-label"><strong> Codigo de descuento: </strong> </label>
+											<div class="controls">
+												<c:choose>
+													<c:when test="${sessionScope.descuento != null}">
+														<input type="text" class="input-medium" placeholder="Codigo" name="codigoDescuento" id="codigoDescuento" value="${sessionScope.descuento.getCodigo() }">
+													</c:when>
+													<c:otherwise>
+														<input type="text" class="input-medium" placeholder="Codigo" name="codigoDescuento" id="codigoDescuento">
+													</c:otherwise>
+												</c:choose>
+												<button type="submit" class="btn"> Aplicar </button>
 											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</form>
-					</c:if>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 
 					<form action="pagoyenvio" method="post">
 						<table class="table table-bordered">

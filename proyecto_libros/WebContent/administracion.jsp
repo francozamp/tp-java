@@ -125,7 +125,7 @@
 							</table>
 						</c:when>
 						<c:when test="${descuentos != null }">
-							<h4>Administración de usuarios</h4>
+							<h4>Administración de descuentos</h4>
 							<div class="span6">
 								<form class="form-inline" method="post" action="buscar" >
 									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
@@ -143,6 +143,7 @@
 									<th>% de Descuento</th>
 									<th>Fecha desde</th>
 									<th>Fecha hasta</th>
+									<th>Acciones</th>
 								</tr>
 								<c:forEach items="${descuentos }" var="descuento">
 									<tr>

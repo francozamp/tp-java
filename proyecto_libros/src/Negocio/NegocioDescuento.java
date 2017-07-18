@@ -105,7 +105,7 @@ public class NegocioDescuento {
 		
 		}
 		else{
-			Exception ex = new Exception("* El c�digo ingresado es inexistente.");
+			Exception ex = new Exception("* El código ingresado es inexistente.");
 			throw ex;
 		}
 		
