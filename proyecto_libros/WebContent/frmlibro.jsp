@@ -31,7 +31,7 @@
 		                    <button type="button" class="close" data-dismiss="alert">×</button>
 		                    <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 		                </div> -->
-		                <form class="form-horizontal frm" action="formularioLibro" method="POST" >
+		                <form class="form-horizontal frm" action="formularioLibro" method="POST" enctype="multipart/form-data" >
 		                    <h4>Información del libro</h4>
 		                    <div class="control-group">
 		                        <label class="control-label" for="isbn">ISBN <sup>*</sup></label>
