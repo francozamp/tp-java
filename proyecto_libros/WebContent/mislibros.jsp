@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 	
 <!DOCTYPE html>
 <html>
@@ -38,20 +39,25 @@
 								<td>
 									<div class="stars small">
 										<form action="">
-											<input class="star small star-5" id="star-5" type="radio" name="star"/>
-									    	<label class="star small star-5" for="star-5"></label>
-									    	<input class="star small star-4" id="star-4" type="radio" name="star"/>
-									    	<label class="star small star-4" for="star-4"></label>
-									    	<input class="star small star-3" id="star-3" type="radio" name="star"/>
-										    <label class="star small star-3" for="star-3"></label>
-										    <input class="star small star-2" id="star-2" type="radio" name="star"/>
-										    <label class="star small star-2" for="star-2"></label>
-										    <input class="star small star-1" id="star-1" type="radio" name="star"/>
-										    <label class="star small star-1" for="star-1"></label>
+ 											<c:set var="puntaje" value="${valoracion.getPuntaje()}"></c:set>
+											<c:forEach var="i" begin="1" end="5">
+              									<c:choose>
+              										<c:when test="${6-i == puntaje}">
+              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" checked="checked"/>
+              										</c:when>
+              										<c:otherwise>
+              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star"/>
+              										</c:otherwise>
+              									</c:choose>
+            									<label class="star small star-${6-i}" for="star-${6-i}"></label>
+          									</c:forEach>
 										</form>
 									</div>
 								</td>
-								<td></td>
+								<c:set var = "comentario" value = "${valoracion.getComentario()}"></c:set>
+								<c:set var = "comentarioParcial" value = "${fn:substring(comentario, 0, 10)}"></c:set>
+								
+								<td><c:out value="${comentarioParcial}"/>...</td>
 								<td><a href="editarvaloracion?idValoracion=${valoracion.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 							</tr>
 						

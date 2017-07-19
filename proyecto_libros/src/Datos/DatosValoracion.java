@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Type;
+
 import Entidades.Usuario;
 import Entidades.Valoracion;
 import Negocio.NegocioLibro;
@@ -40,7 +42,12 @@ public class DatosValoracion {
 				ps.setInt(2, valoracion.getLibro().getId());
 			}
 			else {
-				ps.setInt(1, valoracion.getPuntaje());
+				if(valoracion.getPuntaje() != null){
+					ps.setInt(1, valoracion.getPuntaje());
+				}
+				else{
+					ps.setNull(1, Type.INT);
+				}				
 				ps.setString(2, valoracion.getComentario());
 				ps.setInt(3, valoracion.getId());
 			}
@@ -69,7 +76,7 @@ public class DatosValoracion {
 		return valoracionGuardada;
 	}
 
-	private Valoracion findById(Integer idValoracion) {
+	public Valoracion findById(Integer idValoracion) {
 		Valoracion valoracion = null;
 		
 		Conexion conexion = new Conexion();
@@ -117,7 +124,35 @@ public class DatosValoracion {
 				valoracion.setLibro(new NegocioLibro().getLibroById(rs.getInt("idLibro")));
 				valoracion.setPuntaje(rs.getInt("puntaje"));
 				valoracion.setComentario(rs.getString("comentario"));
-				
+				valoracionesList.add(valoracion);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return valoracionesList;
+	}
+
+	public List<Valoracion> findByLibro(Integer idLibro) {
+		List<Valoracion> valoracionesList = new ArrayList<Valoracion>();
+		
+		Conexion conexion = new Conexion();
+		conexion.crearConexion();
+		
+		String query = "SELECT * FROM valoracion WHERE idLibro = ?";
+		
+		PreparedStatement ps = conexion.preparedStatement(query);
+		try {
+			ps.setInt(1, idLibro);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Valoracion valoracion = new Valoracion();
+				valoracion.setId(rs.getInt("id"));
+				valoracion.setUsuario(new NegocioUsuario().getUsuarioPorId(rs.getInt("idUsuario")));
+				valoracion.setLibro(new NegocioLibro().getLibroById(rs.getInt("idLibro")));
+				valoracion.setPuntaje(rs.getInt("puntaje"));
+				valoracion.setComentario(rs.getString("comentario"));
 				valoracionesList.add(valoracion);
 			}
 		} catch (Exception e) {
