@@ -69,7 +69,12 @@
 										<td> <img width="60" src="${lineaPedido.getLibro().getUrlImagen() }" alt=""/></td>
 										<td><strong>${lineaPedido.getLibro().getTitulo() } </strong><br/>${lineaPedido.getLibro().getEditorial() }<br/>${lineaPedido.getLibro().getEdicion() }</td>
 										<td>
-											<div class="input-append"><input class="span1" style="max-width:34px" size="16" name="cant${lineaPedido.getLibro().getId()}" type="text" value="${lineaPedido.getCantidad() }"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button></div>
+											<div class="input-append">
+												<input class="cantidadLibros" style="max-width:34px" size="16" name="cant${lineaPedido.getLibro().getId()}" type="text" value="${lineaPedido.getCantidad() }">
+												<button class="btn restar" type="button"><i class="icon-minus"></i></button>
+												<button class="btn sumar" type="button"><i class="icon-plus"></i></button>
+												<button class="btn btn-danger borrar" type="button"><i class="icon-remove icon-white"></i></button>
+											</div>
 										</td>
 										<td>$ ${lineaPedido.getLibro().getPrecioView() }</td>
 										<td>$ ${lineaPedido.getMontoLineaView() } </td>
@@ -144,6 +149,24 @@
 			</div>
 		</div>
 	</div>
+	<script src="themes/js/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$('.restar').on('click', function() {		
+			var cant = $('.cantidadLibros').val();
+			if (cant > 0) {
+				$('.cantidadLibros').val(--cant)
+			}
+			console.log(cant);
+		})
+		$('.sumar').on('click', function() {		
+			var cant = $('.cantidadLibros').val();
+
+			$('.cantidadLibros').val(++cant)
+
+			console.log(cant);
+		})
+		
+	</script>
 	<!-- Fin Main Body -->
 	<!-- Footer ================================================================== -->
 	<jsp:include page="plantilla/footer.jsp"/>

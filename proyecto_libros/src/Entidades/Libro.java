@@ -26,13 +26,14 @@ public class Libro {
 	private Precio precioActual;
 	
 	@SuppressWarnings("unchecked")
-	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list){
+	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list, String urlImagen){
 		this.isbn=isbn.replaceAll("\\s+", "");
 		this.titulo=titulo;
 		this.autor=autor;
 		this.editorial=editorial;
 		this.edicion=edicion;
 		this.descripcion=descripcion;
+		this.urlImagen = urlImagen;
 		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
 		try {
 			this.categorias=(List<Categoria>) list;

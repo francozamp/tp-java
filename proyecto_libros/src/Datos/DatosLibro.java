@@ -111,7 +111,7 @@ public class DatosLibro {
 		
 		//Primero guardo el libro
 		if (nuevoLibro) {
-			sql = "INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados, fechaAlta) VALUES (?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados, imagen, fechaAlta) VALUES (?,?,?,?,?,?,?,?,?)";
 		}
 		else{
 			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? WHERE id = ?";
@@ -130,6 +130,7 @@ public class DatosLibro {
 			ps.setString(cont++, libro.getEdicion());
 			ps.setString(cont++, libro.getDescripcion());
 			ps.setInt(cont++, libro.getIdEstado());
+			ps.setString(cont++, libro.getUrlImagen());
 			if (nuevoLibro) {
 				Calendar ahora = Calendar.getInstance();
 				ps.setDate(cont++, new Date((ahora.getTime()).getTime()));
@@ -211,7 +212,7 @@ public class DatosLibro {
 				if (rs.getInt("estados_idestados")==Constantes.ID_ESTADO_ACTIVO) {
 					activo = true;
 				}
-				libro = new Libro(rs.getString("ISBN"), rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("edicion"), rs.getString("descripcion"), activo, categorias);
+				libro = new Libro(rs.getString("ISBN"), rs.getString("titulo"), rs.getString("autor"), rs.getString("editorial"), rs.getString("edicion"), rs.getString("descripcion"), activo, categorias, rs.getString("imagen"));
 			}
 		}
 		catch(Exception ex){
