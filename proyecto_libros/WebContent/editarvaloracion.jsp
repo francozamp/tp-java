@@ -37,16 +37,25 @@
 		                        <label class="control-label" for="isbn">Puntaje</label>
 		                        <div class="controls">
 		                        	<div class="stars">
-									    <input class="star star-5" id="star-5" type="radio" name="puntaje"/>
-									    <label class="star star-5" for="star-5"></label>
-									    <input class="star star-4" id="star-4" type="radio" name="puntaje"/>
-									    <label class="star star-4" for="star-4"></label>
-									    <input class="star star-3" id="star-3" type="radio" name="puntaje"/>
-									    <label class="star star-3" for="star-3"></label>
-									    <input class="star star-2" id="star-2" type="radio" name="puntaje"/>
-									    <label class="star star-2" for="star-2"></label>
-									    <input class="star star-1" id="star-1" type="radio" name="puntaje"/>
-									    <label class="star star-1" for="star-1"></label>
+		                        	<c:choose>
+		                        		<c:when test="${valoracion != null}">
+		                        			<c:set var="puntaje" value="${valoracion.getPuntaje()}"></c:set>
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        		<c:set var="puntaje" value="0"></c:set>
+		                        		</c:otherwise>
+		                        	</c:choose>
+											<c:forEach var="i" begin="1" end="5">
+              									<c:choose>
+              										<c:when test="${6-i == puntaje}">
+              											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}" checked="checked"/>
+              										</c:when>
+              										<c:otherwise>
+              											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}"/>
+              										</c:otherwise>
+              									</c:choose>
+            									<label class="star star-${6-i}" for="star-${6-i}"></label>
+          									</c:forEach>
 									</div>
 		                        </div>
 		                    </div>
@@ -70,7 +79,7 @@
 		                    <div class="control-group">
 		                        <div class="controls">
 		                        	<c:if test="${valoracion != null && valoracion.getId() != null }">
-		                        		<input type="hidden" name="idLibro" value="${valoracion.getId() }">
+		                        		<input type="hidden" name="idValoracion" value="${valoracion.getId() }">
 		                        	</c:if>
 		                            <input class="btn btn-large btn-success" type="submit" value="Guardar" />
 		                        </div>
