@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Valoracion;
+import Negocio.NegocioValoracion;
 
 /**
  * Servlet implementation class editarvaloracion
@@ -37,6 +38,8 @@ public class editarvaloracion extends MiServletPlantilla {
 			Valoracion valoracion = null;
 			//TODO Recuperar la valoracion
 			
+			int idValoracion = Integer.valueOf(request.getParameter("idValoracion"));
+			valoracion = new NegocioValoracion().findById(idValoracion);
 			
 			request.setAttribute("valoracion", valoracion);
 			

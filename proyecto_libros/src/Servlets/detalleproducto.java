@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Libro;
+import Entidades.Valoracion;
 import Negocio.NegocioLibro;
+import Negocio.NegocioValoracion;
+
+import java.util.List;
 
 /**
  * Servlet implementation class detalleproducto
@@ -37,6 +41,14 @@ public class detalleproducto extends MiServletPlantilla {
 		NegocioLibro negocioLibro= new NegocioLibro();
 		libro= negocioLibro.getLibroById(idLibro);
 		request.setAttribute("libro", libro);
+		
+		//Recupero valoraciones de los usuarios y su promedio y los agrego al Request como parametros
+		NegocioValoracion nv = new NegocioValoracion();
+		List<Valoracion> valoraciones = nv.findByLibro(idLibro);
+		Integer promedio = nv.getPuntajePromedio(valoraciones);
+		
+		request.setAttribute("valoraciones", valoraciones);
+		request.setAttribute("puntajePromedio", promedio);
 		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("detalleproducto.jsp");
