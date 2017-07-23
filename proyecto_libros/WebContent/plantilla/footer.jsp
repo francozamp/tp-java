@@ -14,7 +14,7 @@
 				</div>
 				<div class="span4">
 					<h5>Información</h5>
-					<a href="contact.html">Contacto</a>    
+					<a href="contacto">Contacto</a>    
 				</div>
 				<div class="span4">
 					<h5>Nuestras ofertas</h5>

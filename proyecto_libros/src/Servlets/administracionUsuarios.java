@@ -40,8 +40,7 @@ public class administracionUsuarios extends MiServletPlantilla {
 		try {
 			this.validarAdministrador();
 			
-			NegocioUsuario negocioUsuario = new NegocioUsuario();
-			List<Usuario> usuariosList = negocioUsuario.getUsuarios();
+			List<Usuario> usuariosList = new NegocioUsuario().getUsuarios();
 			
 			request.setAttribute("usuarios", usuariosList);
 			

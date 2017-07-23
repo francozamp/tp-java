@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import Entidades.Categoria;
 import Entidades.Constantes;
 import Entidades.Libro;
+import Entidades.Usuario;
 
 public class DatosLibro {
 	
@@ -111,7 +114,7 @@ public class DatosLibro {
 			sql = "INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados, imagen, fechaAlta) VALUES (?,?,?,?,?,?,?,?,?)";
 		}
 		else{
-			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? WHERE id = ?";
+			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? , imagen = ? WHERE id = ?";
 		}
 		
 		PreparedStatement ps = conexion.preparedStatement(sql);
@@ -494,6 +497,32 @@ public class DatosLibro {
 
 	public List<Libro> findByDescripcion(String descripcion) {
 		return this.getLibroPorTituloYCategoria(descripcion, 0);
+	}
+
+	public Set<Integer> findIdLibrosPorUsuario(Usuario usuario) {
+		
+		Set<Integer> librosUsuarioList = new HashSet<Integer>();
+		
+		Conexion conexion = new Conexion();
+		String query = "SELECT * FROM valoracion v "
+				+ " INNER JOIN libros l ON v.idLibro = l.id "
+				+ " WHERE v.idUsuario = ?";
+		
+		conexion.crearConexion();
+		
+		PreparedStatement ps = conexion.preparedStatement(query);
+		try {
+			ps.setInt(1, usuario.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				librosUsuarioList.add(rs.getInt("l.id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return librosUsuarioList;
 	}
 
 }

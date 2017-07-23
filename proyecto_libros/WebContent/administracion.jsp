@@ -124,6 +124,38 @@
 								</c:forEach>
 							</table>
 						</c:when>
+						<c:when test="${descuentos != null }">
+							<h4>Administración de descuentos</h4>
+							<div class="span6">
+								<form class="form-inline" method="post" action="buscar" >
+									<input class="srchTxt" type="text" name="descripcion" placeholder="Buscar" />
+									<input type="hidden" name="objeto" value="descuento">
+									<button type="submit" id="submitButton" class="btn btn-primary">Buscar</button>
+								</form>
+							</div>
+							<div class="span2">
+								<a class="btn btn-default" href="formularioDescuento" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</a>
+								<!-- <button>Agregar</button> -->
+							</div>
+							<table class="table table-striped">
+								<tr>
+									<th>Código</th>
+									<th>% de Descuento</th>
+									<th>Fecha desde</th>
+									<th>Fecha hasta</th>
+									<th>Acciones</th>
+								</tr>
+								<c:forEach items="${descuentos }" var="descuento">
+									<tr>
+										<td>${descuento.getCodigo()}</td>
+										<td>${descuento.getPorcDescuento() }</td>
+										<td>${descuento.getFechaDesde() }</td>
+										<td>${descuento.getFechaHasta() }</td>
+										<td><a href="formularioDescuento?idDescuento=${descuento.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</c:when>
 						<c:when test="${categorias != null }">
 							<h4>Administración de categorias</h4>
 							<div class="span6">
@@ -146,10 +178,10 @@
 								</tr>
 								<c:forEach items="${categorias }" var="categoria">
 									<tr>
-										<td>${categoria.id }</td>
-										<td>${categoria.nombre }</td>
-										<td>${categoria.descripcion }</td>
-										<td><i class="fa fa-pencil" aria-hidden="true"></i> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
+										<td>${categoria.getId() }</td>
+										<td>${categoria.getNombre() }</td>
+										<td>${categoria.getDescripcion() }</td>
+										<td><a href="editarcategoria?idCategoria=${categoria.getId() }"><i class="fa fa-pencil" aria-hidden="true"></i></a> <i class="fa fa-trash-o" aria-hidden="true"></i></td>
 									</tr>
 								</c:forEach>
 							</table>

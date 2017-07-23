@@ -10,6 +10,11 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<description>Ubicacion de los archivos subidos</description>
+  	<param-name>file-upload</param-name>
+  	<param-value>/proyectoLibros/imagenes/libros/</param-value>
+  </context-param>
   <servlet>
     <servlet-name>index</servlet-name>
     <servlet-class>Servlets.index</servlet-class>
@@ -77,6 +82,26 @@
   <servlet>
     <servlet-name>editarLibro</servlet-name>
     <servlet-class>Servlets.editarLibro</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>administracionDescuentos</servlet-name>
+    <servlet-class>Servlets.administracionDescuentos</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>formularioDescuento</servlet-name>
+    <servlet-class>Servlets.formularioDescuento</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>reportes</servlet-name>
+    <servlet-class>Servlets.reportes</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>filtrosreporte</servlet-name>
+    <servlet-class>Servlets.filtrosreporte</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>imprimirReporte</servlet-name>
+    <servlet-class>Servlets.imprimirReporte</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>contacto</servlet-name>

@@ -1,7 +1,5 @@
 proyecto_libros/.classpath
 proyecto_libros/src/Datos/Conexion.java
 *.classpath
+proyecto_libros/.settings/org.eclipse.wst.common.component
 *.prefs
-proyecto_libros/src/Datos/Conexion.java
-*.classpath
-proyecto_libros/src/Datos/Conexion.java

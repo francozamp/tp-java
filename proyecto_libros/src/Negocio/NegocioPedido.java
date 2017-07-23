@@ -1,8 +1,13 @@
 package Negocio;
 
 import java.util.List;
+import java.util.Set;
+
 import Datos.DatosPedido;
+import Entidades.Libro;
+import Entidades.LineaPedido;
 import Entidades.Pedido;
+import Entidades.Valoracion;
 
 public class NegocioPedido {
 
@@ -37,6 +42,26 @@ public class NegocioPedido {
 
 	public List<Pedido> findByDescripcion(String descripcion) {
 		return new DatosPedido().findByDescripcion(descripcion);
+	}
+
+	public Pedido pagarPedido(Pedido pedido) {
+		
+		pedido = new DatosPedido().actualizarEstado(pedido);
+		
+		Set<Integer> idLibrosUsuarioList = new NegocioLibro().findIdLibrosPorUsuario(pedido.getUsuario());
+		
+		for (LineaPedido lp : pedido.getLineasPedido()) {
+			
+			if(!idLibrosUsuarioList.contains(lp.getLibro().getId())){
+				Valoracion valoracion = new Valoracion();
+				valoracion.setLibro(lp.getLibro());
+				valoracion.setUsuario(pedido.getUsuario());
+				
+				valoracion = new NegocioValoracion().guardarValoracion(valoracion);
+			}
+		}
+		
+		return pedido;
 	}
 
 }

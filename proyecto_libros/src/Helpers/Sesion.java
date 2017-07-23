@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import Entidades.Carro;
+import Entidades.Descuento;
 import Entidades.Pedido;
 import Entidades.Usuario;
 import Negocio.NegocioUsuario;
@@ -74,6 +75,18 @@ public class Sesion {
 
 	public static void removerDireccionCompleta() {
 		session.removeAttribute("direccionCompleta");
+	}
+	
+	public static void setDescuento(Descuento descuento){
+		session.setAttribute("descuento", descuento);
+	}
+	
+	public static Descuento getDescuento(){
+		return (Descuento)session.getAttribute("descuento");
+	}
+	
+	public static void removeDescuento(){
+		session.removeAttribute("descuento");
 	}
 	
 
