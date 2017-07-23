@@ -114,7 +114,7 @@ public class DatosLibro {
 			sql = "INSERT INTO libros (ISBN, titulo, autor, editorial, edicion, descripcion, estados_idestados, imagen, fechaAlta) VALUES (?,?,?,?,?,?,?,?,?)";
 		}
 		else{
-			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? WHERE id = ?";
+			sql = "UPDATE libros SET titulo = ?, autor = ?, editorial = ?, edicion = ?, descripcion = ?, estados_idestados = ? , imagen = ? WHERE id = ?";
 		}
 		
 		PreparedStatement ps = conexion.preparedStatement(sql);

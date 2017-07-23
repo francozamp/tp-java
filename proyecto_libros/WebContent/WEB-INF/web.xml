@@ -10,6 +10,11 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<description>Ubicacion de los archivos subidos</description>
+  	<param-name>file-upload</param-name>
+  	<param-value>/proyectoLibros/imagenes/libros/</param-value>
+  </context-param>
   <servlet>
     <servlet-name>index</servlet-name>
     <servlet-class>Servlets.index</servlet-class>

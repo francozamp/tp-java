@@ -16,4 +16,5 @@ public class Constantes {
 	public static final int ID_ESTADO_PEDIDO_PENDIENTE=3;
 	public static final int ID_ESTADO_PEDIDO_PAGADO=4;
 
+	public static final String RUTA_IMAGEN_TAPA_LIBRO = "imagenes/libros/";
 }

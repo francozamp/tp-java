@@ -1,12 +1,13 @@
 package Entidades;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import Negocio.NegocioPrecio;
 
@@ -19,21 +20,21 @@ public class Libro {
 	private String editorial;
 	private String edicion;
 	private String descripcion;
-	private String urlImagen;
+	private String extension;
 	private Estado estado;
 	private Date fechaAlta;
 	private List<Categoria> categorias;
 	private Precio precioActual;
 	
 	@SuppressWarnings("unchecked")
-	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list, String urlImagen){
+	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list, String extension){
 		this.isbn=isbn.replaceAll("\\s+", "");
 		this.titulo=titulo;
 		this.autor=autor;
 		this.editorial=editorial;
 		this.edicion=edicion;
 		this.descripcion=descripcion;
-		this.urlImagen = urlImagen;
+		this.extension = extension;
 		this.estado=(disponible) ? new Estado(Constantes.ID_ESTADO_ACTIVO, Constantes.NOMBRE_ESTADO_ACTIVO) : new Estado(Constantes.ID_ESTADO_BAJA, Constantes.NOMBRE_ESTADO_BAJA);
 		try {
 			this.categorias=(List<Categoria>) list;
@@ -51,7 +52,7 @@ public class Libro {
 		this.editorial=rs.getString("editorial");
 		this.edicion=rs.getString("edicion");
 		this.descripcion=rs.getString("descripcion");
-		this.urlImagen=rs.getString("imagen");
+		this.extension=rs.getString("imagen");
 		
 		boolean disponible = false;
 		if (rs.getInt("estados_idestados")==Constantes.ID_ESTADO_ACTIVO) {
@@ -122,7 +123,8 @@ public class Libro {
 	}
 
 	public String getUrlImagen() {
-		return urlImagen;
+//		return Constantes.RUTA_IMAGEN_TAPA_LIBRO + this.isbn + this.extension;
+		return this.extension;
 	}
 	
 	public Date getFechaAlta(){
@@ -178,5 +180,12 @@ public class Libro {
 		this.descripcion = descripcon;
 	}
 	
+	public String getExtension(){
+		return this.extension;
+	}
+	
+	public void setExtension(String extension){
+		this.extension = extension;
+	}
 
 }
