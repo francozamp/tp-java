@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import Entidades.Libro;
 import Negocio.NegocioLibro;
+import Negocio.NegocioValoracion;
 
 /**
  * Servlet implementation class index
@@ -37,6 +38,10 @@ public class index extends MiServletPlantilla {
 		List<Libro> librosRecientes = null;
 		NegocioLibro negocioLibro = new NegocioLibro();
 		librosRecientes = negocioLibro.getRecientes();
+		
+		for (Libro libro : librosRecientes) {
+			libro.setPuntajePromedio(new NegocioValoracion().getPromedioByIdLibro(libro.getId()));
+		}
 		
 		request.setAttribute("librosRecientes", librosRecientes);
 		

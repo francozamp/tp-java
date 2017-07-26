@@ -167,3 +167,22 @@ input[type="checkbox"][disabled] {
 h4 span.dato, h5 span.dato {
 	color: #555555;
 }
+
+span#promedio {
+	float: right;
+	width: 30px;
+	padding: 10px;
+	color: #444;
+	font-size: 20px;
+	background-color: #DCDCDC;
+}
+
+div.comentario {
+	background-color: #F8F8F8;
+	padding: 0px 10px;
+	margin: 0px 0px 10px 0px;
+}
+
+p.comentario {
+	background-color: #F5F5F5;
+}

@@ -40,16 +40,15 @@ public class detalleproducto extends MiServletPlantilla {
 		int idLibro = Integer.parseInt(request.getParameter("idLibro"));
 		NegocioLibro negocioLibro= new NegocioLibro();
 		libro= negocioLibro.getLibroById(idLibro);
+		NegocioValoracion nv = new NegocioValoracion();
+		libro.setPuntajePromedio(nv.getPromedioByIdLibro(idLibro));
 		request.setAttribute("libro", libro);
 		
 		//Recupero valoraciones de los usuarios y su promedio y los agrego al Request como parametros
-		NegocioValoracion nv = new NegocioValoracion();
+		
 		List<Valoracion> valoraciones = nv.findByLibro(idLibro);
-		Integer promedio = nv.getPuntajePromedio(valoraciones);
 		
 		request.setAttribute("valoraciones", valoraciones);
-		request.setAttribute("puntajePromedio", promedio);
-		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("detalleproducto.jsp");
 		requestDispatcher.forward(request, response);

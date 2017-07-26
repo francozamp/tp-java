@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import Entidades.Constantes;
 import Entidades.Libro;
 import Negocio.NegocioCategoria;
 import Negocio.NegocioLibro;
+import Negocio.NegocioValoracion;
 
 /**
  * Servlet implementation class libros
@@ -98,6 +100,10 @@ public class libros extends MiServletPlantilla {
 			else{
 				librosPagina = new ArrayList<Libro>();
 			}
+		}
+		
+		for (Libro libro : librosPagina) {
+			libro.setPuntajePromedio(new NegocioValoracion().getPromedioByIdLibro(libro.getId()));
 		}
 		
 		request.setAttribute("titulo", tituloLibro);

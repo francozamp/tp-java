@@ -29,11 +29,12 @@ public class agregarAlCarro extends MiServletPlantilla {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-		String redir ="/libros/index";
+		
+		String redir = request.getHeader("referer");
 		if(request.getParameter("idLibro")!=null){
 			int idLibro = Integer.valueOf(request.getParameter("idLibro"));
 			int cantidad = request.getParameter("cantidad") != null ? Integer.valueOf(request.getParameter("cantidad")) : 1;
-			 redir = request.getParameter("redir")!=null? request.getParameter("redir") : "/libros/index";
+//			 redir = request.getParameter("redir")!=null? request.getParameter("redir") : "/libros/index";
 			if(cantidad>0){
 				Carro carro = Sesion.getCarro();
 				carro.agregarAlCarro(idLibro, cantidad);
