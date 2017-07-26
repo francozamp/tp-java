@@ -139,7 +139,8 @@ public class DatosValoracion {
 		Conexion conexion = new Conexion();
 		conexion.crearConexion();
 		
-		String query = "SELECT * FROM valoracion WHERE idLibro = ?";
+		String query = "SELECT * FROM valoracion WHERE idLibro = ? "
+				+ " and ((puntaje is not null and puntaje != '') or (comentario is not null and comentario != ''))";
 		
 		PreparedStatement ps = conexion.preparedStatement(query);
 		try {
@@ -160,6 +161,29 @@ public class DatosValoracion {
 		}
 		
 		return valoracionesList;
+	}
+
+	public Float getPromedioByIdLibro(Integer idLibro) {
+		Float promedio = null;
+		
+		Conexion conexion = new Conexion();
+		conexion.crearConexion();
+		
+		String query = "SELECT AVG(puntaje) FROM valoracion WHERE idLibro = ?";
+		
+		PreparedStatement ps = conexion.preparedStatement(query);
+		try {
+			ps.setInt(1, idLibro);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				promedio = rs.getFloat(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return promedio;
 	}
 
 }

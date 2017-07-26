@@ -32,22 +32,22 @@
 					</c:choose>
 					
 					<hr class="soft" />
-					<div class="row">
-						<form class="form-horizontal span6">
-							<div class="control-group">
-								<label class="control-label alignL">Ordenado por</label> 
-								<select>
-									<option>Alfabético A - Z</option>
-									<option>Alfabético Z - A</option>
-									<option>Precio más bajo</option>
-								</select>
-							</div>
-						</form>
-						<div id="myTab" class="pull-right">
-							<a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a> 
-							<a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-						</div>
-					</div>
+<!-- 					<div class="row"> -->
+<!-- 						<form class="form-horizontal span6"> -->
+<!-- 							<div class="control-group"> -->
+<!-- 								<label class="control-label alignL">Ordenado por</label>  -->
+<!-- 								<select> -->
+<!-- 									<option>Alfabético A - Z</option> -->
+<!-- 									<option>Alfabético Z - A</option> -->
+<!-- 									<option>Precio más bajo</option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
+<!-- 						<div id="myTab" class="pull-right"> -->
+<!-- 							<a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>  -->
+<!-- 							<a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<br class="clr" />
 					
 					<c:choose>
@@ -59,10 +59,10 @@
 		
 										<div class="row">
 											<div class="span2">
-												<img src="${libro.getUrlImagen() }" alt="" />
+												<a href="detalleproducto?idLibro=${libro.getId() }"><img src="${libro.getUrlImagen() }" alt="" /></a>
 											</div>
 											<div class="span4">
-												<h3>${libro.getTitulo() }</h3>
+												<a href="detalleproducto?idLibro=${libro.getId() }"><h3>${libro.getTitulo() }</h3></a>
 												<hr class="soft" />
 												<h5>${libro.getEditorial() }</h5>
 												<p>${libro.getDescripcion() }</p>
@@ -71,7 +71,7 @@
 											<div class="span3 alignR">
 												<form class="form-horizontal qtyFrm">
 													<h3>$${libro.getPrecioView() }</h3>
-													<a href="product_details.html" class="btn btn-large btn-primary"> Agregar al <i class=" icon-shopping-cart"></i></a>
+													<a class="btn" href="agregarAlCarro?idLibro=${libro.getId() }"> Agregar al <i class=" icon-shopping-cart"></i></a>
 												</form>
 											</div>
 										</div>
@@ -87,13 +87,30 @@
 			
 											<li class="span3">
 												<div class="thumbnail">
-													<a href="product_details.html"><img src="${libro.getUrlImagen() }" alt=""/></a>
+													<a href="detalleproducto?idLibro=${libro.getId() }"><img src="${libro.getUrlImagen() }" alt=""/></a>
 													<div class="caption">
-														<h5>${libro.getTitulo() }</h5>
+														<a href="detalleproducto?idLibro=${libro.getId() }"><h5>${libro.getTitulo() }</h5></a>
 														<p>${libro.getDescripcion() }</p>
+														<div class="stars small">
+															<form action="">
+					 											<c:set var="puntaje" value="${libro.getPuntajePromedio()}"></c:set>
+																<c:forEach var="i" begin="1" end="5">
+					              									<c:choose>
+					              										<c:when test="${6-i-0.5 < puntaje && 6-i+0.5 >= puntaje}">
+					              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" checked="checked" disabled/>
+					              										</c:when>
+					              										<c:otherwise>
+					              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" disabled/>
+					              										</c:otherwise>
+					              									</c:choose>
+					            									<label class="star small star-${6-i}" for="star-${6-i}"></label>
+					          									</c:forEach>
+					          									<span>${libro.getPuntajePromedio()}</span>
+					          								</form>
+														</div>
 														<h4 style="text-align: center">
-															<a class="btn" href="#">Agregar al <i class="icon-shopping-cart"></i></a> 
-															<a class="btn btn-primary" href="#">$${libro.getPrecioView() }</a>
+															<a class="btn" href="agregarAlCarro?idLibro=${libro.getId() }">Agregar al <i class="icon-shopping-cart"></i></a> 
+															<a class="btn btn-primary" href="agregarAlCarro?idLibro=${libro.getId() }">$${libro.getPrecioView() }</a>
 														</h4>
 													</div>
 												</div>

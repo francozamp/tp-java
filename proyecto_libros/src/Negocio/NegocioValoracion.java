@@ -56,5 +56,9 @@ public class NegocioValoracion {
 		return new DatosValoracion().findById(idValoracion);
 	}
 	
+	public Float getPromedioByIdLibro(Integer idLibro) {
+		return new DatosValoracion().getPromedioByIdLibro(idLibro);
+	}
+	
 	
 }

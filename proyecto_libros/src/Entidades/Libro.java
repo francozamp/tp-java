@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -25,6 +23,9 @@ public class Libro {
 	private Date fechaAlta;
 	private List<Categoria> categorias;
 	private Precio precioActual;
+	
+	private Float puntajePromedio;
+	private List<Valoracion> valoracionesList;
 	
 	@SuppressWarnings("unchecked")
 	public Libro(String isbn, String titulo, String autor, String editorial, String edicion, String descripcion, boolean disponible,List<Categoria> list, String extension){
@@ -188,4 +189,23 @@ public class Libro {
 		this.extension = extension;
 	}
 
+	public Float getPuntajePromedio() {
+		return puntajePromedio;
+	}
+
+	public void setPuntajePromedio(Float puntajePromedio) {
+		this.puntajePromedio = puntajePromedio;
+	}
+	
+	public int getPuntajeEntero(){
+		return Math.round(this.puntajePromedio);
+	}
+
+	public List<Valoracion> getValoracionesList() {
+		return valoracionesList;
+	}
+
+	public void setValoracionesList(List<Valoracion> valoracionesList) {
+		this.valoracionesList = valoracionesList;
+	}
 }

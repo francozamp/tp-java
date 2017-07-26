@@ -57,13 +57,15 @@ public class login extends HttpServlet {
 		RequestDispatcher requestDispatcher = null;
 		
 		if(destino != null){
-			requestDispatcher = request.getRequestDispatcher(destino);
+//			requestDispatcher = request.getRequestDispatcher(destino);
+			response.sendRedirect(destino);
 		}
 		else{
-			requestDispatcher = request.getRequestDispatcher("index");
+//			requestDispatcher = request.getRequestDispatcher("index");
+			response.sendRedirect("index");
 		}
 		
-		requestDispatcher.forward(request, response);
+//		requestDispatcher.forward(request, response);
 		
 //		response.sendRedirect(request.getHeader("referer"));
 		

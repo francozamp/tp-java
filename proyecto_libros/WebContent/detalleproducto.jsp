@@ -24,6 +24,23 @@
 							<h3>${libro.getTitulo()}</h3>
 							<small>- ${libro.getAutor()}</small>
 							<hr class="soft"/>
+							<div class="stars promedio">
+								<form action="">
+									<span id="promedio">${libro.getPuntajePromedio()}</span>
+									<c:set var="puntaje" value="${libro.getPuntajePromedio()}"></c:set>
+									<c:forEach var="i" begin="1" end="5">
+       									<c:choose>
+       										<c:when test="${6-i-0.5 < puntaje && 6-i+0.5 >= puntaje}">
+       											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="star" checked="checked" disabled/>
+       										</c:when>
+       										<c:otherwise>
+       											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="star" disabled/>
+       										</c:otherwise>
+       									</c:choose>
+     									<label class="star star-${6-i}" for="star-${6-i}"></label>
+   									</c:forEach>
+   								</form>
+							</div>
 							<form  action="agregarAlCarro" class="form qtyFrm">
 								<div class="control-group">
 									<h3>$ ${libro.getPrecioView()}</h3>
@@ -60,10 +77,9 @@
 										
 										<div class="tab-pane active" id="blockView">
 											<h5>Sinopsis</h5>
-									<p>
-										${libro.getDescripcion()}
-									</p>
-
+											<p>
+												${libro.getDescripcion()}
+											</p>
 											<hr class="soft"/>
 										</div>
 									</div>
@@ -71,7 +87,31 @@
 								</div>
 							</div>
 						</div>
-
+						<div class="span9">
+							<h3>Valoraciones</h3>
+							<c:forEach var="valoracion" items="${valoraciones }">
+								<div class="span9 comentario">
+									<h5>${valoracion.getUsuario().getNombreApellido() }</h5>
+									<div class="stars small">
+										<form action="">
+											<c:set var="puntaje" value="${valoracion.getPuntaje()}"></c:set>
+											<c:forEach var="i" begin="1" end="5">
+		       									<c:choose>
+		       										<c:when test="${6-i-0.5 < puntaje && 6-i+0.5 >= puntaje}">
+		       											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" checked="checked" disabled/>
+		       										</c:when>
+		       										<c:otherwise>
+		       											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" disabled/>
+		       										</c:otherwise>
+		       									</c:choose>
+		     									<label class="star small star-${6-i}" for="star-${6-i}"></label>
+		   									</c:forEach>
+		   								</form>
+									</div>
+									<p>${valoracion.getComentario() }</p>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 				<!-- Fin contenido -->

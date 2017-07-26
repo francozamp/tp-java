@@ -48,13 +48,13 @@
 											<c:forEach var="i" begin="1" end="5">
               									<c:choose>
               										<c:when test="${6-i == puntaje}">
-              											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}" checked="checked"/>
+              											<input class="star edit star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}" checked="checked"/>
               										</c:when>
               										<c:otherwise>
-              											<input class="star star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}"/>
+              											<input class="star edit star-${6-i}" id="star-${6-i}" type="radio" name="puntaje" value="${6-i}"/>
               										</c:otherwise>
               									</c:choose>
-            									<label class="star star-${6-i}" for="star-${6-i}"></label>
+            									<label class="star edit star-${6-i}" for="star-${6-i}"></label>
           									</c:forEach>
 									</div>
 		                        </div>

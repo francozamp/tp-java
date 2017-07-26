@@ -56,6 +56,23 @@
 									<div class="caption">
 										<a href="detalleproducto?idLibro=${libro.getId() }"><h5>${libro.getTitulo() }</h5></a>
 										<p>${libro.getDescripcion() }</p>
+										<div class="stars small">
+											<form action="">
+	 											<c:set var="puntaje" value="${libro.getPuntajePromedio()}"></c:set>
+												<c:forEach var="i" begin="1" end="5">
+	              									<c:choose>
+	              										<c:when test="${6-i-0.5 < puntaje && 6-i+0.5 >= puntaje}">
+	              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" checked="checked" disabled/>
+	              										</c:when>
+	              										<c:otherwise>
+	              											<input class="star small star-${6-i}" id="star-${6-i}" type="radio" name="star" disabled/>
+	              										</c:otherwise>
+	              									</c:choose>
+	            									<label class="star small star-${6-i}" for="star-${6-i}"></label>
+	          									</c:forEach>
+	          									<span>${libro.getPuntajePromedio()}</span>
+	          								</form>
+										</div>
 										<h4 style="text-align:center">
 											<a class="btn" href="agregarAlCarro?idLibro=${libro.getId() }">
 												Agregar al
