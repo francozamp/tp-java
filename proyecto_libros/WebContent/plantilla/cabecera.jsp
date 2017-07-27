@@ -64,6 +64,7 @@
 			          				<ul class="dropdown-menu">
 			            				<li><a href="micuenta">Mi cuenta</a></li>
 			            				<li><a href="historialpedidos">Historial de pedidos</a></li>
+			            				<li><a href="mislibros">Mis libros y valoraciones</a></li>
 			            				<c:if test="${sessionScope.usuario.getTipoUsuario().getId() == 1 }">
 			            					<li><a href="admPedidos">Administracion</a></li>
 			            				</c:if>

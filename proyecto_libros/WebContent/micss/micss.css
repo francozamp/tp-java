@@ -57,6 +57,10 @@ input[type="text"].srchTxt {
 	overflow: hidden;
 }
 
+#sidebar {
+	margin-bottom: 20px;
+}
+
 #sidebar ul {
     list-style: none;
     padding: 0;
@@ -100,6 +104,10 @@ input[type="text"].srchTxt {
 #footerSection {
 	padding: 10px 0;
 	background: #202020;
+/* 	position: absolute; */
+/* 	bottom: 0; */
+/* 	width: 100%; */
+/* 	height: 132px; */
 }
 
 #footerSection a {
